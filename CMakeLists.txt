@@ -11,5 +11,13 @@ endif()
 
 project ("FileSorterProject")
 
-# 하위 프로젝트를 포함합니다.
-add_subdirectory ("FileSorterProject")
+
+
+# 헤더 파일 경로 설정
+include_directories(include)
+
+
+# 실행 파일에 사용할 소스 파일 지정
+add_executable(FileSorterProject
+    src/main.cpp
+)

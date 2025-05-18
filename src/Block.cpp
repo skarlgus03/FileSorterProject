@@ -25,14 +25,14 @@ bool Block::isLeaf() const {
 }
 
 void Block::addChild(const std::shared_ptr<Block>& child) {
-    if (this->filterType == FilterType::Extension && child->filterType == FilterType::Extension) {
+    if (this->filterType == FilterType::EXTENSION && child->filterType == FilterType::EXTENSION) {
         throw std::invalid_argument("확장자는 다중 선택할 수 없습니다..");
     }
     children.push_back(child);
 }
 
 std::shared_ptr<Block> Block::addEmptyChild() {
-    auto child = std::make_shared<Block>(FilterType::Exception, "", "");
+    auto child = std::make_shared<Block>(FilterType::EXCEPTION, "", "");
     children.push_back(child);
     return child;
 }

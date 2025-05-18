@@ -1,5 +1,9 @@
 #include "Block.h"
 
+Block::Block()
+    : filterType(FilterType()), condition(""), movePath("") {
+}
+
 Block::Block(FilterType filterType, const std::string& condition, const std::string& movePath)
     : filterType(filterType), condition(condition), movePath(movePath) {
 }
@@ -21,6 +25,9 @@ bool Block::isLeaf() const {
 }
 
 void Block::addChild(const std::shared_ptr<Block>& child) {
+    if (this->filterType == FilterType::Extension && child->filterType == FilterType::Extension) {
+        throw std::invalid_argument("확장자는 다중 선택할 수 없습니다..");
+    }
     children.push_back(child);
 }
 

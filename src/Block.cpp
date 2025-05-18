@@ -31,6 +31,12 @@ void Block::addChild(const std::shared_ptr<Block>& child) {
     children.push_back(child);
 }
 
+std::shared_ptr<Block> Block::addEmptyChild() {
+    auto child = std::make_shared<Block>(FilterType::Exception, "", "");
+    children.push_back(child);
+    return child;
+}
+
 const std::vector<std::shared_ptr<Block>>& Block::getChildren() const {
     return children;
 }

@@ -27,10 +27,10 @@ public:
     const std::vector<std::shared_ptr<Block>>& getChildren() const;
 
 private:
-    FilterType filterType;                      // 필터의 종류 (확장자, 키워드, 날짜, 예외처리)
-    std::string condition;                      // 필터 조건 (예: "exe", "report", "20250518")
-    std::string movePath;                       // 말단 노드일 때, 파일을 이동할 경로
-    std::vector<std::shared_ptr<Block>> children; // 자식 필터 노드들 (트리 구조)
+    FilterType filterType;                      
+    std::string condition;                      
+    std::string movePath;                       
+    std::vector<std::shared_ptr<Block>> children; 
 };
 
 #endif // BLOCK_H

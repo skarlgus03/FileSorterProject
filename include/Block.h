@@ -1,5 +1,4 @@
-#ifndef BLOCK_H
-#define BLOCK_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -14,13 +13,16 @@ enum class FilterType {
 
 class Block {
 public:
-    Block(FilterType filterType,
-          const std::string& condition,
-          const std::string& movePath = "");
+    Block();
+
+    Block(FilterType filterType, const std::string& condition, const std::string& movePath = "");
 
     FilterType getFilterType() const;
+
     const std::string& getCondition() const;
+
     const std::string& getMovePath() const;
+
     bool isLeaf() const;
 
     void addChild(const std::shared_ptr<Block>& child);
@@ -32,5 +34,3 @@ private:
     std::string movePath;
     std::vector<std::shared_ptr<Block>> children;
 };
-
-#endif // BLOCK_H

@@ -1,36 +1,29 @@
-#ifndef BLOCK_H
-#define BLOCK_H
+#include "Block.h"
 
-#include <string>
-#include <vector>
-#include <memory>
+Block::Block(FilterType filterType, const std::string& condition, const std::string& movePath)
+    : filterType(filterType), condition(condition), movePath(movePath) {
+}
 
-enum class FilterType {
-    EXTENSION,
-    KEYWORD,
-    DATE,
-    EXCEPTION
-};
+FilterType Block::getFilterType() const {
+    return filterType;
+}
 
-class Block {
-public:
-    Block(FilterType filterType,
-        const std::string& condition,
-        const std::string& movePath = "");
+const std::string& Block::getCondition() const {
+    return condition;
+}
 
-    FilterType getFilterType() const;
-    const std::string& getCondition() const;
-    const std::string& getMovePath() const;
-    bool isLeaf() const;
+const std::string& Block::getMovePath() const {
+    return movePath;
+}
 
-    void addChild(const std::shared_ptr<Block>& child);
-    const std::vector<std::shared_ptr<Block>>& getChildren() const;
+bool Block::isLeaf() const {
+    return children.empty();
+}
 
-private:
-    FilterType filterType;                      
-    std::string condition;                      
-    std::string movePath;                       
-    std::vector<std::shared_ptr<Block>> children; 
-};
+void Block::addChild(const std::shared_ptr<Block>& child) {
+    children.push_back(child);
+}
 
-#endif // BLOCK_H
+const std::vector<std::shared_ptr<Block>>& Block::getChildren() const {
+    return children;
+}

@@ -27,6 +27,7 @@ public:
 
     void addChild(const std::shared_ptr<Block>& child);
     const std::vector<std::shared_ptr<Block>>& getChildren() const;
+    std::shared_ptr<Block> addEmptyChild();
 
 private:
     FilterType filterType;

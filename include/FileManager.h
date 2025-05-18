@@ -9,7 +9,7 @@
 
 class FileManager {
 public:
-    FileManager() = delete; // 객체 생성 금지
+
 
     // 파일 정보 수집
     static std::vector<FileInfo> collectFileInfos(const std::string& directoryPath) {

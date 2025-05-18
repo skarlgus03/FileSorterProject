@@ -9,6 +9,8 @@
 
 class FileManager {
 public:
+    FileManager() = delete; // 객체 생성 금지
+
     // 파일 정보 수집
     static std::vector<FileInfo> collectFileInfos(const std::string& directoryPath) {
         std::vector<FileInfo> files;
@@ -18,10 +20,9 @@ public:
                 FileInfo info;
                 info.keyword = entry.path().filename().string();
                 info.extension = entry.path().extension().string();
-                info.moveToPath = ""; // 추후 Classifier가 결정
+                info.moveToPath = ""; // 분류는 Classifier에서 설정
                 info.size = std::filesystem::file_size(entry.path());
-
-                info.originalFullPath = entry.path().string(); // 실제 경로 저장
+                info.originalFullPath = entry.path().string();
                 files.push_back(info);
             }
         }
@@ -30,14 +31,17 @@ public:
     }
 
     // 파일 이동
-    static bool moveFile(const FileInfo& fileInfo) {
+    static bool moveFileToDestination(const FileInfo& fileInfo) {
         try {
-            std::string toPath = fileInfo.moveToPath + "/" + fileInfo.keyword;
-            std::filesystem::create_directories(fileInfo.moveToPath); // 없으면 폴더 생성
-            std::filesystem::rename(fileInfo.originalFullPath, toPath);
+            const std::string& destinationDir = fileInfo.moveToPath;
+            const std::string& fileName = fileInfo.keyword;
+            std::string fullDestinationPath = destinationDir + "/" + fileName;
+
+            std::filesystem::create_directories(destinationDir); // 폴더 없으면 생성
+            std::filesystem::rename(fileInfo.originalFullPath, fullDestinationPath); // 이동
             return true;
         } catch (const std::filesystem::filesystem_error& e) {
-            std::cerr << " 파일 이동 실패 " << e.what() << std::endl;
+            std::cerr << "파일 이동 실패: " << e.what() << std::endl;
             return false;
         }
     }

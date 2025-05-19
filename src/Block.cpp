@@ -26,7 +26,7 @@ bool Block::isLeaf() const {
 
 void Block::addChild(const std::shared_ptr<Block>& child) {
     if (this->filterType == FilterType::EXTENSION && child->filterType == FilterType::EXTENSION) {
-        throw std::invalid_argument("확장자는 다중 선택할 수 없습니다..");
+        throw std::invalid_argument("확장자는 다중 선택할 수 없습니다.");
     }
     children.push_back(child);
 }

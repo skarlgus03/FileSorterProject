@@ -3,6 +3,11 @@
 #include <string>
 #include "Block.h"
 
+// 블럭 유틸리티 클래스 입니다.
+
+
+
+// Enum FilterType 을 문자열로 변환 
 inline std::string filterTypeToSting(FilterType type) {
 	switch (type)
 	{
@@ -14,6 +19,7 @@ inline std::string filterTypeToSting(FilterType type) {
 	}
 }
 
+// 문자열을 Enum FilterType 으로 변환
 inline FilterType stringToFilterType(const std::string& str) {
 	if (str == "EXTENSION") return FilterType::EXTENSION;
 	if (str == "KEYWORD") return FilterType::KEYWORD;

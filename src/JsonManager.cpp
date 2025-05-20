@@ -51,6 +51,8 @@ std::shared_ptr<Block> JsonManager::jsonToBlock(const json& j)
 	return block;
 }
 
+
+// Json 파일을 Json 객체로 불러오기
 std::shared_ptr<Block> JsonManager::loadFromJson(const std::string& filePath)
 {
 	std::ifstream in(filePath);

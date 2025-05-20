@@ -6,6 +6,7 @@
 #include "Block.h"
 #include "BlockUtils.h"
 #include <fstream>
+#include <iostream>
 
 
 using json = nlohmann::json;

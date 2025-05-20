@@ -1,4 +1,5 @@
 #include "Block.h"
+#include <stdexcept>
 
 Block::Block()
     : filterType(FilterType()), condition(""), movePath("") {

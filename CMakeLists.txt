@@ -20,4 +20,9 @@ include_directories(include)
 # 실행 파일에 사용할 소스 파일 지정
 add_executable(FileSorterProject
     src/main.cpp
+    src/Block.cpp
+    src/JsonManager.cpp
 )
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)

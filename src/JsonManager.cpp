@@ -49,8 +49,6 @@ void JsonManager::saveToJson(const std::shared_ptr<Block>& root, const std::stri
 	out << j.dump(4);
 }
 
-
-
 // Json 파일을 Json 객체로 불러오기
 std::shared_ptr<Block> JsonManager::loadFromJson(const std::string& filePath) {
 	std::ifstream in(filePath);
@@ -77,7 +75,7 @@ bool JsonManager::isFileExist(const std::string& filePath) {
 // 디버깅용 block to Json 출력해주는 함수
 void JsonManager::prettyPrintJson(const std::shared_ptr<Block>& block) {
 	json j = blockToJson(block);
-	std::count << j.dump(4) < std::endl;
+	std::cout << j.dump(4) << std::endl;
 }
 
 

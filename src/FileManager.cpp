@@ -8,7 +8,7 @@ std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directory
     for (const auto& entry : std::filesystem::directory_iterator(directoryPath)) {
         if (entry.is_regular_file()) {
             FileInfo info;
-            info.keyword = entry.path().filename().string();
+            info.fileName = entry.path().filename().string();
             info.extension = entry.path().extension().string();
             info.moveToPath = ""; // 추후 Classifier가 결정
             info.size = std::filesystem::file_size(entry.path());

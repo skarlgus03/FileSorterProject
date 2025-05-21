@@ -1,4 +1,4 @@
-
+ï»¿
 
 #include <iostream>
 #include "Block.h"
@@ -16,10 +16,10 @@ int main() {
 
     try {
         JsonManager::saveToJson(root, "text.json");
-        std::cout << "ÀúÀå ¼º°ø" << std::endl;
+        std::cout << "ì €ìž¥ ì„±ê³µ" << std::endl;
     }
     catch (const std::exception& e) {
-        std::cerr << "ÀúÀå ½ÇÆÐ: " << e.what() << std::endl;
+        std::cerr << "ì €ìž¥ ì‹¤íŒ¨: " << e.what() << std::endl;
     }
 
     return 0;

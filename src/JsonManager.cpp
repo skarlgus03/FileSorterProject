@@ -1,8 +1,8 @@
-#include "JsonManager.h"
+ï»¿#include "JsonManager.h"
 
 
 
-// ºí·°À» JSONÀ¸·Î ÀúÀå
+// ë¸”ëŸ­ì„ JSONìœ¼ë¡œ ì €ì¥
 json JsonManager::blockToJson(const std::shared_ptr<Block>& block) {
 	json j;
 	j["filterType"] = filterTypeToSting(block->getFilterType());
@@ -11,14 +11,14 @@ json JsonManager::blockToJson(const std::shared_ptr<Block>& block) {
 
 	j["children"] = json::array();
 	for (const auto& child : block->getChildren()) {
-		j["children"].push_back(blockToJson(child)); // Àç±Í ÇÔ¼ö
+		j["children"].push_back(blockToJson(child)); // ì¬ê·€ í•¨ìˆ˜
 	}
 
 	return j;
 }
 
 
-// Json °´Ã¼¸¦ ºí·° °´Ã¼·Î º¯È¯
+// Json ê°ì²´ë¥¼ ë¸”ëŸ­ ê°ì²´ë¡œ ë³€í™˜
 std::shared_ptr<Block> JsonManager::jsonToBlock(const json& j) {
 	FilterType type = stringToFilterType(j.at("filterType").get<std::string>());
 	std::string condition = j.at("condition").get<std::string>();
@@ -27,7 +27,7 @@ std::shared_ptr<Block> JsonManager::jsonToBlock(const json& j) {
 	auto block = std::make_shared<Block>(type, condition, movePath);
 
 
-	//  child°¡ ÀÖ´Ù¸é, Àç±ÍÀûÀ¸·Î ºí·° »ı¼º
+	//  childê°€ ìˆë‹¤ë©´, ì¬ê·€ì ìœ¼ë¡œ ë¸”ëŸ­ ìƒì„±
 	if (j.contains("children")) {
 		for (const auto& childJson : j.at("children")) {
 			std::shared_ptr<Block> child = jsonToBlock(childJson);
@@ -38,22 +38,22 @@ std::shared_ptr<Block> JsonManager::jsonToBlock(const json& j) {
 	return block;
 }
 
-// Json °´Ã¼¸¦, Json ÆÄÀÏ·Î ÀúÀå
+// Json ê°ì²´ë¥¼, Json íŒŒì¼ë¡œ ì €ì¥
 void JsonManager::saveToJson(const std::shared_ptr<Block>& root, const std::string& filePath) {
 	json j = blockToJson(root);
 	std::ofstream out(filePath);
 	if (!out) {
-		throw std::runtime_error("ÆÄÀÏ ÀúÀå ½ÇÆĞ: " + filePath);
+		throw std::runtime_error("íŒŒì¼ ì €ì¥ ì‹¤íŒ¨: " + filePath);
 	}
 
 	out << j.dump(4);
 }
 
-// Json ÆÄÀÏÀ» Json °´Ã¼·Î ºÒ·¯¿À±â
+// Json íŒŒì¼ì„ Json ê°ì²´ë¡œ ë¶ˆëŸ¬ì˜¤ê¸°
 std::shared_ptr<Block> JsonManager::loadFromJson(const std::string& filePath) {
 	std::ifstream in(filePath);
 	if (!in) {
-		throw std::runtime_error("ÆÄÀÏ ¿­±â ½ÇÆĞ: " + filePath);
+		throw std::runtime_error("íŒŒì¼ ì—´ê¸° ì‹¤íŒ¨: " + filePath);
 	}
 
 	json j;
@@ -62,17 +62,17 @@ std::shared_ptr<Block> JsonManager::loadFromJson(const std::string& filePath) {
 }
 
 
-// ¿Ã¹Ù¸¥ JSON ÆÄÀÏ Çü½ÄÀÌ ¸Â´ÂÁö °Ë»ç
+// ì˜¬ë°”ë¥¸ JSON íŒŒì¼ í˜•ì‹ì´ ë§ëŠ”ì§€ ê²€ì‚¬
 bool JsonManager::isValidJson(const json& j) {
 	return j.contains("filterType") && j.contains("condition") && j.contains("movePath") && j.contains("children");
 }
-// ÆÄÀÏ ÀÌ¸§À» ¹Ş¾Æ¼­, ±× ÆÄÀÏÀÌ Á¸Àç ÇÏ´Â°¡ °Ë»ç
+// íŒŒì¼ ì´ë¦„ì„ ë°›ì•„ì„œ, ê·¸ íŒŒì¼ì´ ì¡´ì¬ í•˜ëŠ”ê°€ ê²€ì‚¬
 bool JsonManager::isFileExist(const std::string& filePath) {
 	std::ifstream f(filePath);
 	return f.good();
 }
 
-// µğ¹ö±ë¿ë block to Json Ãâ·ÂÇØÁÖ´Â ÇÔ¼ö
+// ë””ë²„ê¹…ìš© block to Json ì¶œë ¥í•´ì£¼ëŠ” í•¨ìˆ˜
 void JsonManager::prettyPrintJson(const std::shared_ptr<Block>& block) {
 	json j = blockToJson(block);
 	std::cout << j.dump(4) << std::endl;

@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include "Block.h"
 
-// ºí·° À¯Æ¿¸®Æ¼ Å¬·¡½º ÀÔ´Ï´Ù.
+// ë¸”ëŸ­ ìœ í‹¸ë¦¬í‹° í´ë˜ìŠ¤ ì…ë‹ˆë‹¤.
 
 
 
-// Enum FilterType À» ¹®ÀÚ¿­·Î º¯È¯ 
+// Enum FilterType ì„ ë¬¸ìì—´ë¡œ ë³€í™˜ 
 inline std::string filterTypeToSting(FilterType type) {
 	switch (type)
 	{
@@ -19,7 +19,7 @@ inline std::string filterTypeToSting(FilterType type) {
 	}
 }
 
-// ¹®ÀÚ¿­À» Enum FilterType À¸·Î º¯È¯
+// ë¬¸ìì—´ì„ Enum FilterType ìœ¼ë¡œ ë³€í™˜
 inline FilterType stringToFilterType(const std::string& str) {
 	if (str == "EXTENSION") return FilterType::EXTENSION;
 	if (str == "KEYWORD") return FilterType::KEYWORD;

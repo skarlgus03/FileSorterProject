@@ -12,7 +12,7 @@ std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directory
             info.extension = entry.path().extension().string();
             info.moveToPath = ""; // 추후 Classifier가 결정
             info.size = std::filesystem::file_size(entry.path());
-            info.originalFullPath = entry.path().string(); // 전체 경로 저장
+            info.filePath = entry.path().string(); // 전체 경로 저장
             files.push_back(info);
         }
     }

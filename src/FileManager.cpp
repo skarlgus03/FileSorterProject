@@ -4,8 +4,9 @@
 #include "FileInfo.h"
 
 
+//지정한 폴더 안의 모든 일반 파일들을 찾아서, 각각의 정보를 FileInfo에 담아 리스트로 반환하는 함수
 std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directoryPath) {
-    std::vector<FileInfo> files; //지정한 폴더 안의 모든 일반 파일들을 찾아서, 각각의 정보를 FileInfo에 담아 리스트로 반환하는 함수
+    std::vector<FileInfo> files; 
 
     for (const auto& entry : std::filesystem::directory_iterator(directoryPath)) { //directroyPath 폴더를 하나씩 검사
         if (entry.is_regular_file()) {          //폴더가 링크가 아닌 일반 파일들만 처리함
@@ -31,8 +32,8 @@ std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directory
             ss << std::put_time(std::localtime(&cftime), "%Y-%m-%d %H:%M:%S");
             info.date = ss.str();
 
-            
-            files.push_back(info);         //완성된 FileInfo 객체를 백터에 추가함.
+            //완성된 FileInfo 객체를 백터에 추가함.
+            files.push_back(info);         
 
             
         }
@@ -46,9 +47,10 @@ bool FileManager::moveFile(const FileInfo& fileInfo) { //파일을 실제로 이
         std::string toPath = fileInfo.moveToPath + "/" + fileInfo.fileName;         //이동할 폴더가 없다면 생성함
         std::filesystem::create_directories(fileInfo.moveToPath);         // 폴더 없으면 생성
         std::filesystem::rename(fileInfo.filePath, toPath);         //파일을 이동시킴
-        return true;          //성공적으로 이동했으면 true 반환함.
+        return true;          
+    
     } catch (const std::filesystem::filesystem_error& e) {
         std::cerr << "파일 이동 오류: " << e.what() << std::endl; 
-        return false;         //에러가 나면 false를 반환함
+        return false;         
     }
 }

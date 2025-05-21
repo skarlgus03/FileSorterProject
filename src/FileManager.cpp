@@ -24,9 +24,9 @@ std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directory
 
 bool FileManager::moveFile(const FileInfo& fileInfo) {
     try {
-        std::string toPath = fileInfo.moveToPath + "/" + fileInfo.keyword;
+        std::string toPath = fileInfo.moveToPath + "/" + fileInfo.fileName;
         std::filesystem::create_directories(fileInfo.moveToPath); // 폴더 없으면 생성
-        std::filesystem::rename(fileInfo.originalFullPath, toPath);
+        std::filesystem::rename(fileInfo.filePath, toPath);
         return true;
     } catch (const std::filesystem::filesystem_error& e) {
         std::cerr << "파일 이동 오류: " << e.what() << std::endl;

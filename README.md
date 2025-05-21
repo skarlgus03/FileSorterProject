@@ -1,6 +1,6 @@
 # FileSorterProject
 
-A file sorting tool written in C++ using a block-based classification system inspired by Minecraft's Create mod.
+A file sorting tool written in C++ using a block-based classification system 
 
 
 

@@ -42,7 +42,9 @@ std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directory
     return files;
 }
 
-bool FileManager::moveFile(const FileInfo& fileInfo) { //파일을 실제로 이동시키는 함수
+
+//파일을 실제로 이동시키는 함수
+bool FileManager::moveFile(const FileInfo& fileInfo) { 
     try { 
         std::string toPath = fileInfo.moveToPath + "/" + fileInfo.fileName;         //이동할 폴더가 없다면 생성함
         std::filesystem::create_directories(fileInfo.moveToPath);         // 폴더 없으면 생성

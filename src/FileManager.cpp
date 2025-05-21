@@ -1,6 +1,8 @@
 #include "FileManager.h"
 #include <filesystem>
 #include <iostream>
+#include "FileInfo.h"
+
 
 std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directoryPath) {
     std::vector<FileInfo> files;

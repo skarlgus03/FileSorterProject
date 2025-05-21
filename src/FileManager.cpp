@@ -5,7 +5,7 @@
 
 
 std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directoryPath) {
-    std::vector<FileInfo> files; //파일 정보를 담을 FileInfo 객체들을 저장할 벡터 files 생성
+    std::vector<FileInfo> files; //지정한 폴더 안의 모든 일반 파일들을 찾아서, 각각의 정보를 FileInfo에 담아 리스트로 반환하는 함수
 
     for (const auto& entry : std::filesystem::directory_iterator(directoryPath)) { //directroyPath 폴더를 하나씩 검사
         if (entry.is_regular_file()) {         //폴더가 링크가 아닌 일반 파일들만 처리함

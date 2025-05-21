@@ -23,7 +23,7 @@ std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directory
 }
 
 bool FileManager::moveFile(const FileInfo& fileInfo) { //파일을 실제로 이동시키는 함수
-    try { //이동 대상 전체 경로 생성
+    try { 
         std::string toPath = fileInfo.moveToPath + "/" + fileInfo.fileName;         //이동할 폴더가 없다면 생성함
         std::filesystem::create_directories(fileInfo.moveToPath);         // 폴더 없으면 생성
         std::filesystem::rename(fileInfo.filePath, toPath);         //파일을 이동시킴

@@ -8,7 +8,9 @@ struct FileInfo {
     std::string filePath;      // 원본 파일 경로
     std::string extension;     // 확장자
     std::string moveToPath;    // 이동할 경로
-    std::string date;          // 파일 날짜
+    std::string size;          // 파일 크기
+    std::string date;         //파일 날짜
+
    
 };
 

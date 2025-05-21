@@ -15,7 +15,20 @@ std::vector<FileInfo> FileManager::collectFileInfos(const std::string& directory
             info.moveToPath = "";         // 파일을 이동할 경로는 아직 비워둠 추후 Classifier가 분류함. 
             info.size = std::filesystem::file_size(entry.path());         //파일 크기 저장
             info.filePath = entry.path().string();         // 전체 경로 저장
+            
+            // 날짜 정보 추가 (마지막 수정 시간 기준)
+            auto ftime = std::filesystem::last_write_time(entry);
+            auto sctp = std::chrono::time_point_cast<std::chrono::system_clock::duration>(
+                            ftime - std::filesystem::file_time_type::clock::now() + std::chrono::system_clock::now());
+            std::time_t cftime = std::chrono::system_clock::to_time_t(sctp);
+            std::stringstream ss;
+            ss << std::put_time(std::localtime(&cftime), "%Y-%m-%d %H:%M:%S");
+            info.date = ss.str();
+
+            
             files.push_back(info);         //완성된 FileInfo 객체를 백터에 추가함.
+
+            
         }
     }
 

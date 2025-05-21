@@ -1,43 +1,67 @@
 #include "Block.h"
 #include <stdexcept>
 
+// Block 클래스의 기본 생성자: 멤버 변수들을 기본값으로 초기화
 Block::Block()
     : filterType(FilterType()), condition(""), movePath("") {
 }
 
+// Block 클래스의 매개변수 생성자: 전달받은 값으로 멤버 변수 초기화
 Block::Block(FilterType filterType, const std::string& condition, const std::string& movePath)
     : filterType(filterType), condition(condition), movePath(movePath) {
 }
 
-FilterType Block::getFilterType() const {
-    return filterType;
-}
+// filterType 멤버 변수 값을 반환하는 getter 함수
+FilterType Block::getFilterType() const { return filterType; }
 
-const std::string& Block::getCondition() const {
-    return condition;
-}
+// condition 멤버 변수 값을 반환하는 getter 함수
+const std::string& Block::getCondition() const { return condition; }
 
-const std::string& Block::getMovePath() const {
-    return movePath;
-}
+// movePath 멤버 변수 값을 반환하는 getter 함수
+const std::string& Block::getMovePath() const { return movePath; }
 
+// 자식 블록 목록을 반환하는 getter 함수
+const std::vector<std::shared_ptr<Block>>& Block::getChildren() const { return children; }
+
+// filterType 멤버 변수 값을 설정하는 setter 함수
+void Block::setFilterType(FilterType type) { filterType = type; }
+
+// condition 멤버 변수 값을 설정하는 setter 함수
+void Block::setCondition(const std::string& cond) { condition = cond; }
+
+// movePath 멤버 변수 값을 설정하는 setter 함수
+void Block::setMovePath(const std::string& path) { movePath = path; }
+
+// 자식 블록이 없는지 확인하는 함수
 bool Block::isLeaf() const {
     return children.empty();
 }
 
+// 자식 블록을 추가하는 함수 (확장자 필터 중복 방지)
 void Block::addChild(const std::shared_ptr<Block>& child) {
     if (this->filterType == FilterType::EXTENSION && child->filterType == FilterType::EXTENSION) {
         throw std::invalid_argument("확장자는 다중 선택할 수 없습니다.");
     }
+    child->setParent(shared_from_this());
     children.push_back(child);
 }
 
+// 비어있는(예외 타입) 자식 블록을 추가하고 반환하는 함수
 std::shared_ptr<Block> Block::addEmptyChild() {
     auto child = std::make_shared<Block>(FilterType::EXCEPTION, "", "");
     children.push_back(child);
     return child;
 }
 
-const std::vector<std::shared_ptr<Block>>& Block::getChildren() const {
-    return children;
+// 부모 설정 함수 구현
+void Block::setParent(const std::shared_ptr<Block>& parentBlock) {
+    parent = parentBlock;
+}
+
+// 자식 노드 삭제 함수 구현
+void Block::removeChild(const std::shared_ptr<Block>& child) {
+    auto it = std::find(children.begin(), children.end(), child);
+    if (it != children.end()) {
+        children.erase(it);
+    }
 }

@@ -1,67 +1,49 @@
-#include "Block.h"
-#include <stdexcept>
+#pragma once
 
-// Block 클래스의 기본 생성자: 멤버 변수들을 기본값으로 초기화
-Block::Block()
-    : filterType(FilterType()), condition(""), movePath("") {
-}
+#include <string>
+#include <vector>
+#include <memory>
 
-// Block 클래스의 매개변수 생성자: 전달받은 값으로 멤버 변수 초기화
-Block::Block(FilterType filterType, const std::string& condition, const std::string& movePath)
-    : filterType(filterType), condition(condition), movePath(movePath) {
-}
+enum class FilterType {
+    EXTENSION,
+    KEYWORD,
+    DATE,
+    EXCEPTION
+};
 
-// filterType 멤버 변수 값을 반환하는 getter 함수
-FilterType Block::getFilterType() const { return filterType; }
+class Block {
+public:
+    Block();
 
-// condition 멤버 변수 값을 반환하는 getter 함수
-const std::string& Block::getCondition() const { return condition; }
+    Block(FilterType filterType, const std::string& condition, const std::string& movePath = "");
 
-// movePath 멤버 변수 값을 반환하는 getter 함수
-const std::string& Block::getMovePath() const { return movePath; }
+    FilterType getFilterType() const;
+    const std::string& getCondition() const;
+    const std::string& getMovePath() const;
 
-// 자식 블록 목록을 반환하는 getter 함수
-const std::vector<std::shared_ptr<Block>>& Block::getChildren() const { return children; }
+    bool isLeaf() const;
 
-// filterType 멤버 변수 값을 설정하는 setter 함수
-void Block::setFilterType(FilterType type) { filterType = type; }
+    void addChild(const std::shared_ptr<Block>& child);
+    const std::vector<std::shared_ptr<Block>>& getChildren() const;
+    std::shared_ptr<Block> addEmptyChild();
 
-// condition 멤버 변수 값을 설정하는 setter 함수
-void Block::setCondition(const std::string& cond) { condition = cond; }
+    // 부모 설정 함수
+    void setParent(const std::shared_ptr<Block>& parentBlock);
 
-// movePath 멤버 변수 값을 설정하는 setter 함수
-void Block::setMovePath(const std::string& path) { movePath = path; }
+    // 자식 노드 삭제 함수
+    void removeChild(const std::shared_ptr<Block>& child);
 
-// 자식 블록이 없는지 확인하는 함수
-bool Block::isLeaf() const {
-    return children.empty();
-}
+    // 빈노드 필터를 설정하게 하는 setter 함수
+    void setFilterType(FilterType type);
+    void setCondition(const std::string& cond);
+    void setMovePath(const std::string& path);
 
-// 자식 블록을 추가하는 함수 (확장자 필터 중복 방지)
-void Block::addChild(const std::shared_ptr<Block>& child) {
-    if (this->filterType == FilterType::EXTENSION && child->filterType == FilterType::EXTENSION) {
-        throw std::invalid_argument("확장자는 다중 선택할 수 없습니다.");
-    }
-    child->setParent(shared_from_this());
-    children.push_back(child);
-}
+private:
+    FilterType filterType;
+    std::string condition;
+    std::string movePath;
+    std::vector<std::shared_ptr<Block>> children;
 
-// 비어있는(예외 타입) 자식 블록을 추가하고 반환하는 함수
-std::shared_ptr<Block> Block::addEmptyChild() {
-    auto child = std::make_shared<Block>(FilterType::EXCEPTION, "", "");
-    children.push_back(child);
-    return child;
-}
-
-// 부모 설정 함수 구현
-void Block::setParent(const std::shared_ptr<Block>& parentBlock) {
-    parent = parentBlock;
-}
-
-// 자식 노드 삭제 함수 구현
-void Block::removeChild(const std::shared_ptr<Block>& child) {
-    auto it = std::find(children.begin(), children.end(), child);
-    if (it != children.end()) {
-        children.erase(it);
-    }
-}
+    // 부모 노드를 가리키는 weak_ptr 멤버 추가
+    std::weak_ptr<Block> parent;
+};

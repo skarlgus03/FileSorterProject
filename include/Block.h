@@ -11,7 +11,7 @@ enum class FilterType {
     EXCEPTION
 };
 
-class Block {
+class Block : public std::enable_shared_from_this<Block> {
 public:
     Block();
 

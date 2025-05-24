@@ -12,6 +12,15 @@ endif()
 project ("FileSorterProject")
 
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
 # 헤더 파일 경로 설정
 include_directories(include)
@@ -22,7 +31,8 @@ add_executable(FileSorterProject
     src/main.cpp
     src/Block.cpp
     src/JsonManager.cpp
+    src/FileManager.cpp
+    src/MainWindow.cpp
+    include/MainWindow.h
 )
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+target_link_libraries(FileSorterProject PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)

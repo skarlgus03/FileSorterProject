@@ -24,7 +24,7 @@ events:
       The output was:
       0
       msbuild 버전 17.9.8+b34f75857(.NET Framework용)
-      빌드 시작: 05-21(수) 오전 12:12:39
+      빌드 시작: 05-24(토) 오후 3:13:13
       
       1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\3.28.0-msvc1\\CompilerIdC\\CompilerIdC.vcxproj" 프로젝트(기본 대상)입니다.
       PrepareForBuild:
@@ -53,7 +53,7 @@ events:
           경고 0개
           오류 0개
       
-      경과 시간: 00:00:00.50
+      경과 시간: 00:00:00.51
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -79,7 +79,7 @@ events:
       The output was:
       0
       msbuild 버전 17.9.8+b34f75857(.NET Framework용)
-      빌드 시작: 05-21(수) 오전 12:12:40
+      빌드 시작: 05-24(토) 오후 3:13:14
       
       1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\3.28.0-msvc1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" 프로젝트(기본 대상)입니다.
       PrepareForBuild:
@@ -108,7 +108,7 @@ events:
           경고 0개
           오류 0개
       
-      경과 시간: 00:00:00.49
+      경과 시간: 00:00:00.51
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -127,8 +127,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-527juj"
-      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-527juj"
+      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-j17v2t"
+      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-j17v2t"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Ob0 /Od /RTC1"
@@ -138,40 +138,40 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-527juj'
+        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-j17v2t'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_f21b3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_17bf4.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         msbuild 버전 17.9.8+b34f75857(.NET Framework용)
-        빌드 시작: 05-21(수) 오전 12:12:41
+        빌드 시작: 05-24(토) 오후 3:13:14
         
-        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-527juj\\cmTC_f21b3.vcxproj" 프로젝트(기본 대상)입니다.
+        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j17v2t\\cmTC_17bf4.vcxproj" 프로젝트(기본 대상)입니다.
         PrepareForBuild:
-          "cmTC_f21b3.dir\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_17bf4.dir\\Debug\\" 디렉터리를 만들고 있습니다.
           구조적 출력을 사용할 수 있습니다. 컴파일러 진단의 서식은 오류 계층 구조를 반영합니다. 자세한 내용은 https://aka.ms/cpp/structured-output을 참조하세요.
-          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-527juj\\Debug\\" 디렉터리를 만들고 있습니다.
-          "cmTC_f21b3.dir\\Debug\\cmTC_f21b3.tlog\\" 디렉터리를 만들고 있습니다.
+          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j17v2t\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_17bf4.dir\\Debug\\cmTC_17bf4.tlog\\" 디렉터리를 만들고 있습니다.
         InitializeBuildStatus:
-          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_f21b3.dir\\Debug\\cmTC_f21b3.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
-          "cmTC_f21b3.dir\\Debug\\cmTC_f21b3.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
+          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_17bf4.dir\\Debug\\cmTC_17bf4.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
+          "cmTC_17bf4.dir\\Debug\\cmTC_17bf4.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_f21b3.dir\\Debug\\\\" /Fd"cmTC_f21b3.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_17bf4.dir\\Debug\\\\" /Fd"cmTC_17bf4.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ 최적화 컴파일러 버전 19.39.33523(x64)
           Copyright (c) Microsoft Corporation. All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_f21b3.dir\\Debug\\\\" /Fd"cmTC_f21b3.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_17bf4.dir\\Debug\\\\" /Fd"cmTC_17bf4.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-527juj\\Debug\\cmTC_f21b3.exe" /INCREMENTAL /ILK:"cmTC_f21b3.dir\\Debug\\cmTC_f21b3.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-527juj/Debug/cmTC_f21b3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-527juj/Debug/cmTC_f21b3.lib" /MACHINE:X64  /machine:x64 cmTC_f21b3.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_f21b3.vcxproj -> D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-527juj\\Debug\\cmTC_f21b3.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j17v2t\\Debug\\cmTC_17bf4.exe" /INCREMENTAL /ILK:"cmTC_17bf4.dir\\Debug\\cmTC_17bf4.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-j17v2t/Debug/cmTC_17bf4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-j17v2t/Debug/cmTC_17bf4.lib" /MACHINE:X64  /machine:x64 cmTC_17bf4.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_17bf4.vcxproj -> D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j17v2t\\Debug\\cmTC_17bf4.exe
         FinalizeBuildStatus:
-          "cmTC_f21b3.dir\\Debug\\cmTC_f21b3.tlog\\unsuccessfulbuild" 파일을 삭제하고 있습니다.
-          "cmTC_f21b3.dir\\Debug\\cmTC_f21b3.tlog\\cmTC_f21b3.lastbuildstate"에 연결(touching)하고 있습니다.
-        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-527juj\\cmTC_f21b3.vcxproj" 프로젝트를 빌드했습니다(기본 대상).
+          "cmTC_17bf4.dir\\Debug\\cmTC_17bf4.tlog\\unsuccessfulbuild" 파일을 삭제하고 있습니다.
+          "cmTC_17bf4.dir\\Debug\\cmTC_17bf4.tlog\\cmTC_17bf4.lastbuildstate"에 연결(touching)하고 있습니다.
+        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j17v2t\\cmTC_17bf4.vcxproj" 프로젝트를 빌드했습니다(기본 대상).
         
         빌드했습니다.
             경고 0개
             오류 0개
         
-        경과 시간: 00:00:00.53
+        경과 시간: 00:00:00.51
         
       exitCode: 0
   -
@@ -183,8 +183,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-ok6w2l"
-      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-ok6w2l"
+      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-plibzg"
+      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-plibzg"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Ob0 /Od /RTC1"
@@ -194,40 +194,40 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-ok6w2l'
+        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-plibzg'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_42bb1.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_b191a.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         msbuild 버전 17.9.8+b34f75857(.NET Framework용)
-        빌드 시작: 05-21(수) 오전 12:12:41
+        빌드 시작: 05-24(토) 오후 3:13:15
         
-        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ok6w2l\\cmTC_42bb1.vcxproj" 프로젝트(기본 대상)입니다.
+        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-plibzg\\cmTC_b191a.vcxproj" 프로젝트(기본 대상)입니다.
         PrepareForBuild:
-          "cmTC_42bb1.dir\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_b191a.dir\\Debug\\" 디렉터리를 만들고 있습니다.
           구조적 출력을 사용할 수 있습니다. 컴파일러 진단의 서식은 오류 계층 구조를 반영합니다. 자세한 내용은 https://aka.ms/cpp/structured-output을 참조하세요.
-          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ok6w2l\\Debug\\" 디렉터리를 만들고 있습니다.
-          "cmTC_42bb1.dir\\Debug\\cmTC_42bb1.tlog\\" 디렉터리를 만들고 있습니다.
+          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-plibzg\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_b191a.dir\\Debug\\cmTC_b191a.tlog\\" 디렉터리를 만들고 있습니다.
         InitializeBuildStatus:
-          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_42bb1.dir\\Debug\\cmTC_42bb1.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
-          "cmTC_42bb1.dir\\Debug\\cmTC_42bb1.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
+          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_b191a.dir\\Debug\\cmTC_b191a.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
+          "cmTC_b191a.dir\\Debug\\cmTC_b191a.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_42bb1.dir\\Debug\\\\" /Fd"cmTC_42bb1.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_b191a.dir\\Debug\\\\" /Fd"cmTC_b191a.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ 최적화 컴파일러 버전 19.39.33523(x64)
           Copyright (c) Microsoft Corporation. All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_42bb1.dir\\Debug\\\\" /Fd"cmTC_42bb1.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_b191a.dir\\Debug\\\\" /Fd"cmTC_b191a.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ok6w2l\\Debug\\cmTC_42bb1.exe" /INCREMENTAL /ILK:"cmTC_42bb1.dir\\Debug\\cmTC_42bb1.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-ok6w2l/Debug/cmTC_42bb1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-ok6w2l/Debug/cmTC_42bb1.lib" /MACHINE:X64  /machine:x64 cmTC_42bb1.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_42bb1.vcxproj -> D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ok6w2l\\Debug\\cmTC_42bb1.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-plibzg\\Debug\\cmTC_b191a.exe" /INCREMENTAL /ILK:"cmTC_b191a.dir\\Debug\\cmTC_b191a.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-plibzg/Debug/cmTC_b191a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-plibzg/Debug/cmTC_b191a.lib" /MACHINE:X64  /machine:x64 cmTC_b191a.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_b191a.vcxproj -> D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-plibzg\\Debug\\cmTC_b191a.exe
         FinalizeBuildStatus:
-          "cmTC_42bb1.dir\\Debug\\cmTC_42bb1.tlog\\unsuccessfulbuild" 파일을 삭제하고 있습니다.
-          "cmTC_42bb1.dir\\Debug\\cmTC_42bb1.tlog\\cmTC_42bb1.lastbuildstate"에 연결(touching)하고 있습니다.
-        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ok6w2l\\cmTC_42bb1.vcxproj" 프로젝트를 빌드했습니다(기본 대상).
+          "cmTC_b191a.dir\\Debug\\cmTC_b191a.tlog\\unsuccessfulbuild" 파일을 삭제하고 있습니다.
+          "cmTC_b191a.dir\\Debug\\cmTC_b191a.tlog\\cmTC_b191a.lastbuildstate"에 연결(touching)하고 있습니다.
+        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-plibzg\\cmTC_b191a.vcxproj" 프로젝트를 빌드했습니다(기본 대상).
         
         빌드했습니다.
             경고 0개
             오류 0개
         
-        경과 시간: 00:00:00.50
+        경과 시간: 00:00:00.51
         
       exitCode: 0
   -
@@ -241,12 +241,12 @@ events:
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/Qt6Dependencies.cmake:34 (_qt_internal_find_third_party_dependencies)"
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/Qt6Config.cmake:162 (include)"
-      - "CMakeLists.txt:21 (find_package)"
+      - "CMakeLists.txt:18 (find_package)"
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-i8nry9"
-      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-i8nry9"
+      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-ink9co"
+      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-ink9co"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Ob0 /Od /RTC1"
@@ -257,35 +257,35 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-i8nry9'
+        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-ink9co'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_74760.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_06bbd.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         msbuild 버전 17.9.8+b34f75857(.NET Framework용)
-        빌드 시작: 05-21(수) 오전 12:12:42
+        빌드 시작: 05-24(토) 오후 3:13:16
         
-        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\cmTC_74760.vcxproj" 프로젝트(기본 대상)입니다.
+        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\cmTC_06bbd.vcxproj" 프로젝트(기본 대상)입니다.
         PrepareForBuild:
-          "cmTC_74760.dir\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_06bbd.dir\\Debug\\" 디렉터리를 만들고 있습니다.
           구조적 출력을 사용할 수 있습니다. 컴파일러 진단의 서식은 오류 계층 구조를 반영합니다. 자세한 내용은 https://aka.ms/cpp/structured-output을 참조하세요.
-          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\Debug\\" 디렉터리를 만들고 있습니다.
-          "cmTC_74760.dir\\Debug\\cmTC_74760.tlog\\" 디렉터리를 만들고 있습니다.
+          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_06bbd.dir\\Debug\\cmTC_06bbd.tlog\\" 디렉터리를 만들고 있습니다.
         InitializeBuildStatus:
-          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_74760.dir\\Debug\\cmTC_74760.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
-          "cmTC_74760.dir\\Debug\\cmTC_74760.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
+          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_06bbd.dir\\Debug\\cmTC_06bbd.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
+          "cmTC_06bbd.dir\\Debug\\cmTC_06bbd.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_74760.dir\\Debug\\\\" /Fd"cmTC_74760.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_06bbd.dir\\Debug\\\\" /Fd"cmTC_06bbd.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\src.c"
           Microsoft (R) C/C++ 최적화 컴파일러 버전 19.39.33523(x64)
           Copyright (c) Microsoft Corporation. All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_74760.dir\\Debug\\\\" /Fd"cmTC_74760.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\src.c"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_06bbd.dir\\Debug\\\\" /Fd"cmTC_06bbd.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\src.c"
           src.c
-        D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\src.c(1,10): error C1083: 포함 파일을 열 수 없습니다. 'pthread.h': No such file or directory [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\cmTC_74760.vcxproj]
-        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\cmTC_74760.vcxproj" 프로젝트를 빌드했습니다(기본 대상). - 실패
+        D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\src.c(1,10): error C1083: 포함 파일을 열 수 없습니다. 'pthread.h': No such file or directory [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\cmTC_06bbd.vcxproj]
+        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\cmTC_06bbd.vcxproj" 프로젝트를 빌드했습니다(기본 대상). - 실패
         
         빌드하지 못했습니다.
         
-        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\cmTC_74760.vcxproj"(기본 대상)(1)->
+        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\cmTC_06bbd.vcxproj"(기본 대상)(1)->
         (ClCompile 대상) -> 
-          D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\src.c(1,10): error C1083: 포함 파일을 열 수 없습니다. 'pthread.h': No such file or directory [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i8nry9\\cmTC_74760.vcxproj]
+          D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\src.c(1,10): error C1083: 포함 파일을 열 수 없습니다. 'pthread.h': No such file or directory [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ink9co\\cmTC_06bbd.vcxproj]
         
             경고 0개
             오류 1개
@@ -303,12 +303,12 @@ events:
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/Qt6Dependencies.cmake:34 (_qt_internal_find_third_party_dependencies)"
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/Qt6Config.cmake:162 (include)"
-      - "CMakeLists.txt:21 (find_package)"
+      - "CMakeLists.txt:18 (find_package)"
     checks:
       - "Looking for pthread_create in pthreads"
     directories:
-      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-9lbbmf"
-      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-9lbbmf"
+      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-r8s15a"
+      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-r8s15a"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Ob0 /Od /RTC1"
@@ -319,37 +319,37 @@ events:
       variable: "CMAKE_HAVE_PTHREADS_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-9lbbmf'
+        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-r8s15a'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_06041.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_53bc3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         msbuild 버전 17.9.8+b34f75857(.NET Framework용)
-        빌드 시작: 05-21(수) 오전 12:12:43
+        빌드 시작: 05-24(토) 오후 3:13:17
         
-        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9lbbmf\\cmTC_06041.vcxproj" 프로젝트(기본 대상)입니다.
+        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r8s15a\\cmTC_53bc3.vcxproj" 프로젝트(기본 대상)입니다.
         PrepareForBuild:
-          "cmTC_06041.dir\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_53bc3.dir\\Debug\\" 디렉터리를 만들고 있습니다.
           구조적 출력을 사용할 수 있습니다. 컴파일러 진단의 서식은 오류 계층 구조를 반영합니다. 자세한 내용은 https://aka.ms/cpp/structured-output을 참조하세요.
-          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9lbbmf\\Debug\\" 디렉터리를 만들고 있습니다.
-          "cmTC_06041.dir\\Debug\\cmTC_06041.tlog\\" 디렉터리를 만들고 있습니다.
+          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r8s15a\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_53bc3.dir\\Debug\\cmTC_53bc3.tlog\\" 디렉터리를 만들고 있습니다.
         InitializeBuildStatus:
-          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_06041.dir\\Debug\\cmTC_06041.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
-          "cmTC_06041.dir\\Debug\\cmTC_06041.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
+          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_53bc3.dir\\Debug\\cmTC_53bc3.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
+          "cmTC_53bc3.dir\\Debug\\cmTC_53bc3.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_06041.dir\\Debug\\\\" /Fd"cmTC_06041.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9lbbmf\\CheckFunctionExists.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_53bc3.dir\\Debug\\\\" /Fd"cmTC_53bc3.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r8s15a\\CheckFunctionExists.c"
           Microsoft (R) C/C++ 최적화 컴파일러 버전 19.39.33523(x64)
           Copyright (c) Microsoft Corporation. All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_06041.dir\\Debug\\\\" /Fd"cmTC_06041.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9lbbmf\\CheckFunctionExists.c"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_53bc3.dir\\Debug\\\\" /Fd"cmTC_53bc3.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r8s15a\\CheckFunctionExists.c"
           CheckFunctionExists.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9lbbmf\\Debug\\cmTC_06041.exe" /INCREMENTAL /ILK:"cmTC_06041.dir\\Debug\\cmTC_06041.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-9lbbmf/Debug/cmTC_06041.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-9lbbmf/Debug/cmTC_06041.lib" /MACHINE:X64  /machine:x64 cmTC_06041.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: 'pthreads.lib' 파일을 열 수 없습니다. [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9lbbmf\\cmTC_06041.vcxproj]
-        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9lbbmf\\cmTC_06041.vcxproj" 프로젝트를 빌드했습니다(기본 대상). - 실패
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r8s15a\\Debug\\cmTC_53bc3.exe" /INCREMENTAL /ILK:"cmTC_53bc3.dir\\Debug\\cmTC_53bc3.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-r8s15a/Debug/cmTC_53bc3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-r8s15a/Debug/cmTC_53bc3.lib" /MACHINE:X64  /machine:x64 cmTC_53bc3.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: 'pthreads.lib' 파일을 열 수 없습니다. [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r8s15a\\cmTC_53bc3.vcxproj]
+        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r8s15a\\cmTC_53bc3.vcxproj" 프로젝트를 빌드했습니다(기본 대상). - 실패
         
         빌드하지 못했습니다.
         
-        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9lbbmf\\cmTC_06041.vcxproj"(기본 대상)(1)->
+        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r8s15a\\cmTC_53bc3.vcxproj"(기본 대상)(1)->
         (Link 대상) -> 
-          LINK : fatal error LNK1104: 'pthreads.lib' 파일을 열 수 없습니다. [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9lbbmf\\cmTC_06041.vcxproj]
+          LINK : fatal error LNK1104: 'pthreads.lib' 파일을 열 수 없습니다. [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r8s15a\\cmTC_53bc3.vcxproj]
         
             경고 0개
             오류 1개
@@ -367,12 +367,12 @@ events:
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/Qt6Dependencies.cmake:34 (_qt_internal_find_third_party_dependencies)"
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/Qt6Config.cmake:162 (include)"
-      - "CMakeLists.txt:21 (find_package)"
+      - "CMakeLists.txt:18 (find_package)"
     checks:
       - "Looking for pthread_create in pthread"
     directories:
-      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-wmnha1"
-      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-wmnha1"
+      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-vo7gl7"
+      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-vo7gl7"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Ob0 /Od /RTC1"
@@ -383,42 +383,42 @@ events:
       variable: "CMAKE_HAVE_PTHREAD_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-wmnha1'
+        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-vo7gl7'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_45cc9.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_64893.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         msbuild 버전 17.9.8+b34f75857(.NET Framework용)
-        빌드 시작: 05-21(수) 오전 12:12:43
+        빌드 시작: 05-24(토) 오후 3:13:17
         
-        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wmnha1\\cmTC_45cc9.vcxproj" 프로젝트(기본 대상)입니다.
+        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vo7gl7\\cmTC_64893.vcxproj" 프로젝트(기본 대상)입니다.
         PrepareForBuild:
-          "cmTC_45cc9.dir\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_64893.dir\\Debug\\" 디렉터리를 만들고 있습니다.
           구조적 출력을 사용할 수 있습니다. 컴파일러 진단의 서식은 오류 계층 구조를 반영합니다. 자세한 내용은 https://aka.ms/cpp/structured-output을 참조하세요.
-          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wmnha1\\Debug\\" 디렉터리를 만들고 있습니다.
-          "cmTC_45cc9.dir\\Debug\\cmTC_45cc9.tlog\\" 디렉터리를 만들고 있습니다.
+          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vo7gl7\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_64893.dir\\Debug\\cmTC_64893.tlog\\" 디렉터리를 만들고 있습니다.
         InitializeBuildStatus:
-          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_45cc9.dir\\Debug\\cmTC_45cc9.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
-          "cmTC_45cc9.dir\\Debug\\cmTC_45cc9.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
+          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_64893.dir\\Debug\\cmTC_64893.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
+          "cmTC_64893.dir\\Debug\\cmTC_64893.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_45cc9.dir\\Debug\\\\" /Fd"cmTC_45cc9.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wmnha1\\CheckFunctionExists.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_64893.dir\\Debug\\\\" /Fd"cmTC_64893.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vo7gl7\\CheckFunctionExists.c"
           Microsoft (R) C/C++ 최적화 컴파일러 버전 19.39.33523(x64)
           Copyright (c) Microsoft Corporation. All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_45cc9.dir\\Debug\\\\" /Fd"cmTC_45cc9.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wmnha1\\CheckFunctionExists.c"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_64893.dir\\Debug\\\\" /Fd"cmTC_64893.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vo7gl7\\CheckFunctionExists.c"
           CheckFunctionExists.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wmnha1\\Debug\\cmTC_45cc9.exe" /INCREMENTAL /ILK:"cmTC_45cc9.dir\\Debug\\cmTC_45cc9.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-wmnha1/Debug/cmTC_45cc9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-wmnha1/Debug/cmTC_45cc9.lib" /MACHINE:X64  /machine:x64 cmTC_45cc9.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: 'pthread.lib' 파일을 열 수 없습니다. [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wmnha1\\cmTC_45cc9.vcxproj]
-        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wmnha1\\cmTC_45cc9.vcxproj" 프로젝트를 빌드했습니다(기본 대상). - 실패
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vo7gl7\\Debug\\cmTC_64893.exe" /INCREMENTAL /ILK:"cmTC_64893.dir\\Debug\\cmTC_64893.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-vo7gl7/Debug/cmTC_64893.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-vo7gl7/Debug/cmTC_64893.lib" /MACHINE:X64  /machine:x64 cmTC_64893.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: 'pthread.lib' 파일을 열 수 없습니다. [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vo7gl7\\cmTC_64893.vcxproj]
+        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vo7gl7\\cmTC_64893.vcxproj" 프로젝트를 빌드했습니다(기본 대상). - 실패
         
         빌드하지 못했습니다.
         
-        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wmnha1\\cmTC_45cc9.vcxproj"(기본 대상)(1)->
+        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vo7gl7\\cmTC_64893.vcxproj"(기본 대상)(1)->
         (Link 대상) -> 
-          LINK : fatal error LNK1104: 'pthread.lib' 파일을 열 수 없습니다. [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wmnha1\\cmTC_45cc9.vcxproj]
+          LINK : fatal error LNK1104: 'pthread.lib' 파일을 열 수 없습니다. [D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vo7gl7\\cmTC_64893.vcxproj]
         
             경고 0개
             오류 1개
         
-        경과 시간: 00:00:00.36
+        경과 시간: 00:00:00.40
         
       exitCode: 1
   -
@@ -436,12 +436,12 @@ events:
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:45 (_qt_internal_find_qt_dependencies)"
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:43 (include)"
       - "C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6/Qt6Config.cmake:212 (find_package)"
-      - "CMakeLists.txt:21 (find_package)"
+      - "CMakeLists.txt:18 (find_package)"
     checks:
       - "Performing Test HAVE_STDATOMIC"
     directories:
-      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-1qhie3"
-      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-1qhie3"
+      source: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-mxsxi5"
+      binary: "D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-mxsxi5"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Ob0 /Od /RTC1"
@@ -452,40 +452,40 @@ events:
       variable: "HAVE_STDATOMIC"
       cached: true
       stdout: |
-        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-1qhie3'
+        Change Dir: 'D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-mxsxi5'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_929bf.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_87eaf.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         msbuild 버전 17.9.8+b34f75857(.NET Framework용)
-        빌드 시작: 05-21(수) 오전 12:12:44
+        빌드 시작: 05-24(토) 오후 3:13:18
         
-        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1qhie3\\cmTC_929bf.vcxproj" 프로젝트(기본 대상)입니다.
+        1 노드의 "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxsxi5\\cmTC_87eaf.vcxproj" 프로젝트(기본 대상)입니다.
         PrepareForBuild:
-          "cmTC_929bf.dir\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_87eaf.dir\\Debug\\" 디렉터리를 만들고 있습니다.
           구조적 출력을 사용할 수 있습니다. 컴파일러 진단의 서식은 오류 계층 구조를 반영합니다. 자세한 내용은 https://aka.ms/cpp/structured-output을 참조하세요.
-          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1qhie3\\Debug\\" 디렉터리를 만들고 있습니다.
-          "cmTC_929bf.dir\\Debug\\cmTC_929bf.tlog\\" 디렉터리를 만들고 있습니다.
+          "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxsxi5\\Debug\\" 디렉터리를 만들고 있습니다.
+          "cmTC_87eaf.dir\\Debug\\cmTC_87eaf.tlog\\" 디렉터리를 만들고 있습니다.
         InitializeBuildStatus:
-          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_929bf.dir\\Debug\\cmTC_929bf.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
-          "cmTC_929bf.dir\\Debug\\cmTC_929bf.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
+          "AlwaysCreate"이(가) 지정되었기 때문에 "cmTC_87eaf.dir\\Debug\\cmTC_87eaf.tlog\\unsuccessfulbuild"을(를) 만들고 있습니다.
+          "cmTC_87eaf.dir\\Debug\\cmTC_87eaf.tlog\\unsuccessfulbuild"에 연결(touching)하고 있습니다.
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAVE_STDATOMIC /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_929bf.dir\\Debug\\\\" /Fd"cmTC_929bf.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1qhie3\\src.cxx"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAVE_STDATOMIC /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_87eaf.dir\\Debug\\\\" /Fd"cmTC_87eaf.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxsxi5\\src.cxx"
           Microsoft (R) C/C++ 최적화 컴파일러 버전 19.39.33523(x64)
           Copyright (c) Microsoft Corporation. All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAVE_STDATOMIC /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_929bf.dir\\Debug\\\\" /Fd"cmTC_929bf.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1qhie3\\src.cxx"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D HAVE_STDATOMIC /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_87eaf.dir\\Debug\\\\" /Fd"cmTC_87eaf.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxsxi5\\src.cxx"
           src.cxx
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1qhie3\\Debug\\cmTC_929bf.exe" /INCREMENTAL /ILK:"cmTC_929bf.dir\\Debug\\cmTC_929bf.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-1qhie3/Debug/cmTC_929bf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-1qhie3/Debug/cmTC_929bf.lib" /MACHINE:X64  /machine:x64 cmTC_929bf.dir\\Debug\\src.obj
-          cmTC_929bf.vcxproj -> D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1qhie3\\Debug\\cmTC_929bf.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxsxi5\\Debug\\cmTC_87eaf.exe" /INCREMENTAL /ILK:"cmTC_87eaf.dir\\Debug\\cmTC_87eaf.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-mxsxi5/Debug/cmTC_87eaf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/source/repos/FileSorterProject/build/CMakeFiles/CMakeScratch/TryCompile-mxsxi5/Debug/cmTC_87eaf.lib" /MACHINE:X64  /machine:x64 cmTC_87eaf.dir\\Debug\\src.obj
+          cmTC_87eaf.vcxproj -> D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxsxi5\\Debug\\cmTC_87eaf.exe
         FinalizeBuildStatus:
-          "cmTC_929bf.dir\\Debug\\cmTC_929bf.tlog\\unsuccessfulbuild" 파일을 삭제하고 있습니다.
-          "cmTC_929bf.dir\\Debug\\cmTC_929bf.tlog\\cmTC_929bf.lastbuildstate"에 연결(touching)하고 있습니다.
-        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1qhie3\\cmTC_929bf.vcxproj" 프로젝트를 빌드했습니다(기본 대상).
+          "cmTC_87eaf.dir\\Debug\\cmTC_87eaf.tlog\\unsuccessfulbuild" 파일을 삭제하고 있습니다.
+          "cmTC_87eaf.dir\\Debug\\cmTC_87eaf.tlog\\cmTC_87eaf.lastbuildstate"에 연결(touching)하고 있습니다.
+        "D:\\source\\repos\\FileSorterProject\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxsxi5\\cmTC_87eaf.vcxproj" 프로젝트를 빌드했습니다(기본 대상).
         
         빌드했습니다.
             경고 0개
             오류 0개
         
-        경과 시간: 00:00:00.55
+        경과 시간: 00:00:00.54
         
       exitCode: 0
 ...

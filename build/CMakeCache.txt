@@ -153,9 +153,6 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 //Path to a program.
 CMAKE_MT:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.22621.0/x86/mt.exe
 
-//No help, variable specified on the command line.
-CMAKE_PREFIX_PATH:UNINITIALIZED=C:/Qt/6.9.0/msvc2022_64
-
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
 
@@ -285,8 +282,8 @@ Qt6Widgets_DIR:PATH=C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6Widgets
 //The directory containing a CMake configuration file for Qt6ZlibPrivate.
 Qt6ZlibPrivate_DIR:PATH=C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6ZlibPrivate
 
-//The directory containing a CMake configuration file for Qt6.
-Qt6_DIR:PATH=C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6
+//No help, variable specified on the command line.
+Qt6_DIR:UNINITIALIZED=C:/Qt/6.9.0/msvc2022_64/lib/cmake/Qt6
 
 //Path to a program.
 Vulkan_GLSLANG_VALIDATOR_EXECUTABLE:FILEPATH=Vulkan_GLSLANG_VALIDATOR_EXECUTABLE-NOTFOUND

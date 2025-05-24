@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <iostream>
 #include "FileInfo.h"
+#include <sstream>
 
 
 //지정한 폴더 안의 모든 일반 파일들을 찾아서, 각각의 정보를 FileInfo에 담아 리스트로 반환하는 함수

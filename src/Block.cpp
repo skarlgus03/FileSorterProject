@@ -65,3 +65,45 @@ void Block::removeChild(const std::shared_ptr<Block>& child) {
         children.erase(it);
     }
 }
+
+// File의 값과 비교하는 함수
+bool Block::matches(const FileInfo& file) const
+{
+    switch (filterType)
+    {
+    case FilterType::EXTENSION:
+        return file.extension == condition;
+    case FilterType::KEYWORD:
+        return file.fileName == condition;
+    case FilterType::DATE:
+        return file.date == condition;
+    case FilterType::EXCEPTION:
+        return false;
+    case FilterType::SIZE:
+        return matchSizeCondition(file);
+    default:
+        return false;
+    }
+}
+
+// 크기비교 함수
+bool Block::matchSizeCondition(const FileInfo& file) const
+{
+    std::uintmax_t fileSize = std::stoull(file.size);
+    std::uintmax_t conditionSize = std::stoull(condition);
+    switch (comparisonType)
+    {
+    case ComparisonType::GREATER_EQUAL:
+        return fileSize >= conditionSize;
+    case ComparisonType::LESS_EQUAL:
+        return fileSize <= conditionSize;
+    case ComparisonType::GREATER:
+        return fileSize > conditionSize;
+    case ComparisonType::LESS:
+        return fileSize < conditionSize;
+    case ComparisonType::EQUAL:
+        return fileSize == conditionSize;
+    default:
+        return false;
+    }
+}

@@ -34,5 +34,5 @@ add_executable(FileSorterProject
     src/FileManager.cpp
     src/MainWindow.cpp
     include/MainWindow.h
-)
+ "include/Classifier.h" "src/Classifier.cpp")
 target_link_libraries(FileSorterProject PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)

@@ -16,13 +16,12 @@
 FileDropWidget::FileDropWidget(QWidget *parent)
     : QWidget(parent)
 {
-    setAcceptDrops(true);
+    setAcceptDrops(true);     
 
     auto *layout = new QVBoxLayout(this);
     layout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     layout->setSpacing(10);
 
-    // 상단 버튼(정리, 비우기)
     {
         auto *h = new QHBoxLayout;
         h->setAlignment(Qt::AlignLeft);
@@ -42,7 +41,6 @@ FileDropWidget::FileDropWidget(QWidget *parent)
         connect(clearBtn,    &QPushButton::clicked, this, &FileDropWidget::onClear);
     }
 
-    // 파일 리스트
     fileList = new QListWidget(this);
     layout->addWidget(fileList);
 }
@@ -76,7 +74,6 @@ void FileDropWidget::onOrganize()
         QMessageBox::warning(this, "경로 미설정", "먼저 설정 창에서 대상 경로를 지정해주세요.");
         return;
     }
-    // TODO: FileInfo → Classifier → FileManager 로직 호출
     QMessageBox::information(this, "정리", "파일이 정리되었습니다. (로직 미구현)");
 }
 

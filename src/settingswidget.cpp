@@ -1,4 +1,3 @@
-// settingswidget.cpp
 #include "settingswidget.h"
 
 #include <QVBoxLayout>
@@ -23,8 +22,7 @@ void SettingsWidget::setupUi()
     mainL->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     mainL->setSpacing(10);
 
-    // 1) 상단 버튼
-    {
+    {   // 상단 버튼
         auto *topL = new QHBoxLayout;
         topL->setAlignment(Qt::AlignLeft);
         topL->setSpacing(10);
@@ -36,9 +34,9 @@ void SettingsWidget::setupUi()
         btnReset->setFixedSize(100,30);
         btnAddParent->setFixedSize(100,30);
 
-        topL->addWidget(btnSave);
-        topL->addWidget(btnReset);
-        topL->addWidget(btnAddParent);
+        topL->addWidget(btnSave,      0, Qt::AlignLeft);
+        topL->addWidget(btnReset,     0, Qt::AlignLeft);
+        topL->addWidget(btnAddParent, 0, Qt::AlignLeft);
         mainL->addLayout(topL);
 
         connect(btnSave,      &QPushButton::clicked, this, &SettingsWidget::saveSettings);
@@ -46,8 +44,7 @@ void SettingsWidget::setupUi()
         connect(btnAddParent, &QPushButton::clicked, this, &SettingsWidget::addParentBlock);
     }
 
-    // 2) 블록 스크롤 영역 (가로 전폭 채움)
-    {
+    {   // 블록 스크롤 영역
         blocksScroll = new QScrollArea(this);
         blocksScroll->setWidgetResizable(true);
         blocksScroll->setMinimumHeight(300);
@@ -58,11 +55,10 @@ void SettingsWidget::setupUi()
         blocksLayout->setSpacing(5);
 
         blocksScroll->setWidget(blocksContainer);
-        mainL->addWidget(blocksScroll);  // ← stretch=1, 정렬 플래그 제거
+        mainL->addWidget(blocksScroll);
     }
 
-    // 3) 하단: 남는 파일 지정 버튼을 오른쪽 끝에
-    {
+    {   // 하단: 남는 파일 지정 (오른쪽 끝)
         auto *bottomL = new QHBoxLayout;
         bottomL->addStretch();
 
@@ -80,7 +76,6 @@ void SettingsWidget::setupUi()
     }
 }
 
-// 재귀로 자식 총 개수 세기
 static int countAllDescendants(
     const QMap<QFrame*, QList<QFrame*>> &map, QFrame *f)
 {
@@ -97,17 +92,15 @@ void SettingsWidget::addParentBlock()
 
 void SettingsWidget::createBlock(QFrame *parentFrame)
 {
-    // 새 프레임 생성
     QFrame *frame = new QFrame(blocksContainer);
     frame->setFrameShape(QFrame::Box);
     frame->setStyleSheet("QFrame { background-color: #808080; border-radius: 5px; }");
-    frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);  // ← 가로 확장
+    frame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     auto *hl = new QHBoxLayout(frame);
     hl->setAlignment(Qt::AlignLeft);
     hl->setSpacing(8);
 
-    // 들여쓰기 + ㄴ 마커
     int depth = 0;
     QFrame *anc = parentFrame;
     while (anc) {
@@ -119,7 +112,6 @@ void SettingsWidget::createBlock(QFrame *parentFrame)
         hl->addWidget(new QLabel("ㄴ", frame));
     }
 
-    // 콤보박스
     auto *combo = new QComboBox(frame);
     combo->addItem("선택해 주세요");
     QSet<QString> used;
@@ -134,7 +126,6 @@ void SettingsWidget::createBlock(QFrame *parentFrame)
             combo->addItem(opt);
     hl->addWidget(combo, 0, Qt::AlignLeft);
 
-    // 파일 이름 텍스트 필터
     auto *edit = new QLineEdit(frame);
     edit->setPlaceholderText("텍스트 필터");
     edit->setFixedSize(150,30);
@@ -142,14 +133,12 @@ void SettingsWidget::createBlock(QFrame *parentFrame)
     edit->setAlignment(Qt::AlignLeft);
     hl->addWidget(edit, 0, Qt::AlignLeft);
 
-    // 확장자 콤보
     auto *extCombo = new QComboBox(frame);
     extCombo->addItems({"pdf","txt","ppt","hwp"});
     extCombo->setFixedSize(80,30);
     extCombo->setVisible(false);
     hl->addWidget(extCombo, 0, Qt::AlignLeft);
 
-    // 날짜 범위 입력
     auto *fromEdit = new QLineEdit(frame);
     fromEdit->setPlaceholderText("YYYY-MM-DD");
     fromEdit->setFixedSize(120,30);
@@ -164,23 +153,19 @@ void SettingsWidget::createBlock(QFrame *parentFrame)
     toEdit->setAlignment(Qt::AlignLeft);
     hl->addWidget(toEdit, 0, Qt::AlignLeft);
 
-    // 파일 지정 버튼
     QPushButton *fileBtn = new QPushButton("파일 지정", frame);
     fileBtn->setObjectName("fileBtn");
     fileBtn->setFixedSize(80,30);
     hl->addWidget(fileBtn, 0, Qt::AlignLeft);
 
-    // + 자식 버튼
     QPushButton *addChildBtn = new QPushButton("+ 자식", frame);
     addChildBtn->setFixedSize(80,30);
     hl->addWidget(addChildBtn, 0, Qt::AlignLeft);
 
-    // 삭제 버튼
     QPushButton *delBtn = new QPushButton("x", frame);
     delBtn->setFixedSize(20,20);
     hl->addWidget(delBtn, 0, Qt::AlignLeft);
 
-    // blocksLayout에 추가
     if (parentFrame) {
         int idx    = blocksLayout->indexOf(parentFrame);
         int offset = countAllDescendants(childrenMap, parentFrame);
@@ -189,7 +174,6 @@ void SettingsWidget::createBlock(QFrame *parentFrame)
         blocksLayout->addWidget(frame);
     }
 
-    // 맵 갱신
     childrenMap[frame] = {};
     if (parentFrame) {
         parentMap[frame] = parentFrame;
@@ -200,7 +184,6 @@ void SettingsWidget::createBlock(QFrame *parentFrame)
         parentBlocks.append(frame);
     }
 
-    // 콤보박스 변경
     connect(combo, &QComboBox::currentTextChanged, this,
             [=](const QString &txt){
                 edit    ->setVisible(txt == "파일 이름");
@@ -210,7 +193,6 @@ void SettingsWidget::createBlock(QFrame *parentFrame)
                 toEdit  ->setVisible(isDate);
             });
 
-    // 파일 지정
     connect(fileBtn, &QPushButton::clicked, this, [=](){
         QString d = QFileDialog::getExistingDirectory(this, "대상 폴더 선택");
         if (!d.isEmpty()) {
@@ -219,12 +201,10 @@ void SettingsWidget::createBlock(QFrame *parentFrame)
         }
     });
 
-    // + 자식
     connect(addChildBtn, &QPushButton::clicked, this, [=](){
         createBlock(frame);
     });
 
-    // 삭제
     connect(delBtn, &QPushButton::clicked, this, [=](){
         for (auto *c : childrenMap[frame]) {
             blocksLayout->removeWidget(c);

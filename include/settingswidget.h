@@ -1,4 +1,3 @@
-// settingswidget.h  (변경 없음)
 #pragma once
 
 #include <QWidget>

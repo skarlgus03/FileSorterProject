@@ -1,117 +1,86 @@
-// filedropwidget.cpp
 #include "filedropwidget.h"
 
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
+#include <QListWidget>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QMimeData>
-#include <QUrl>
 #include <QFileInfo>
-#include <QFrame>
-#include <QLabel>
-#include <QPushButton>
 #include <QMessageBox>
-#include <QVBoxLayout>
-#include <QListWidget>
-#include <QDebug>
+#include <QFileDialog>
+#include <QUrl>
+#include <QDesktopServices>
 
 FileDropWidget::FileDropWidget(QWidget *parent)
     : QWidget(parent)
-    , targetDir()
 {
     setAcceptDrops(true);
 
-    // 1) 드롭된 파일 태그(프레임) 표시용 컨테이너
-    listContainer = new QWidget(this);
-    listLayout    = new QHBoxLayout(listContainer);
-    listLayout->setAlignment(Qt::AlignLeft);
-    listLayout->setSpacing(5);
+    auto *layout = new QVBoxLayout(this);
+    layout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    layout->setSpacing(10);
 
-    // 2) 전체 레이아웃
-    auto *mainL = new QVBoxLayout(this);
-    mainL->addWidget(listContainer);
+    // 상단 버튼(정리, 비우기)
+    {
+        auto *h = new QHBoxLayout;
+        h->setAlignment(Qt::AlignLeft);
+        h->setSpacing(10);
 
-    // 3) 정리/비우기 버튼
-    QWidget *btnBox = new QWidget(this);
-    QHBoxLayout *btnL = new QHBoxLayout(btnBox);
-    btnL->setAlignment(Qt::AlignLeft);
-    btnL->setSpacing(10);
+        QPushButton *organizeBtn = new QPushButton("정리하기", this);
+        organizeBtn->setFixedSize(100, 30);
+        h->addWidget(organizeBtn);
 
-    organizeBtn = new QPushButton("정리하기", btnBox);
-    clearBtn    = new QPushButton("비우기", btnBox);
-    organizeBtn->setFixedSize(100,30);
-    clearBtn   ->setFixedSize(100,30);
-    btnL->addWidget(organizeBtn);
-    btnL->addWidget(clearBtn);
+        QPushButton *clearBtn = new QPushButton("비우기", this);
+        clearBtn->setFixedSize(100, 30);
+        h->addWidget(clearBtn);
 
-    mainL->addWidget(btnBox);
+        layout->addLayout(h);
 
-    // 4) 파일 정보 리스트뷰
+        connect(organizeBtn, &QPushButton::clicked, this, &FileDropWidget::onOrganize);
+        connect(clearBtn,    &QPushButton::clicked, this, &FileDropWidget::onClear);
+    }
+
+    // 파일 리스트
     fileList = new QListWidget(this);
-    mainL->addWidget(fileList);
-
-    // 슬롯 연결
-    connect(clearBtn,    &QPushButton::clicked, this, &FileDropWidget::onClear);
-    connect(organizeBtn, &QPushButton::clicked, this, &FileDropWidget::onOrganize);
+    layout->addWidget(fileList);
 }
 
-void FileDropWidget::setTargetDir(const QString &dir) {
-    targetDir = dir;
-}
-
-void FileDropWidget::onClear() {
-    // 리스트 뷰 비우기
-    fileList->clear();
-    // 태그 프레임도 모두 제거
-    QLayoutItem *child;
-    while ((child = listLayout->takeAt(0)) != nullptr) {
-        delete child->widget();
-        delete child;
-    }
-}
-
-void FileDropWidget::onOrganize() {
-    if (targetDir.isEmpty()) {
-        QMessageBox::warning(this, "경고", "경로를 설정해주세요");
-        return;
-    }
-    // TODO: 분류 로직 호출
-    qDebug() << "분류 실행, 대상 폴더:" << targetDir;
-}
-
-void FileDropWidget::dragEnterEvent(QDragEnterEvent *event) {
+void FileDropWidget::dragEnterEvent(QDragEnterEvent *event)
+{
     if (event->mimeData()->hasUrls())
         event->acceptProposedAction();
 }
 
-void FileDropWidget::dropEvent(QDropEvent *event) {
-    for (const QUrl &url : event->mimeData()->urls()) {
-        QString filePath = url.toLocalFile();
+void FileDropWidget::dropEvent(QDropEvent *event)
+{
+    const auto urls = event->mimeData()->urls();
+    for (const QUrl &url : urls) {
+        const QString filePath = url.toLocalFile();
         QFileInfo info(filePath);
 
-        // 1) 리스트뷰에도 추가
-        QString detail = QString("%1 | %2 bytes | %3 | %4")
-                             .arg(info.fileName())
-                             .arg(info.size())
-                             .arg(info.lastModified().toString("yyyy-MM-dd hh:mm:ss"))
-                             .arg(info.suffix());
-        fileList->addItem(detail);
+        QString fileDetail = QString("파일명: %1 | 크기: %2 bytes | 수정일: %3 | 확장자: %4")
+                                 .arg(info.fileName())
+                                 .arg(info.size())
+                                 .arg(info.lastModified().toString("yyyy-MM-dd hh:mm:ss"))
+                                 .arg(info.suffix());
 
-        // 2) 왼쪽 태그 프레임으로도 추가
-        QFrame *frame = new QFrame(listContainer);
-        frame->setFrameShape(QFrame::Box);
-        frame->setStyleSheet("QFrame { background: #f0f0f0; }");
-        QHBoxLayout *lay = new QHBoxLayout(frame);
-        lay->setContentsMargins(5,2,5,2);
-
-        QLabel *lbl = new QLabel(info.fileName(), frame);
-        QPushButton *btnX = new QPushButton("x", frame);
-        btnX->setFixedSize(16,16);
-        lay->addWidget(lbl);
-        lay->addWidget(btnX);
-
-        connect(btnX, &QPushButton::clicked, frame, &QFrame::deleteLater);
-
-        listLayout->addWidget(frame);
+        fileList->addItem(fileDetail);
     }
-    event->acceptProposedAction();
+}
+
+void FileDropWidget::onOrganize()
+{
+    if (targetDir.isEmpty()) {
+        QMessageBox::warning(this, "경로 미설정", "먼저 설정 창에서 대상 경로를 지정해주세요.");
+        return;
+    }
+    // TODO: FileInfo → Classifier → FileManager 로직 호출
+    QMessageBox::information(this, "정리", "파일이 정리되었습니다. (로직 미구현)");
+}
+
+void FileDropWidget::onClear()
+{
+    fileList->clear();
 }

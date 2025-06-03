@@ -26,13 +26,11 @@ set(CMAKE_AUTOUIC ON)
 include_directories(include)
 
 
+
 # 실행 파일에 사용할 소스 파일 지정
-add_executable(FileSorterProject
-    src/main.cpp
-    src/Block.cpp
-    src/JsonManager.cpp
-    src/FileManager.cpp
-    src/MainWindow.cpp
-    include/MainWindow.h
- "include/Classifier.h" "src/Classifier.cpp")
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+# 실행 파일 생성
+add_executable(FileSorterProject ${SOURCES})
+
 target_link_libraries(FileSorterProject PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)

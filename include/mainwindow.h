@@ -1,27 +1,9 @@
-// mainwindow.h
-#pragma once
-
+﻿#pragma once
 #include <QMainWindow>
 
-class FileDropWidget;
-class SettingsWidget;
-class FileViewWidget;
-
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
-
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
-    FileDropWidget *fileDropWidget;
-    SettingsWidget *settingsWidget;
-    FileViewWidget *fileViewWidget;
+    MainWindow(QWidget* parent = nullptr);
 };

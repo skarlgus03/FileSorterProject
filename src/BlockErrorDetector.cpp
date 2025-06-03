@@ -1,10 +1,10 @@
-#include "BlockErrorDetector.h"
+ï»¿#include "BlockErrorDetector.h"
 
 std::vector<std::string> BlockErrorDetector::scan(const std::shared_ptr<Block>& root) {
     std::vector<std::string> errors;
 
     if (!root) {
-        errors.push_back("ºí·Ï Æ®¸®°¡ ºñ¾î ÀÖ½À´Ï´Ù.");
+        errors.push_back("ë¸”ë¡ íŠ¸ë¦¬ê°€ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤.");
         return errors;
     }
 
@@ -12,7 +12,7 @@ std::vector<std::string> BlockErrorDetector::scan(const std::shared_ptr<Block>& 
     return errors;
 }
 
-// ºí·Ï Æ®¸®¸¦ Àç±ÍÀûÀ¸·Î ¼øÈ¸ÇÏ¸ç °Ë»ç ÇÔ¼ö¸¦ È£ÃâÇÑ´Ù.
+// ë¸”ë¡ íŠ¸ë¦¬ë¥¼ ì¬ê·€ì ìœ¼ë¡œ ìˆœíšŒí•˜ë©° ê²€ì‚¬ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•œë‹¤.
 void BlockErrorDetector::scanRecursive(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
     if (!block) return;
 
@@ -27,23 +27,23 @@ void BlockErrorDetector::scanRecursive(const std::shared_ptr<Block>& block, cons
 }
 
 
-// Á¶°ÇÀÌ ºñ¾î ÀÖ´Â °æ¿ì
+// ì¡°ê±´ì´ ë¹„ì–´ ìˆëŠ” ê²½ìš°
 void BlockErrorDetector::checkEmptyCondition(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
     if (block->getCondition().empty()) {
-        errors.push_back("Á¶°ÇÀÌ ºñ¾î ÀÖÀ½ ¡æ °æ·Î: " + path);
+        errors.push_back("ì¡°ê±´ì´ ë¹„ì–´ ìˆìŒ â†’ ê²½ë¡œ: " + path);
     }
 }
 
 
-//¸»´Ü ºí·ÏÀÎµ¥ ÀÌµ¿ °æ·Î°¡ ¾ø´Â °æ¿ì
+//ë§ë‹¨ ë¸”ë¡ì¸ë° ì´ë™ ê²½ë¡œê°€ ì—†ëŠ” ê²½ìš°
 void BlockErrorDetector::checkLeafWithoutMovePath(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
     if (block->isLeaf() && block->getMovePath().empty()) {
-        errors.push_back("ÀÌµ¿ °æ·Î°¡ ¾ø´Â ¸»´Ü ºí·Ï ¡æ °æ·Î: " + path);
+        errors.push_back("ì´ë™ ê²½ë¡œê°€ ì—†ëŠ” ë§ë‹¨ ë¸”ë¡ â†’ ê²½ë¡œ: " + path);
     }
 }
 
 
-// FilterType enumÀ» ¹®ÀÚ¿­·Î º¯È¯
+// FilterType enumì„ ë¬¸ìì—´ë¡œ ë³€í™˜
 std::string BlockErrorDetector::filterTypeToString(FilterType type) {
     switch (type) {
     case FilterType::EXTENSION: return "EXTENSION";

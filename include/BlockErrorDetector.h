@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Block.h"
 #include <vector>
@@ -20,5 +20,5 @@ private:
         
     static void checkLeafWithoutMovePath(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);
 
-    static std::string filterTypeToString(FilterType type);  // ³»ºÎ¿¡¼­¸¸ »ç¿ë
+    static std::string filterTypeToString(FilterType type);  // ë‚´ë¶€ì—ì„œë§Œ ì‚¬ìš©
 };

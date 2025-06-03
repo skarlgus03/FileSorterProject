@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 왼쪽 메뉴
     QWidget *leftMenu = new QWidget;
-    leftMenu->setStyleSheet("background-color: #cccccc;");
+    leftMenu->setStyleSheet("background-color: #2c2c2c;");
     QVBoxLayout *menuLayout = new QVBoxLayout(leftMenu);
     menuLayout->setContentsMargins(10, 10, 10, 10);         //여백을 얼마나 간격을 할것인가
     menuLayout->setSpacing(20);          //위 간격 함수

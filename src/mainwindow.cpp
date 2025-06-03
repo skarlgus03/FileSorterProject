@@ -1,7 +1,4 @@
-// mainwindow.cpp
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-
 #include "filedropwidget.h"
 #include "settingswidget.h"
 #include "fileviewwidget.h"
@@ -10,55 +7,70 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QStackedWidget>
+#include <QWidget>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(nullptr) // Designer UI가 없으므로 nullptr
 {
-    ui->setupUi(this);
+    // 중앙 위젯 설정
+    QWidget *central = new QWidget(this);
+    setCentralWidget(central);
 
-    // 1) Create pages
-    fileDropWidget   = new FileDropWidget(this);
-    settingsWidget   = new SettingsWidget(this);
-    fileViewWidget   = new FileViewWidget(this);
+    auto *mainL = new QVBoxLayout(central);
+    mainL->setContentsMargins(0,0,0,0);
+    mainL->setSpacing(0);
 
-    stack = new QStackedWidget(this);
+    QSplitter *splitter = new QSplitter(Qt::Horizontal, central);
+    splitter->setStyleSheet("QSplitter::handle { background-color: lightgray; width: 2px; }");
+
+    // 왼쪽 메뉴
+    QWidget *leftMenu = new QWidget;
+    leftMenu->setStyleSheet("background-color: #cccccc;");
+    QVBoxLayout *menuLayout = new QVBoxLayout(leftMenu);
+    menuLayout->setContentsMargins(10, 10, 10, 10);         //여백을 얼마나 간격을 할것인가
+    menuLayout->setSpacing(20);          //위 간격 함수
+    menuLayout->setAlignment(Qt::AlignTop);     //배치설정
+
+    //버튼 생성
+    QPushButton *btnPage1 = new QPushButton("정리 창", leftMenu);
+    QPushButton *btnPage2 = new QPushButton("설정 창", leftMenu);
+    QPushButton *btnPage3 = new QPushButton("파일 창", leftMenu);
+    QSize buttonSize(120, 40);
+    btnPage1->setFixedSize(buttonSize);
+    btnPage2->setFixedSize(buttonSize);
+    btnPage3->setFixedSize(buttonSize);
+
+    menuLayout->addWidget(btnPage1);
+    menuLayout->addWidget(btnPage2);
+    menuLayout->addWidget(btnPage3);
+    menuLayout->addStretch();
+
+    // 스택 위젯 버튼연결
+    QStackedWidget *stack = new QStackedWidget;
+
+    fileDropWidget = new FileDropWidget;
+    settingsWidget = new SettingsWidget;
+    fileViewWidget = new FileViewWidget;
+
     stack->addWidget(fileDropWidget);
     stack->addWidget(settingsWidget);
     stack->addWidget(fileViewWidget);
 
-    // 2) Left menu
-    QWidget *leftMenu = new QWidget(this);
-    QVBoxLayout *menuL = new QVBoxLayout(leftMenu);
-    menuL->setAlignment(Qt::AlignTop);
-    QStringList titles = { "정리 창", "설정 창", "파일 창" };
-    for (int i = 0; i < titles.size(); ++i) {
-        QPushButton *btn = new QPushButton(titles[i], leftMenu);
-        btn->setFixedSize(120, 40);
-        menuL->addWidget(btn);
-        connect(btn, &QPushButton::clicked, this, [this, i]() {
-            stack->setCurrentIndex(i);
-        });
-    }
-    menuL->addStretch();
+    connect(btnPage1, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(0); });
+    connect(btnPage2, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(1); });
+    connect(btnPage3, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(2); });
 
-    // 3) Splitter
-    QSplitter *splitter = new QSplitter(Qt::Horizontal, this);
     splitter->addWidget(leftMenu);
     splitter->addWidget(stack);
-    splitter->setStretchFactor(1, 1);
-    splitter->setStyleSheet("QSplitter::handle { background-color: lightgray; width: 2px; }");
+    splitter->setStretchFactor(1,1);
 
-    // 4) Place into centralwidget
-    auto *mainL = qobject_cast<QVBoxLayout*>(ui->centralwidget->layout());
-    if (!mainL) {
-        mainL = new QVBoxLayout(ui->centralwidget);
-        mainL->setContentsMargins(0,0,0,0);
-    }
     mainL->addWidget(splitter);
+
+    resize(1024, 700);
+    setMinimumSize(800, 600);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
 }

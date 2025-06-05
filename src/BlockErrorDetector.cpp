@@ -20,6 +20,7 @@ void BlockErrorDetector::scanRecursive(const std::shared_ptr<Block>& block, cons
 
     checkEmptyCondition(block, currentPath, errors);
     checkLeafWithoutMovePath(block, currentPath, errors);
+    checkMultipleExtensionInSameParent(block, currentPath, errors);
 
     for (const auto& child : block->getChildren()) {
         scanRecursive(child, currentPath, errors);
@@ -39,6 +40,24 @@ void BlockErrorDetector::checkEmptyCondition(const std::shared_ptr<Block>& block
 void BlockErrorDetector::checkLeafWithoutMovePath(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
     if (block->isLeaf() && block->getMovePath().empty()) {
         errors.push_back("이동 경로가 없는 말단 블록 → 경로: " + path);
+    }
+}
+
+// 하나의 트리에 확장자가 2개 이상인 경우
+void BlockErrorDetector::checkMultipleExtensionInSameParent(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
+    // 자식이 없으면 검사할 필요 없음
+    if (block->getChildren().empty()) return;
+
+    int extensionCount = 0;
+
+    for (const auto& child : block->getChildren()) {
+        if (child && child->getFilterType() == FilterType::EXTENSION) {
+            extensionCount++;
+        }
+    }
+
+    if (extensionCount > 1) {
+        errors.push_back("같은 부모 블록 아래에 확장자 조건이 2개 이상 존재함 → 경로: " + path);
     }
 }
 

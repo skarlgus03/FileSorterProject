@@ -20,5 +20,8 @@ private:
         
     static void checkLeafWithoutMovePath(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);
 
+    static void checkMultipleExtensionInSameParent(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);
+
+
     static std::string filterTypeToString(FilterType type);  // 내부에서만 사용
 };

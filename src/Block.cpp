@@ -20,6 +20,8 @@ const std::string& Block::getCondition() const { return condition; }
 // movePath 멤버 변수 값을 반환하는 getter 함수
 const std::string& Block::getMovePath() const { return movePath; }
 
+ComparisonType Block::getComparisonType() const { return comparisonType; }
+
 // 자식 블록 목록을 반환하는 getter 함수
 const std::vector<std::shared_ptr<Block>>& Block::getChildren() const { return children; }
 
@@ -31,6 +33,8 @@ void Block::setCondition(const std::string& cond) { condition = cond; }
 
 // movePath 멤버 변수 값을 설정하는 setter 함수
 void Block::setMovePath(const std::string& path) { movePath = path; }
+
+void Block::setComparisonType(ComparisonType type) { comparisonType = type; }
 
 // 자식 블록이 없는지 확인하는 함수
 bool Block::isLeaf() const {
@@ -49,9 +53,11 @@ void Block::addChild(const std::shared_ptr<Block>& child) {
 // 비어있는(예외 타입) 자식 블록을 추가하고 반환하는 함수
 std::shared_ptr<Block> Block::addEmptyChild() {
     auto child = std::make_shared<Block>(FilterType::EXCEPTION, "", "");
-    children.push_back(child);
+    child->setParent(shared_from_this());     //  부모 등록
+    children.push_back(child);                
     return child;
 }
+
 
 // 부모 설정 함수 구현
 void Block::setParent(const std::shared_ptr<Block>& parentBlock) {

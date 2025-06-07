@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <QFrame>
-#include "Ui/BlockWidget.h"
+
+class BlockWidget;
 
 class RootBlockArea : public QFrame {
     Q_OBJECT
@@ -9,12 +10,14 @@ public:
     BlockWidget* getRootBlock() const;
 
     int getTotalHeight() const;
-    void updateHeight();
+    void updateSize();
+    int calculateMaxDepth(BlockWidget* node) const;
+    int getTotalWidth() const;
+
 
 private:
     BlockWidget* rootBlock;
     static constexpr int WIDTH = 1000;
     static constexpr int HEIGHT_PADDING = 20;
-    static constexpr int BLOCK_HEIGHT = 80;
 
 };

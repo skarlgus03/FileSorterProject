@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 왼쪽 메뉴
     QWidget *leftMenu = new QWidget;
-    leftMenu->setStyleSheet("background-color: #cccccc;");
+    leftMenu->setStyleSheet("background-color: #3c3c3c;");
     QVBoxLayout *menuLayout = new QVBoxLayout(leftMenu);
     menuLayout->setContentsMargins(10, 10, 10, 10);         //여백을 얼마나 간격을 할것인가
     menuLayout->setSpacing(20);          //위 간격 함수
@@ -36,14 +36,17 @@ MainWindow::MainWindow(QWidget *parent)
     QPushButton *btnPage1 = new QPushButton("정리 창", leftMenu);
     QPushButton *btnPage2 = new QPushButton("설정 창", leftMenu);
     QPushButton *btnPage3 = new QPushButton("파일 창", leftMenu);
+    QPushButton* btnPage4 = new QPushButton("실험용", leftMenu);
     QSize buttonSize(120, 40);
     btnPage1->setFixedSize(buttonSize);
     btnPage2->setFixedSize(buttonSize);
     btnPage3->setFixedSize(buttonSize);
+    btnPage4->setFixedSize(buttonSize);
 
     menuLayout->addWidget(btnPage1);
     menuLayout->addWidget(btnPage2);
     menuLayout->addWidget(btnPage3);
+    menuLayout->addWidget(btnPage4);
     menuLayout->addStretch();
 
     // 스택 위젯 버튼연결
@@ -52,14 +55,17 @@ MainWindow::MainWindow(QWidget *parent)
     fileDropWidget = new FileDropWidget;
     settingsWidget = new SettingsWidget;
     fileViewWidget = new FileViewWidget;
+    testBlockPage = new TestBlockPage;
 
     stack->addWidget(fileDropWidget);
     stack->addWidget(settingsWidget);
     stack->addWidget(fileViewWidget);
+    stack->addWidget(testBlockPage);
 
     connect(btnPage1, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(0); });
     connect(btnPage2, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(1); });
     connect(btnPage3, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(2); });
+    connect(btnPage4, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(3); });
 
     splitter->addWidget(leftMenu);
     splitter->addWidget(stack);

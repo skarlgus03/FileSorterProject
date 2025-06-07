@@ -1,4 +1,4 @@
-D:/source/repos/FileSorterProject/build/FileSorterProject_autogen/include_Debug/VZKHXQLDTQ/moc_TestBlockPage.cpp: D:/source/repos/FileSorterProject/include/Ui/TestBlockPage.h \
+D:/source/repos/FileSorterProject/build/FileSorterProject_autogen/include_Debug/VZKHXQLDTQ/moc_RootBlockArea.cpp: D:/source/repos/FileSorterProject/include/Ui/RootBlockArea.h \
   C:/Qt/6.9.0/msvc2022_64/include/QtCore/QVector \
   C:/Qt/6.9.0/msvc2022_64/include/QtCore/q17memory.h \
   C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20functional.h \
@@ -164,7 +164,6 @@ D:/source/repos/FileSorterProject/build/FileSorterProject_autogen/include_Debug/
   C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/QLabel \
   C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/QLineEdit \
   C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/QPushButton \
-  C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/QWidget \
   C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/qabstractbutton.h \
   C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/qframe.h \
   C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/qlabel.h \
@@ -177,7 +176,4 @@ D:/source/repos/FileSorterProject/build/FileSorterProject_autogen/include_Debug/
   C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/qwidget.h \
   D:/source/repos/FileSorterProject/include/Block.h \
   D:/source/repos/FileSorterProject/include/FileInfo.h \
-  D:/source/repos/FileSorterProject/include/Ui/BlockWidget.h \
-  D:/source/repos/FileSorterProject/include/Ui/CanvasWidget.h \
-  D:/source/repos/FileSorterProject/include/Ui/blockwidget.h \
-  D:/source/repos/FileSorterProject/include/Ui/rootblockarea.h
+  D:/source/repos/FileSorterProject/include/Ui/BlockWidget.h

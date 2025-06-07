@@ -37,22 +37,33 @@ TestBlockPage::TestBlockPage(QWidget* parent)
 }
 
 void TestBlockPage::createRootBlock() {
+    // 1. 루트 논리 노드 생성
+    std::shared_ptr<Block> rootLogicBlock = std::make_shared<Block>();
+
+    // 2. 루트 영역 UI 생성
     auto* area = new RootBlockArea(canvas, nextRootY);
     area->show();
     rootAreas.append(area);
     static_cast<CanvasWidget*>(canvas)->addRootArea(area);
 
-    connect(area->getRootBlock(), &BlockWidget::resized, this, [=]() {
-        recalculateAllLayout();   // ✅ 여기
+    // 3. 내부 BlockWidget 가져와서 연결
+    BlockWidget* rootBlockWidget = area->getRootBlock();
+    rootBlockWidget->setLogicBlock(rootLogicBlock);
+
+    // 4. 레이아웃 및 시그널 연결
+    connect(rootBlockWidget, &BlockWidget::resized, this, [=]() {
+        recalculateAllLayout();
+        area->updateSize();
         });
 
-    recalculateAllLayout();       // ✅ 부모 생성 직후도 반드시 호출
+    recalculateAllLayout();
 }
+
 
 void TestBlockPage::recalculateAllLayout() {
     int y = 50;  // 버튼 영역 아래 여백
     for (RootBlockArea* area : rootAreas) {
-        area->updateHeight();              // 높이 재계산 (BlockWidget 기반)
+        area->updateSize();              //사이즈 조정
         area->move(10, y);                 // 위치 조정
         y += area->height() + 20;
     }

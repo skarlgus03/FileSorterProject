@@ -32,6 +32,7 @@ public:
     FilterType getFilterType() const;
     const std::string& getCondition() const;
     const std::string& getMovePath() const;
+    ComparisonType getComparisonType() const;
 
     bool isLeaf() const;
 
@@ -52,7 +53,7 @@ public:
     void setFilterType(FilterType type);
     void setCondition(const std::string& cond);
     void setMovePath(const std::string& path);
-
+    void setComparisonType(ComparisonType type);
 private:
     FilterType filterType;
     std::string condition;

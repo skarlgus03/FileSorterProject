@@ -365,6 +365,18 @@
 			null
 		],
 		[
+			"D:/source/repos/FileSorterProject/include/Ui/CanvasWidget.h",
+			"MU",
+			"VZKHXQLDTQ/moc_CanvasWidget.cpp",
+			null
+		],
+		[
+			"D:/source/repos/FileSorterProject/include/Ui/RootBlockArea.h",
+			"MU",
+			"VZKHXQLDTQ/moc_RootBlockArea.cpp",
+			null
+		],
+		[
 			"D:/source/repos/FileSorterProject/include/Ui/TestBlockPage.h",
 			"MU",
 			"VZKHXQLDTQ/moc_TestBlockPage.cpp",
@@ -550,9 +562,11 @@
 			null
 		],
 		[ "D:/source/repos/FileSorterProject/src/BlockWidget.cpp", "MU", null ],
+		[ "D:/source/repos/FileSorterProject/src/CanvasWidget.cpp", "MU", null ],
 		[ "D:/source/repos/FileSorterProject/src/Classifier.cpp", "MU", null ],
 		[ "D:/source/repos/FileSorterProject/src/FileManager.cpp", "MU", null ],
 		[ "D:/source/repos/FileSorterProject/src/JsonManager.cpp", "MU", null ],
+		[ "D:/source/repos/FileSorterProject/src/RootBlockArea.cpp", "MU", null ],
 		[ "D:/source/repos/FileSorterProject/src/TestBlockPage.cpp", "MU", null ],
 		[
 			"D:/source/repos/FileSorterProject/src/filedropwidget.cpp",

@@ -411,6 +411,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\source\repos\FileSorterProject\include\FileManager.h" />
     <ClInclude Include="D:\source\repos\FileSorterProject\include\JsonManager.h" />
     <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\BlockWidget.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\CanvasWidget.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\RootBlockArea.h" />
     <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\TestBlockPage.h" />
     <ClInclude Include="D:\source\repos\FileSorterProject\include\filedropwidget.h" />
     <ClInclude Include="D:\source\repos\FileSorterProject\include\fileviewwidget.h" />
@@ -419,9 +421,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\source\repos\FileSorterProject\src\Block.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\BlockErrorDetector.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\BlockWidget.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\CanvasWidget.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\Classifier.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\FileManager.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\JsonManager.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\RootBlockArea.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\TestBlockPage.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\filedropwidget.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\fileviewwidget.cpp" />

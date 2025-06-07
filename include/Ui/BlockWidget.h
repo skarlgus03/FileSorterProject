@@ -3,42 +3,56 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QVector>
+#include <QLineEdit>
+#include <QComboBox>
 #include <memory>
 #include <vector>
-
 #include <Block.h>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+
+#include "Ui/RootBlockArea.h"
 
 class BlockWidget : public QFrame {
     Q_OBJECT
 public:
-    BlockWidget(QWidget* canvas, BlockWidget* parentBlock, int depth, int y);
+    BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y);
+    void setLogicBlock(const std::shared_ptr<Block>& block);
     int getTotalHeight() const;
     void relayoutChildren();
     void updateLayoutFromChildGrowth();
-    QVector<BlockWidget*> getChildren() const;
+
+    QVector<BlockWidget*> getChildren() const { return children; }    
+    int getCurrentDepth() { return currentDepth; }
+
+
+
+
 signals:
     void resized();
-
-protected:
+ 
 
 private slots:
     void addChild();
+    void choosePath();
+    void onFilterTypeChanged(int index);
 
 private:
     QWidget* canvasRef;
     BlockWidget* parentBlock;
     QPushButton* addChildBtn;
-    QLabel* label;
+    QLabel* label = nullptr;
     QVector<BlockWidget*> children;
 
+    QComboBox* filterTypeBox;
+    QLineEdit* conditionEdit;
+    QLabel* movePathLabel;
+    QPushButton* movePathBtn;
+    QComboBox* comparisonBox;
 
     int currentDepth;
     int nextChildY = 0;
 
-    static constexpr int BLOCK_WIDTH = 120;
-    static constexpr int BLOCK_HEIGHT = 80;
-    static constexpr int H_SPACING = 150;
-    static constexpr int V_SPACING = 10;
 
     std::shared_ptr<Block> logicBlock;
 };

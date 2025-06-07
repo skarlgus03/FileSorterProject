@@ -39,10 +39,17 @@ template <> constexpr inline auto BlockWidget::qt_create_metaobjectdata<qt_meta_
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "BlockWidget"
+        "BlockWidget",
+        "resized",
+        "",
+        "addChild"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'resized'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'addChild'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -52,7 +59,7 @@ template <> constexpr inline auto BlockWidget::qt_create_metaobjectdata<qt_meta_
             qt_methods, qt_properties, qt_enums);
 }
 Q_CONSTINIT const QMetaObject BlockWidget::staticMetaObject = { {
-    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
+    QMetaObject::SuperData::link<QFrame::staticMetaObject>(),
     qt_staticMetaObjectStaticContent<qt_meta_tag_ZN11BlockWidgetE_t>.stringdata,
     qt_staticMetaObjectStaticContent<qt_meta_tag_ZN11BlockWidgetE_t>.data,
     qt_static_metacall,
@@ -64,10 +71,17 @@ Q_CONSTINIT const QMetaObject BlockWidget::staticMetaObject = { {
 void BlockWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<BlockWidget *>(_o);
-    (void)_t;
-    (void)_c;
-    (void)_id;
-    (void)_a;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: _t->resized(); break;
+        case 1: _t->addChild(); break;
+        default: ;
+        }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (BlockWidget::*)()>(_a, &BlockWidget::resized, 0))
+            return;
+    }
 }
 
 const QMetaObject *BlockWidget::metaObject() const
@@ -80,12 +94,30 @@ void *BlockWidget::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN11BlockWidgetE_t>.strings))
         return static_cast<void*>(this);
-    return QWidget::qt_metacast(_clname);
+    return QFrame::qt_metacast(_clname);
 }
 
 int BlockWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = QFrame::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 2)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 2;
+    }
     return _id;
+}
+
+// SIGNAL 0
+void BlockWidget::resized()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

@@ -13,6 +13,9 @@
     <ClCompile Include="D:\source\repos\FileSorterProject\src\BlockWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\CanvasWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\source\repos\FileSorterProject\src\Classifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -20,6 +23,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\source\repos\FileSorterProject\src\JsonManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\RootBlockArea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\source\repos\FileSorterProject\src\TestBlockPage.cpp">
@@ -76,6 +82,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\BlockWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\CanvasWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\RootBlockArea.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\TestBlockPage.h">

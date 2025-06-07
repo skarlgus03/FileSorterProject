@@ -14,7 +14,7 @@ TestBlockPage::TestBlockPage(QWidget* parent)
     // 상단 버튼 바
     auto* topBar = new QWidget(this);
     auto* topLayout = new QHBoxLayout(topBar);
-    topLayout->setContentsMargins(10, 10, 10, 10);
+    topLayout->setContentsMargins(10, 5, 10, 5);
     topLayout->setAlignment(Qt::AlignLeft);
 
     btnCreateRoot = new QPushButton("부모생성", topBar);
@@ -61,7 +61,7 @@ void TestBlockPage::createRootBlock() {
 
 
 void TestBlockPage::recalculateAllLayout() {
-    int y = 50;  // 버튼 영역 아래 여백
+    int y = 10;  // 버튼 영역 아래 여백
     for (RootBlockArea* area : rootAreas) {
         area->updateSize();              //사이즈 조정
         area->move(10, y);                 // 위치 조정

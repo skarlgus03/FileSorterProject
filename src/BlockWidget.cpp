@@ -2,8 +2,12 @@
 #include "UIConstants.h"
 #include <QFileDialog>
 
+
 BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     : QFrame(canvas), canvasRef(canvas), parentBlock(parent), currentDepth(depth) {
+
+    QFont baseFont("Noto Sans KR", 11);
+    this->setFont(baseFont);
 
     setFrameStyle(QFrame::NoFrame);
     setStyleSheet(R"(
@@ -12,7 +16,7 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
         border-radius: 14px;
         color: #dcdfe4;
         font-size: 12px;
-        font-family: 'Segoe UI', sans-serif;
+        font-family: 'Noto Sans KR', sans-serif;
     )");
     setFixedSize(BLOCK_WIDTH, BLOCK_HEIGHT);
 
@@ -20,6 +24,7 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     move(x, y);
 
     filterTypeBox = new QComboBox(this);
+    filterTypeBox->setFont(baseFont);
     filterTypeBox->setStyleSheet(R"(
         QComboBox {
             background-color: #2b2f40;
@@ -40,22 +45,26 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     connect(filterTypeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &BlockWidget::onFilterTypeChanged);
 
     conditionEdit = new QLineEdit(this);
+    conditionEdit->setFont(baseFont);
     conditionEdit->setGeometry(10, 40, 120, 20);
     connect(conditionEdit, &QLineEdit::textChanged, this, [=](const QString& text) {
         if (logicBlock) logicBlock->setCondition(text.toStdString());
         });
 
     movePathBtn = new QPushButton("경로선택", this);
+    movePathBtn->setFont(baseFont);
     movePathBtn->setGeometry(10, 70, 50, 20);
     movePathBtn->setToolTip("말단 블럭에서만 경로를 설정할 수 있습니다.");
     connect(movePathBtn, &QPushButton::clicked, this, &BlockWidget::choosePath);
 
     movePathLabel = new QLabel("(미지정)", this);
+    movePathLabel->setFont(baseFont);
     movePathLabel->setGeometry(65, 70, 95, 20);
     movePathLabel->setStyleSheet("color: lightgray;");
     movePathLabel->setToolTip("이 블럭이 말단일 때만 설정 가능합니다.");
 
     comparisonBox = new QComboBox(this);
+    comparisonBox->setFont(baseFont);
     comparisonBox->setStyleSheet(R"(
         QComboBox {
             background-color: #2b2f40;
@@ -80,6 +89,7 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
         });
 
     addChildBtn = new QPushButton("＋", this);
+    addChildBtn->setFont(baseFont);
     addChildBtn->setStyleSheet(R"(
         QPushButton {
             background-color: #2e3440;
@@ -103,9 +113,6 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
 
     updateEnabledStates();
 }
-
-
-
 
 
 void BlockWidget::addChild() {

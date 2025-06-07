@@ -16,17 +16,20 @@ MainWindow::MainWindow(QWidget *parent)
     // 중앙 위젯 설정
     QWidget *central = new QWidget(this);
     setCentralWidget(central);
+    central->setStyleSheet("background-color: #212121;");
 
     auto *mainL = new QVBoxLayout(central);
     mainL->setContentsMargins(0,0,0,0);
     mainL->setSpacing(0);
 
     QSplitter *splitter = new QSplitter(Qt::Horizontal, central);
-    splitter->setStyleSheet("QSplitter::handle { background-color: lightgray; width: 2px; }");
+    splitter->setStyleSheet("QSplitter::handle { background-color: #112240; width: 2px; }");
 
     // 왼쪽 메뉴
     QWidget *leftMenu = new QWidget;
-    leftMenu->setStyleSheet("background-color: #3c3c3c;");
+    leftMenu->setStyleSheet(R"(
+        background-color: #1a1a1a;
+    )");
     QVBoxLayout *menuLayout = new QVBoxLayout(leftMenu);
     menuLayout->setContentsMargins(10, 10, 10, 10);         //여백을 얼마나 간격을 할것인가
     menuLayout->setSpacing(20);          //위 간격 함수
@@ -42,6 +45,24 @@ MainWindow::MainWindow(QWidget *parent)
     btnPage2->setFixedSize(buttonSize);
     btnPage3->setFixedSize(buttonSize);
     btnPage4->setFixedSize(buttonSize);
+
+    QString btnStyle = (R"(
+        QPushButton{
+            background - color: #16162b;
+            color: #ffffff;
+            border: 2px solid #464964;
+            border - radius: 6px;
+        }
+        QPushButton:hover{
+            background - color: #3B82F6;
+            color: white;
+        }
+     )");
+
+    btnPage1->setStyleSheet(btnStyle);
+    btnPage2->setStyleSheet(btnStyle);
+    btnPage3->setStyleSheet(btnStyle);
+    btnPage4->setStyleSheet(btnStyle);
 
     menuLayout->addWidget(btnPage1);
     menuLayout->addWidget(btnPage2);

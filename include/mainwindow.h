@@ -1,10 +1,14 @@
 #pragma once
 
 #include <QMainWindow>
+#include "Ui/testblockpage.h"  // 우리가 만든 페이지
 
+class TestBlockPage;
 class FileDropWidget;
 class SettingsWidget;
 class FileViewWidget;
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,4 +28,5 @@ private:
     FileDropWidget *fileDropWidget;
     SettingsWidget *settingsWidget;
     FileViewWidget *fileViewWidget;
+    TestBlockPage* testBlockPage;
 };

@@ -4,13 +4,25 @@
     <ClCompile Include="D:\source\repos\FileSorterProject\build\FileSorterProject_autogen\mocs_compilation_Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\main.cpp">
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\mainwindow.cpp">
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\BlockErrorDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\settingswidget.cpp">
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\BlockWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\Classifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\FileManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\JsonManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\TestBlockPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\source\repos\FileSorterProject\src\filedropwidget.cpp">
@@ -19,19 +31,13 @@
     <ClCompile Include="D:\source\repos\FileSorterProject\src\fileviewwidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\FileManager.cpp">
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\Classifier.cpp">
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\Block.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\BlockErrorDetector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\JsonManager.cpp">
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\settingswidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\source\repos\FileSorterProject\build\FileSorterProject_autogen\mocs_compilation_Release.cpp">
@@ -45,9 +51,56 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\BlockErrorDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\BlockUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Classifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\ExceptionBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\FileInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\FileManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\JsonManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\BlockWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\TestBlockPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\filedropwidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\fileviewwidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\mainwindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\settingswidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <CustomBuild Include="D:\source\repos\FileSorterProject\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{1225EE86-A2E5-3972-9AAB-AF171DC7DF64}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{523CBBA0-8AA2-3EBF-8FF8-C2515C8DA864}</UniqueIdentifier>
     </Filter>

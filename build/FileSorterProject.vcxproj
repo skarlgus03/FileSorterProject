@@ -402,16 +402,32 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Block.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\BlockErrorDetector.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\BlockUtils.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Classifier.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\ExceptionBlock.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\FileInfo.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\FileManager.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\JsonManager.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\BlockWidget.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\Ui\TestBlockPage.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\filedropwidget.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\fileviewwidget.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\mainwindow.h" />
+    <ClInclude Include="D:\source\repos\FileSorterProject\include\settingswidget.h" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\Block.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\BlockErrorDetector.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\BlockWidget.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\Classifier.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\FileManager.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\JsonManager.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\TestBlockPage.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\filedropwidget.cpp" />
+    <ClCompile Include="D:\source\repos\FileSorterProject\src\fileviewwidget.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\main.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\mainwindow.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\src\settingswidget.cpp" />
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\filedropwidget.cpp" />
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\fileviewwidget.cpp" />
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\FileManager.cpp" />
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\Classifier.cpp" />
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\Block.cpp" />
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\BlockErrorDetector.cpp" />
-    <ClCompile Include="D:\source\repos\FileSorterProject\src\JsonManager.cpp" />
     <ClCompile Include="D:\source\repos\FileSorterProject\build\FileSorterProject_autogen\mocs_compilation_Release.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</ExcludedFromBuild>

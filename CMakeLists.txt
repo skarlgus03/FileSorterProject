@@ -28,7 +28,7 @@ include_directories(include)
 
 
 # 실행 파일에 사용할 소스 파일 지정
-file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h" "include/*.h")
+file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h" "include/*.h" "include/Ui/*.h")
 
 # 실행 파일 생성
 add_executable(FileSorterProject ${SOURCES})

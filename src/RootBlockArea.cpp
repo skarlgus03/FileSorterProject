@@ -7,7 +7,7 @@ RootBlockArea::RootBlockArea(QWidget* parent, int y)
     : QFrame(parent) {
     move(10, y);
     setFrameStyle(QFrame::Box); 
-    setStyleSheet("background-color: rgba(18, 20, 28, 180);");
+    setStyleSheet("background-color: rgba(18, 20, 28, 150);");
     setFixedWidth(1100);
 
     rootBlock = new BlockWidget(this, nullptr, 0, 10); // 루트 노드
@@ -42,6 +42,5 @@ int RootBlockArea::calculateMaxDepth(BlockWidget* node) const {
 }
 
 int RootBlockArea::getTotalWidth() const {
-    int maxDepth = calculateMaxDepth(rootBlock);
-    return std::max(1100, 10 + (maxDepth + 1) * 150);
+    return std::max(1100, rootBlock->getMaxRight() + 20);
 }

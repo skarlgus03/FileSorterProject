@@ -5,7 +5,6 @@
 BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     : QFrame(canvas), canvasRef(canvas), parentBlock(parent), currentDepth(depth) {
 
-    // 블럭 디자인
     setFrameStyle(QFrame::NoFrame);
     setStyleSheet(R"(
         background-color: #1c1e26;
@@ -20,8 +19,7 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     int x = parent ? parent->x() + H_SPACING : 10;
     move(x, y);
 
-    // 필터 박스 버튼
-    filterTypeBox = new QComboBox(this); 
+    filterTypeBox = new QComboBox(this);
     filterTypeBox->setStyleSheet(R"(
         QComboBox {
             background-color: #2b2f40;
@@ -37,31 +35,43 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
             border: none;
         }
     )");
-    filterTypeBox->setGeometry(10, 10, 150, 20);
-    filterTypeBox->addItems({ "EXTENSION", "KEYWORD", "DATE", "EXCEPTION", "SIZE" });
+    filterTypeBox->setGeometry(10, 10, 120, 20);
+    filterTypeBox->addItems({ "EXTENSION", "KEYWORD", "DATE", "EXCEPTION", "SIZE(BYTE)" });
     connect(filterTypeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &BlockWidget::onFilterTypeChanged);
 
-
-    // condition값 설정텍스트박스
     conditionEdit = new QLineEdit(this);
     conditionEdit->setGeometry(10, 40, 120, 20);
     connect(conditionEdit, &QLineEdit::textChanged, this, [=](const QString& text) {
         if (logicBlock) logicBlock->setCondition(text.toStdString());
         });
 
-    // 경로선택 버튼
     movePathBtn = new QPushButton("경로선택", this);
     movePathBtn->setGeometry(10, 70, 50, 20);
+    movePathBtn->setToolTip("말단 블럭에서만 경로를 설정할 수 있습니다.");
     connect(movePathBtn, &QPushButton::clicked, this, &BlockWidget::choosePath);
 
-    // 경로 보여주는 곳
     movePathLabel = new QLabel("(미지정)", this);
     movePathLabel->setGeometry(65, 70, 95, 20);
     movePathLabel->setStyleSheet("color: lightgray;");
+    movePathLabel->setToolTip("이 블럭이 말단일 때만 설정 가능합니다.");
 
-    // 이상 or 이하 이런거 정하는 콤보박스
     comparisonBox = new QComboBox(this);
-    comparisonBox->setGeometry(130, 40, 40, 20);
+    comparisonBox->setStyleSheet(R"(
+        QComboBox {
+            background-color: #2b2f40;
+            color: #dcdfe4;
+            border: 1px solid #3b4c6e;
+            border-radius: 6px;
+            padding-left: 6px;
+        }
+        QComboBox:hover {
+            border-color: #3b78ff;
+        }
+        QComboBox::drop-down {
+            border: none;
+        }
+    )");
+    comparisonBox->setGeometry(131, 40, 40, 20);
     comparisonBox->addItems({ ">=", "<=", " >", " <", " =" });
     comparisonBox->hide();
     connect(comparisonBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
@@ -69,26 +79,33 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
             logicBlock->setComparisonType(static_cast<ComparisonType>(index));
         });
 
-    // 자식블럭 추가 버튼
-    addChildBtn = new QPushButton("조건추가", this);
+    addChildBtn = new QPushButton("＋", this);
     addChildBtn->setStyleSheet(R"(
         QPushButton {
-            background-color: #2b2f40;
-            color: #dcdfe4;
-            border: 1px solid #3b4c6e;
-            border-radius: 8px;
-            padding: 4px 8px;
+            background-color: #2e3440;
+            color: white;
+            border: 1px solid #4c566a;
+            border-radius: 4px;      
+            min-width: 16px;
+            min-height: 16px;
+            max-width: 20px;
+            max-height: 20px;
+            padding: 0;
         }
         QPushButton:hover {
-            background-color: #3b78ff;
-            color: white;
+            background-color: #3b4252;
+            border-color: #88c0d0;
         }
     )");
 
-    addChildBtn->setGeometry(10, 95, 60, 20);
+    addChildBtn->setGeometry(140, 10, 20, 20);
     connect(addChildBtn, &QPushButton::clicked, this, &BlockWidget::addChild);
 
+    updateEnabledStates();
 }
+
+
+
 
 
 void BlockWidget::addChild() {
@@ -106,13 +123,17 @@ void BlockWidget::addChild() {
     while (root->parentBlock)
         root = root->parentBlock;
 
-    // ✅ 루트 기준으로 부모 위젯인 RootBlockArea를 찾아서 updateSize() 호출
     if (auto* rootArea = qobject_cast<RootBlockArea*>(root->parentWidget())) {
         rootArea->updateSize();
     }
 
     root->relayoutChildren();
-    emit root->resized();  // 루트 기준
+    emit root->resized();
+
+    updateEnabledStates();
+    for (auto* childWidget : children) {
+        childWidget->updateEnabledStates();
+    }
 }
 
 int BlockWidget::getTotalHeight() const {
@@ -123,24 +144,27 @@ int BlockWidget::getTotalHeight() const {
     for (const auto* child : children)
         total += child->getTotalHeight() + V_SPACING;
 
-    total -= V_SPACING; // 마지막 여백 제거
+    total -= V_SPACING;
     return std::max(height(), total);
 }
 
+int BlockWidget::getMaxRight() const {
+    int right = x() + width();
+    for (const auto* child : children)
+        right = std::max(right, child->getMaxRight());
+    return right;
+}
 
 void BlockWidget::relayoutChildren() {
     int currentY = y();
 
     for (auto* child : children) {
         int childY = currentY;
-
-        // 블럭 하나일 때는 자기 위치 기준
         if (children.size() == 1)
             childY = y();
 
         child->move(x() + H_SPACING, childY);
         currentY += child->getTotalHeight() + V_SPACING;
-
         child->relayoutChildren();
     }
 }
@@ -165,7 +189,6 @@ void BlockWidget::updateLayoutFromChildGrowth() {
     }
 }
 
-
 void BlockWidget::setLogicBlock(const std::shared_ptr<Block>& block) {
     logicBlock = block;
     filterTypeBox->setCurrentIndex(static_cast<int>(block->getFilterType()));
@@ -173,6 +196,7 @@ void BlockWidget::setLogicBlock(const std::shared_ptr<Block>& block) {
     movePathLabel->setText(QString::fromStdString(block->getMovePath()));
     comparisonBox->setCurrentIndex(static_cast<int>(block->getComparisonType()));
     comparisonBox->setVisible(block->getFilterType() == FilterType::SIZE);
+    updateEnabledStates();
 }
 
 void BlockWidget::choosePath() {
@@ -189,4 +213,31 @@ void BlockWidget::onFilterTypeChanged(int index) {
     auto type = static_cast<FilterType>(index);
     logicBlock->setFilterType(type);
     comparisonBox->setVisible(type == FilterType::SIZE);
+    updateEnabledStates();
+}
+
+void BlockWidget::updateEnabledStates() {
+    bool isLeaf = logicBlock && logicBlock->isLeaf();
+    movePathBtn->setEnabled(isLeaf);
+    movePathLabel->setEnabled(isLeaf);
+
+    movePathBtn->setStyleSheet(isLeaf ? R"(
+        QPushButton {
+            background-color: #2b2f40;
+            color: #dcdfe4;
+            border: 1px solid #3b4c6e;
+            border-radius: 4px;
+        }
+        QPushButton:hover {
+            background-color: #3b4252;
+            border-color: #88c0d0;
+        }
+    )" : R"(
+        QPushButton {
+            background-color: #2e2e2e;
+            color: gray;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+    )");
 }

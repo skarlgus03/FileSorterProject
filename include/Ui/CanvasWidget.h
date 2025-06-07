@@ -16,5 +16,5 @@ protected:
 
 private:
     QVector<RootBlockArea*> rootAreas;
-    void drawLinesRecursive(QPainter* painter, BlockWidget* parent);
+    void drawLinesRecursive(QPainter* painter, BlockWidget* parent, QMap<BlockWidget*, int>& midXCache);
 };

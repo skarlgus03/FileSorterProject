@@ -1,6 +1,9 @@
-﻿#include "Ui/canvaswidget.h"
+﻿// CanvasWidget.cpp
+#include "Ui/canvaswidget.h"
 #include <QPainter>
 #include <QtMath>
+#include <QPainterPath>
+#include <QMap>
 
 CanvasWidget::CanvasWidget(QWidget* parent)
     : QWidget(parent) {
@@ -22,41 +25,51 @@ void CanvasWidget::repaintAll() {
 void CanvasWidget::paintEvent(QPaintEvent* event) {
     QWidget::paintEvent(event);
 
+    static QMap<BlockWidget*, int> parentToMidX;
+    parentToMidX.clear();
+
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(QPen(Qt::white, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setBrush(Qt::NoBrush);
 
     for (auto* area : rootAreas) {
-        drawLinesRecursive(&painter, area->getRootBlock());
+        drawLinesRecursive(&painter, area->getRootBlock(), parentToMidX);
     }
 }
 
-void CanvasWidget::drawLinesRecursive(QPainter* painter, BlockWidget* parent) {
+void CanvasWidget::drawLinesRecursive(QPainter* painter, BlockWidget* parent, QMap<BlockWidget*, int>& midXCache) {
     for (BlockWidget* child : parent->getChildren()) {
-        QPoint start = parent->mapTo(this, parent->rect().center());
+        QRect parentRect = parent->rect();
+        QPointF start = parent->mapTo(this, QPoint(parentRect.right(), parentRect.center().y()));
 
         QRect childRect = child->rect();
-        QPoint end = child->mapTo(this, QPoint(childRect.left(), childRect.center().y()));
+        QPointF end = child->mapTo(this, QPoint(childRect.left(), childRect.center().y()));
 
-        // 선 그리기
-        painter->drawLine(start, end);
+        int midX;
+        if (midXCache.contains(parent)) {
+            midX = midXCache[parent];
+        }
+        else {
+            midX = (start.x() + end.x()) / 2;
+            midXCache[parent] = midX;
+        }
 
-        // 방향 벡터 (정규화)
-        QLineF line(start, end);
-        QPointF unit = line.unitVector().p2() - line.unitVector().p1();
+        QPainterPath path(start);
+        path.lineTo(midX, start.y());
+        path.lineTo(midX, end.y());
+        path.lineTo(end);
+        painter->drawPath(path);
 
-        // 각도 보정 및 화살머리 그리기
-        constexpr int arrowSize = 10;
-        QPointF arrowP1 = end - unit * arrowSize + QPointF(-unit.y(), unit.x()) * (arrowSize / 2.5);
-        QPointF arrowP2 = end - unit * arrowSize - QPointF(-unit.y(), unit.x()) * (arrowSize / 2.5);
+        QLineF arrowLine(QPointF(midX, end.y()), end);
+        QPointF unit = arrowLine.unitVector().p2() - arrowLine.unitVector().p1();
+        QPointF arrowP1 = end - unit * 8 + QPointF(-unit.y(), unit.x()) * 4;
+        QPointF arrowP2 = end - unit * 8 - QPointF(-unit.y(), unit.x()) * 4;
 
         QPolygonF arrowHead;
         arrowHead << end << arrowP1 << arrowP2;
+        painter->drawPolyline(arrowHead);
 
-        painter->setBrush(Qt::white);
-        painter->drawPolygon(arrowHead);
-
-        drawLinesRecursive(painter, child);
+        drawLinesRecursive(painter, child, midXCache);
     }
 }
-

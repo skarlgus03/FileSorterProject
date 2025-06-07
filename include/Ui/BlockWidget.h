@@ -19,18 +19,15 @@ public:
     BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y);
     void setLogicBlock(const std::shared_ptr<Block>& block);
     int getTotalHeight() const;
+    int getMaxRight() const;
     void relayoutChildren();
     void updateLayoutFromChildGrowth();
 
-    QVector<BlockWidget*> getChildren() const { return children; }    
+    QVector<BlockWidget*> getChildren() const { return children; }
     int getCurrentDepth() { return currentDepth; }
-
-
-
 
 signals:
     void resized();
- 
 
 private slots:
     void addChild();
@@ -38,6 +35,8 @@ private slots:
     void onFilterTypeChanged(int index);
 
 private:
+    void updateEnabledStates();
+
     QWidget* canvasRef;
     BlockWidget* parentBlock;
     QPushButton* addChildBtn;
@@ -52,7 +51,6 @@ private:
 
     int currentDepth;
     int nextChildY = 0;
-
 
     std::shared_ptr<Block> logicBlock;
 };

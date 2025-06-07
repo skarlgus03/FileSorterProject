@@ -2,6 +2,8 @@
 #include "filedropwidget.h"
 #include "settingswidget.h"
 #include "fileviewwidget.h"
+#include "Ui/TestBlockPage.h"
+#include "LogPage.h"
 
 #include <QSplitter>
 #include <QPushButton>
@@ -38,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     //버튼 생성
     QPushButton *btnPage1 = new QPushButton("정리 창", leftMenu);
     QPushButton *btnPage2 = new QPushButton("설정 창", leftMenu);
-    QPushButton *btnPage3 = new QPushButton("파일 창", leftMenu);
+    QPushButton *btnPage3 = new QPushButton("로그 창", leftMenu);
     QPushButton* btnPage4 = new QPushButton("실험용", leftMenu);
     QSize buttonSize(120, 40);
     btnPage1->setFixedSize(buttonSize);
@@ -75,13 +77,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     fileDropWidget = new FileDropWidget;
     settingsWidget = new SettingsWidget;
-    fileViewWidget = new FileViewWidget;
+    logPage = new LogPage;
     testBlockPage = new TestBlockPage;
 
     stack->addWidget(fileDropWidget);
     stack->addWidget(settingsWidget);
-    stack->addWidget(fileViewWidget);
+    stack->addWidget(logPage);
     stack->addWidget(testBlockPage);
+
+    fileDropWidget->setLogPage(logPage);
+    fileDropWidget->setTestBlockPage(testBlockPage);
 
     connect(btnPage1, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(0); });
     connect(btnPage2, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(1); });

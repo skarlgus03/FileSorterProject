@@ -39,6 +39,7 @@ TestBlockPage::TestBlockPage(QWidget* parent)
 void TestBlockPage::createRootBlock() {
     // 1. 루트 논리 노드 생성
     std::shared_ptr<Block> rootLogicBlock = std::make_shared<Block>();
+    rootLogicBlocks.push_back(rootLogicBlock);
 
     // 2. 루트 영역 UI 생성
     auto* area = new RootBlockArea(canvas, nextRootY);

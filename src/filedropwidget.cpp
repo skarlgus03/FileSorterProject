@@ -1,4 +1,7 @@
 #include "filedropwidget.h"
+#include "FileInfo.h"
+#include "Ui/TestBlockPage.h"
+#include "LogPage.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -58,28 +61,69 @@ void FileDropWidget::dropEvent(QDropEvent* event)
     const auto urls = event->mimeData()->urls();
     for (const QUrl& url : urls) {
         const QString filePath = url.toLocalFile();
-        QFileInfo info(filePath);
+        QFileInfo qfileInfo(filePath);
 
-        QString fileDetail = QString("파일명: %1 | 크기: %2 bytes | 수정일: %3 | 확장자: %4")
-            .arg(info.fileName())
-            .arg(info.size())
-            .arg(info.lastModified().toString("yyyy-MM-dd hh:mm:ss"))
-            .arg(info.suffix());
+        FileInfo f;
+        f.fileName = qfileInfo.fileName().toStdString();
+        f.filePath = filePath.toStdString();
+        f.extension = qfileInfo.suffix().toStdString();
+        f.size = std::to_string(qfileInfo.size());
+        f.date = qfileInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss").toStdString();
 
-        fileList->addItem(fileDetail);
+        // 디버그용
+        qDebug() << "파일 드롭됨:";
+        qDebug() << "  fileName   =" << QString::fromStdString(f.fileName);
+        qDebug() << "  filePath   =" << QString::fromStdString(f.filePath);
+        qDebug() << "  extension  =" << QString::fromStdString(f.extension);
+        qDebug() << "  size       =" << QString::fromStdString(f.size);
+        qDebug() << "  date       =" << QString::fromStdString(f.date);
+
+        droppedFiles.push_back(f);
+
+        fileList->addItem(QString::fromStdString(f.fileName));
     }
 }
 
+// 정리 하는 함수
 void FileDropWidget::onOrganize()
 {
-    if (targetDir.isEmpty()) {
-        QMessageBox::warning(this, "경로 미설정", "먼저 설정 창에서 대상 경로를 지정해주세요.");
+
+    auto blocks = testBlockPage->getRootBlocks();
+    if (blocks.empty()) {
+        QMessageBox::warning(this, "정리 실패", "정리 기준 블럭이 없습니다.");
         return;
     }
-    QMessageBox::information(this, "정리", "파일이 정리되었습니다. (로직 미구현)");
+
+    if (droppedFiles.empty()) {
+        QMessageBox::warning(this, "정리 실패", "정리할 파일이 없습니다.");
+        return;
+    }
+
+    for (auto& file : droppedFiles) {
+        if (file.filePath.empty()) {
+            qDebug() << "❌ filePath 비어 있음: " << QString::fromStdString(file.fileName);
+            continue;
+        }
+
+        Classifier::classifyFile(file, blocks, nullptr);
+
+        qDebug() << "  movePath  =" << QString::fromStdString(file.moveToPath);
+
+        QString result = FileManager::moveFile(file);
+        if (logPage) logPage->appendLog(result);
+    }
+
+    QMessageBox::information(this, "정리 완료", "파일이 정리되었습니다.");
+    droppedFiles.clear();
+    fileList->clear();
 }
+
 
 void FileDropWidget::onClear()
 {
     fileList->clear();
+}
+
+void FileDropWidget::setLogPage(LogPage* page) {
+    this->logPage = page;
 }

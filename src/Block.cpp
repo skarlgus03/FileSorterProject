@@ -1,9 +1,10 @@
 #include "Block.h"
 #include <stdexcept>
+#include <algorithm>
 
 // Block 클래스의 기본 생성자: 멤버 변수들을 기본값으로 초기화
 Block::Block()
-    : filterType(FilterType()), condition(""), movePath("") {
+    : filterType(FilterType::EMPTY), condition(""), movePath("") {
 }
 
 // Block 클래스의 매개변수 생성자: 전달받은 값으로 멤버 변수 초기화
@@ -37,18 +38,18 @@ bool Block::isLeaf() const {
     return children.empty();
 }
 
-// 자식 블록을 추가하는 함수 (확장자 필터 중복 방지)
+// 자식 블록을 추가하는 함수
 void Block::addChild(const std::shared_ptr<Block>& child) {
-    if (this->filterType == FilterType::EXTENSION && child->filterType == FilterType::EXTENSION) {
-        throw std::invalid_argument("확장자는 다중 선택할 수 없습니다.");
-    }
+    // child의 부모 설정
     child->setParent(shared_from_this());
+    // 자식 블록 리스트에 추가
     children.push_back(child);
 }
 
 // 비어있는(예외 타입) 자식 블록을 추가하고 반환하는 함수
 std::shared_ptr<Block> Block::addEmptyChild() {
-    auto child = std::make_shared<Block>(FilterType::EXCEPTION, "", "");
+    auto child = std::make_shared<Block>(FilterType::EMPTY, "", "");
+    child->setParent(shared_from_this());  // 부모 설정 누락 보완
     children.push_back(child);
     return child;
 }
@@ -77,10 +78,11 @@ bool Block::matches(const FileInfo& file) const
         return file.fileName == condition;
     case FilterType::DATE:
         return file.date == condition;
-    case FilterType::EXCEPTION:
-        return false;
     case FilterType::SIZE:
         return matchSizeCondition(file);
+    case FilterType::EXCEPTION:
+    case FilterType::EMPTY: // 누락된 EMPTY 필터 처리
+        return false;
     default:
         return false;
     }
@@ -89,21 +91,26 @@ bool Block::matches(const FileInfo& file) const
 // 크기비교 함수
 bool Block::matchSizeCondition(const FileInfo& file) const
 {
-    std::uintmax_t fileSize = std::stoull(file.size);
-    std::uintmax_t conditionSize = std::stoull(condition);
-    switch (comparisonType)
-    {
-    case ComparisonType::GREATER_EQUAL:
-        return fileSize >= conditionSize;
-    case ComparisonType::LESS_EQUAL:
-        return fileSize <= conditionSize;
-    case ComparisonType::GREATER:
-        return fileSize > conditionSize;
-    case ComparisonType::LESS:
-        return fileSize < conditionSize;
-    case ComparisonType::EQUAL:
-        return fileSize == conditionSize;
-    default:
-        return false;
+    try {
+        std::uintmax_t fileSize = std::stoull(file.size);
+        std::uintmax_t conditionSize = std::stoull(condition);
+        switch (comparisonType)
+        {
+        case ComparisonType::GREATER_EQUAL:
+            return fileSize >= conditionSize;
+        case ComparisonType::LESS_EQUAL:
+            return fileSize <= conditionSize;
+        case ComparisonType::GREATER:
+            return fileSize > conditionSize;
+        case ComparisonType::LESS:
+            return fileSize < conditionSize;
+        case ComparisonType::EQUAL:
+            return fileSize == conditionSize;
+        default:
+            return false;
+        }
+    }
+    catch (...) {
+        return false;  // 예외 발생 시 조건 불충족 처리
     }
 }

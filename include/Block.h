@@ -6,6 +6,7 @@
 #include <FileInfo.h>
 
 enum class FilterType {
+    EMPTY,
     EXTENSION,
     KEYWORD,
     DATE,
@@ -26,8 +27,6 @@ public:
     Block();
 
     Block(FilterType filterType, const std::string& condition, const std::string& movePath = "");
-
-
 
     FilterType getFilterType() const;
     const std::string& getCondition() const;

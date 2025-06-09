@@ -75,7 +75,7 @@ void FileDropWidget::dropEvent(QDropEvent* event)
         QIcon fileIcon = iconProvider.icon(qfileInfo);
 
         FileInfo f;
-        f.fileName = qfileInfo.fileName().toStdString();
+        f.fileName = qfileInfo.completeBaseName().toStdString();
         f.filePath = filePath.toStdString();
         f.extension = qfileInfo.suffix().toStdString();
         f.size = std::to_string(qfileInfo.size());

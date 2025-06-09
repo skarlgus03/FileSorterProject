@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QScrollArea>
+#include <QTimer>
 
 TestBlockPage::TestBlockPage(QWidget* parent)
     : QWidget(parent)
@@ -81,47 +82,35 @@ void TestBlockPage::recalculateAllLayout() {
 void TestBlockPage::onDeleteBlock(BlockWidget* widget) {
     if (!widget) return;
 
-    std::shared_ptr<Block> logicBlock = widget->getBlock();
-    if (!logicBlock) return;
-
-    if (QMessageBox::question(this, "삭제 확인", "이 블럭과 모든 자식을 삭제하시겠습니까?") != QMessageBox::Yes)
+    // 자식 있으면 삭제 금지
+    if (!widget->getChildren().isEmpty()) {
+        QMessageBox::warning(this, "삭제 불가", "자식이 있는 블럭은 삭제할 수 없습니다.");
         return;
-
-    // 1. UI 제거 먼저
-    if (widget->getParentBlock()) {
-        BlockWidget* parentWidget = widget->getParentBlock();
-        parentWidget->removeChild(widget);
-        widget->setParent(nullptr);    // 연결 해제
-        widget->hide();
-        widget->deleteLater();
     }
-    else {
-        for (int i = 0; i < rootAreas.size(); ++i) {
-            RootBlockArea* area = rootAreas[i];
-            if (area->getRootBlock() == widget) {
-                area->hide();
-                area->setParent(nullptr);
-                area->deleteLater();
-                rootAreas.removeAt(i);
-                break;
-            }
+
+    // 루트 블럭이면: RootBlockArea 제거
+    for (int i = 0; i < rootAreas.size(); ++i) {
+        if (rootAreas[i]->getRootBlock() == widget) {
+            auto* area = rootAreas[i];
+            rootAreas.removeAt(i);
+            static_cast<CanvasWidget*>(canvas)->removeRootArea(area);
+            area->deleteLater();
+
+            rootLogicBlocks.erase(
+                std::remove(rootLogicBlocks.begin(), rootLogicBlocks.end(), widget->getBlock()),
+                rootLogicBlocks.end()
+            );
+
+            recalculateAllLayout();
+            QTimer::singleShot(0, canvas, SLOT(repaintAll()));
+            return;
         }
     }
 
-    // 2. 논리 블럭 구조에서 제거
-    if (auto parent = logicBlock->getParent().lock()) {
-        auto& siblings = parent->getChildrenMutable();
-        siblings.erase(std::remove(siblings.begin(), siblings.end(), logicBlock), siblings.end());
-    }
-    else {
-        rootLogicBlocks.erase(
-            std::remove(rootLogicBlocks.begin(), rootLogicBlocks.end(), logicBlock),
-            rootLogicBlocks.end());
-    }
-
-    recalculateAllLayout();
-    canvas->repaintAll();
+    // 루트가 아니면 → self 삭제
+    widget->performSelfDelete();
 }
+
 
 
 void TestBlockPage::removeRootBlockArea(RootBlockArea* area) {

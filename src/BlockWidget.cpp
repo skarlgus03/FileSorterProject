@@ -1,6 +1,9 @@
 ﻿#include "Ui/blockwidget.h"
 #include "UIConstants.h"
 #include <QFileDialog>
+#include "Ui/TestBlockPage.h"
+#include <QMessageBox>
+#include <QTimer>
 
 
 BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
@@ -131,8 +134,10 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
         }
     )");
     deleteBtn->setGeometry(140, 10, 20, 20);
-    connect(deleteBtn, &QPushButton::clicked, this, [=]() {emit requestDelete(this); });
-
+    connect(deleteBtn, &QPushButton::clicked, this, [=]() {
+        qDebug() << "삭제 요청" << this;
+        emit requestDelete(this);
+        });
     updateEnabledStates();
 }
 
@@ -145,6 +150,17 @@ void BlockWidget::addChild() {
     child->logicBlock = newLogicBlock;
     child->show();
     children.append(child);
+
+    connect(child, &BlockWidget::requestDelete, child, [=](BlockWidget* self) {
+        if (!self->getParentBlock()) {
+            if (auto* page = qobject_cast<TestBlockPage*>(canvasRef->parentWidget()->parentWidget())) {
+                page->onDeleteBlock(self);
+            }
+        }
+        else {
+            self->performSelfDelete();
+        }
+        });
 
     nextChildY += child->getTotalHeight() + V_SPACING;
 
@@ -164,6 +180,7 @@ void BlockWidget::addChild() {
         childWidget->updateEnabledStates();
     }
 }
+
 
 int BlockWidget::getTotalHeight() const {
     if (children.isEmpty())
@@ -273,4 +290,35 @@ void BlockWidget::updateEnabledStates() {
 
 void BlockWidget::removeChild(BlockWidget* child) {
     children.removeOne(child);
+}
+
+// 자신 삭제
+void BlockWidget::performSelfDelete() {
+    if (!children.isEmpty()) {
+        QMessageBox::warning(this, "삭제 불가", "자식이 있는 블럭은 삭제할 수 없습니다.");
+        return;
+    }
+
+    if (parentBlock) {
+        parentBlock->removeChild(this);
+    }
+
+    if (auto parent = logicBlock->getParent().lock()) {
+        auto& siblings = parent->getChildrenMutable();
+        siblings.erase(std::remove(siblings.begin(), siblings.end(), logicBlock), siblings.end());
+    }
+    // 블럭 즉시 삭제
+    BlockWidget* root = this;
+    while (root->getParentBlock())
+        root = root->getParentBlock();
+
+    if (auto* area = qobject_cast<RootBlockArea*>(root->parentWidget())) {
+        area->updateSize();
+    }
+
+    this->hide();
+    this->deleteLater();
+
+    // 화살표 다시 그리기
+    canvasRef->repaint();
 }

@@ -1,9 +1,10 @@
-﻿// CanvasWidget.cpp
+﻿
 #include "Ui/canvaswidget.h"
 #include <QPainter>
 #include <QtMath>
 #include <QPainterPath>
 #include <QMap>
+#include <QDebug>
 
 CanvasWidget::CanvasWidget(QWidget* parent)
     : QWidget(parent) {
@@ -12,6 +13,10 @@ CanvasWidget::CanvasWidget(QWidget* parent)
 
 void CanvasWidget::addRootArea(RootBlockArea* area) {
     rootAreas.append(area);
+}
+
+void CanvasWidget::removeRootArea(RootBlockArea* area) {
+    rootAreas.removeAll(area);
 }
 
 void CanvasWidget::clearRootAreas() {
@@ -34,26 +39,29 @@ void CanvasWidget::paintEvent(QPaintEvent* event) {
     painter.setBrush(Qt::NoBrush);
 
     for (auto* area : rootAreas) {
-        drawLinesRecursive(&painter, area->getRootBlock(), parentToMidX);
+        if (!area || area->parent() == nullptr || !area->isVisible()) continue;
+
+        BlockWidget* root = area->getRootBlock();
+        if (!root || root->parent() == nullptr || !root->isVisible()) continue;
+
+        drawLinesRecursive(&painter, root, parentToMidX);
     }
 }
 
 void CanvasWidget::drawLinesRecursive(QPainter* painter, BlockWidget* parent, QMap<BlockWidget*, int>& midXCache) {
+    if (!parent || parent->parent() == nullptr || !parent->isVisible()) return;
+
     for (BlockWidget* child : parent->getChildren()) {
+        if (!child || child->parent() == nullptr || !child->isVisible()) continue;
+
         QRect parentRect = parent->rect();
         QPointF start = parent->mapTo(this, QPoint(parentRect.right(), parentRect.center().y()));
 
         QRect childRect = child->rect();
         QPointF end = child->mapTo(this, QPoint(childRect.left(), childRect.center().y()));
 
-        int midX;
-        if (midXCache.contains(parent)) {
-            midX = midXCache[parent];
-        }
-        else {
-            midX = (start.x() + end.x()) / 2;
-            midXCache[parent] = midX;
-        }
+        int midX = (start.x() + end.x()) / 2;
+        midXCache[parent] = midX;
 
         QPainterPath path(start);
         path.lineTo(midX, start.y());
@@ -66,9 +74,8 @@ void CanvasWidget::drawLinesRecursive(QPainter* painter, BlockWidget* parent, QM
         QPointF arrowP1 = end - unit * 8 + QPointF(-unit.y(), unit.x()) * 4;
         QPointF arrowP2 = end - unit * 8 - QPointF(-unit.y(), unit.x()) * 4;
 
-        QPolygonF arrowHead;
-        arrowHead << end << arrowP1 << arrowP2;
-        painter->drawPolyline(arrowHead);
+        painter->drawLine(end, arrowP1);
+        painter->drawLine(end, arrowP2);
 
         drawLinesRecursive(painter, child, midXCache);
     }

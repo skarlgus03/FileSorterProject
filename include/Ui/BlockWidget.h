@@ -27,7 +27,7 @@ public:
     std::shared_ptr<Block> getBlock() const { return logicBlock; }
     BlockWidget* getParentBlock() const { return parentBlock; }
    
-
+    void performSelfDelete();
 signals:
     void resized();
     void requestDelete(BlockWidget* self);

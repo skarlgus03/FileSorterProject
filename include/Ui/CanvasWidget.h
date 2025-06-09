@@ -10,6 +10,7 @@ public:
     void addRootArea(RootBlockArea* area);
     void clearRootAreas();
     void repaintAll();
+    void removeRootArea(RootBlockArea* area);
 
 protected:
     void paintEvent(QPaintEvent* event) override;

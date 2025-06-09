@@ -108,8 +108,30 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
         }
     )");
 
-    addChildBtn->setGeometry(140, 10, 20, 20);
+    addChildBtn->setGeometry(150, 70, 20, 20);
     connect(addChildBtn, &QPushButton::clicked, this, &BlockWidget::addChild);
+
+    deleteBtn = new QPushButton("X",this);
+    deleteBtn->setFont(baseFont);
+    deleteBtn->setStyleSheet(R"(
+        QPushButton {
+            background-color: #2e3440;
+            color: white;
+            border: 1px solid #4c566a;
+            border-radius: 4px;      
+            min-width: 16px;
+            min-height: 16px;
+            max-width: 20px;
+            max-height: 20px;
+            padding: 0;
+        }
+        QPushButton:hover {
+            background-color: #3b4252;
+            border-color: #88c0d0;
+        }
+    )");
+    deleteBtn->setGeometry(140, 10, 20, 20);
+    connect(deleteBtn, &QPushButton::clicked, this, [=]() {emit requestDelete(this); });
 
     updateEnabledStates();
 }
@@ -247,4 +269,8 @@ void BlockWidget::updateEnabledStates() {
             border-radius: 4px;
         }
     )");
+}
+
+void BlockWidget::removeChild(BlockWidget* child) {
+    children.removeOne(child);
 }

@@ -33,11 +33,13 @@ public:
     const std::string& getCondition() const;
     const std::string& getMovePath() const;
     ComparisonType getComparisonType() const;
+    const std::vector<std::shared_ptr<Block>>& getChildren() const;
+    std::weak_ptr<Block> getParent() const;
+    std::vector<std::shared_ptr<Block>>& getChildrenMutable() { return children; }
 
     bool isLeaf() const;
 
     void addChild(const std::shared_ptr<Block>& child);
-    const std::vector<std::shared_ptr<Block>>& getChildren() const;
     std::shared_ptr<Block> addEmptyChild();
 
     bool matches(const FileInfo& file)const;

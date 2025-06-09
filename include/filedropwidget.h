@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <QFileIconProvider>
 #include "FileInfo.h"
 #include "Classifier.h"
 #include "FileManager.h"
@@ -33,5 +34,6 @@ private:
     LogPage* logPage = nullptr;
     QListWidget *fileList;
     QString      targetDir;
+    QFileIconProvider iconProvider;
     std::vector<FileInfo> droppedFiles;
 };

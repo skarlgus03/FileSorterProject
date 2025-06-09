@@ -9,6 +9,7 @@ public:
     explicit RootBlockArea(QWidget* parent, int y);
     BlockWidget* getRootBlock() const;
 
+
     int getTotalHeight() const;
     void updateSize();
     int calculateMaxDepth(BlockWidget* node) const;

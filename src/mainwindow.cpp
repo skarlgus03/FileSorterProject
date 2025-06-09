@@ -2,6 +2,8 @@
 #include "filedropwidget.h"
 #include "settingswidget.h"
 #include "fileviewwidget.h"
+#include "Ui/TestBlockPage.h"
+#include "LogPage.h"
 
 #include <QSplitter>
 #include <QPushButton>
@@ -16,17 +18,20 @@ MainWindow::MainWindow(QWidget *parent)
     // 중앙 위젯 설정
     QWidget *central = new QWidget(this);
     setCentralWidget(central);
+    central->setStyleSheet("background-color: #212121;");
 
     auto *mainL = new QVBoxLayout(central);
     mainL->setContentsMargins(0,0,0,0);
     mainL->setSpacing(0);
 
     QSplitter *splitter = new QSplitter(Qt::Horizontal, central);
-    splitter->setStyleSheet("QSplitter::handle { background-color: lightgray; width: 2px; }");
+    splitter->setStyleSheet("QSplitter::handle { background-color: #112240; width: 2px; }");
 
     // 왼쪽 메뉴
     QWidget *leftMenu = new QWidget;
-    leftMenu->setStyleSheet("background-color: #3c3c3c;");
+    leftMenu->setStyleSheet(R"(
+        background-color: #1a1a1a;
+    )");
     QVBoxLayout *menuLayout = new QVBoxLayout(leftMenu);
     menuLayout->setContentsMargins(10, 10, 10, 10);         //여백을 얼마나 간격을 할것인가
     menuLayout->setSpacing(20);          //위 간격 함수
@@ -35,13 +40,31 @@ MainWindow::MainWindow(QWidget *parent)
     //버튼 생성
     QPushButton *btnPage1 = new QPushButton("정리 창", leftMenu);
     QPushButton *btnPage2 = new QPushButton("설정 창", leftMenu);
-    QPushButton *btnPage3 = new QPushButton("파일 창", leftMenu);
+    QPushButton *btnPage3 = new QPushButton("로그 창", leftMenu);
     QPushButton* btnPage4 = new QPushButton("실험용", leftMenu);
     QSize buttonSize(120, 40);
     btnPage1->setFixedSize(buttonSize);
     btnPage2->setFixedSize(buttonSize);
     btnPage3->setFixedSize(buttonSize);
     btnPage4->setFixedSize(buttonSize);
+
+    QString btnStyle = (R"(
+        QPushButton{
+            background - color: #16162b;
+            color: #ffffff;
+            border: 2px solid #464964;
+            border - radius: 6px;
+        }
+        QPushButton:hover{
+            background - color: #3B82F6;
+            color: white;
+        }
+     )");
+
+    btnPage1->setStyleSheet(btnStyle);
+    btnPage2->setStyleSheet(btnStyle);
+    btnPage3->setStyleSheet(btnStyle);
+    btnPage4->setStyleSheet(btnStyle);
 
     menuLayout->addWidget(btnPage1);
     menuLayout->addWidget(btnPage2);
@@ -54,13 +77,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     fileDropWidget = new FileDropWidget;
     settingsWidget = new SettingsWidget;
-    fileViewWidget = new FileViewWidget;
+    logPage = new LogPage;
     testBlockPage = new TestBlockPage;
 
     stack->addWidget(fileDropWidget);
     stack->addWidget(settingsWidget);
-    stack->addWidget(fileViewWidget);
+    stack->addWidget(logPage);
     stack->addWidget(testBlockPage);
+
+    fileDropWidget->setLogPage(logPage);
+    fileDropWidget->setTestBlockPage(testBlockPage);
 
     connect(btnPage1, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(0); });
     connect(btnPage2, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(1); });

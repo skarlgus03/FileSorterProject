@@ -5,14 +5,12 @@
 #include <QVector>
 #include <QLineEdit>
 #include <QComboBox>
-#include <memory>
-#include <vector>
-#include <Block.h>
+
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
 #include "Ui/RootBlockArea.h"
-
+#include <Block.h>
 class BlockWidget : public QFrame {
     Q_OBJECT
 public:
@@ -22,12 +20,17 @@ public:
     int getMaxRight() const;
     void relayoutChildren();
     void updateLayoutFromChildGrowth();
+    void removeChild(BlockWidget* child);
 
     QVector<BlockWidget*> getChildren() const { return children; }
     int getCurrentDepth() { return currentDepth; }
+    std::shared_ptr<Block> getBlock() const { return logicBlock; }
+    BlockWidget* getParentBlock() const { return parentBlock; }
+   
 
 signals:
     void resized();
+    void requestDelete(BlockWidget* self);
 
 private slots:
     void addChild();
@@ -39,15 +42,17 @@ private:
 
     QWidget* canvasRef;
     BlockWidget* parentBlock;
-    QPushButton* addChildBtn;
+    
     QLabel* label = nullptr;
     QVector<BlockWidget*> children;
 
+    QPushButton* addChildBtn;
     QComboBox* filterTypeBox;
     QLineEdit* conditionEdit;
     QLabel* movePathLabel;
     QPushButton* movePathBtn;
     QComboBox* comparisonBox;
+    QPushButton* deleteBtn;
 
     int currentDepth;
     int nextChildY = 0;

@@ -47,6 +47,13 @@ FileDropWidget::FileDropWidget(QWidget* parent)
     }
 
     fileList = new QListWidget(this);
+
+    // 아이콘, 글씨 크기
+    fileList->setIconSize(QSize(32, 32));
+    QFont font = fileList->font();
+    font.setPointSize(12);
+    fileList->setFont(font);
+
     layout->addWidget(fileList);
 }
 
@@ -62,6 +69,10 @@ void FileDropWidget::dropEvent(QDropEvent* event)
     for (const QUrl& url : urls) {
         const QString filePath = url.toLocalFile();
         QFileInfo qfileInfo(filePath);
+        
+
+        // icon
+        QIcon fileIcon = iconProvider.icon(qfileInfo);
 
         FileInfo f;
         f.fileName = qfileInfo.fileName().toStdString();
@@ -79,8 +90,11 @@ void FileDropWidget::dropEvent(QDropEvent* event)
         qDebug() << "  date       =" << QString::fromStdString(f.date);
 
         droppedFiles.push_back(f);
-
-        fileList->addItem(QString::fromStdString(f.fileName));
+        // 아이콘 + 파일이름 표시하게하기
+        auto* item = new QListWidgetItem(fileIcon, QString::fromStdString(f.fileName));
+        fileList->addItem(item);
+        
+        
     }
 }
 

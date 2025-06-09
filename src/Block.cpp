@@ -25,6 +25,11 @@ ComparisonType Block::getComparisonType() const { return comparisonType; }
 // 자식 블록 목록을 반환하는 getter 함수
 const std::vector<std::shared_ptr<Block>>& Block::getChildren() const { return children; }
 
+// 부모 블록 반환
+std::weak_ptr<Block> Block::getParent() const { return parent; }
+
+
+
 // filterType 멤버 변수 값을 설정하는 setter 함수
 void Block::setFilterType(FilterType type) { filterType = type; }
 

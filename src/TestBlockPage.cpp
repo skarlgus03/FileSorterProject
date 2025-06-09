@@ -1,5 +1,6 @@
 ﻿#include "Ui/testblockpage.h"
 
+#include <QMessageBox>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
@@ -57,6 +58,10 @@ void TestBlockPage::createRootBlock() {
         area->updateSize();
         });
 
+    connect(rootBlockWidget, &BlockWidget::requestDelete, this, [=](BlockWidget* self) {
+        onDeleteBlock(self);
+        });
+
     recalculateAllLayout();
 }
 
@@ -73,3 +78,56 @@ void TestBlockPage::recalculateAllLayout() {
     static_cast<CanvasWidget*>(canvas)->repaintAll();
 }
 
+void TestBlockPage::onDeleteBlock(BlockWidget* widget) {
+    if (!widget) return;
+
+    std::shared_ptr<Block> logicBlock = widget->getBlock();
+    if (!logicBlock) return;
+
+    if (QMessageBox::question(this, "삭제 확인", "이 블럭과 모든 자식을 삭제하시겠습니까?") != QMessageBox::Yes)
+        return;
+
+    // 1. UI 제거 먼저
+    if (widget->getParentBlock()) {
+        BlockWidget* parentWidget = widget->getParentBlock();
+        parentWidget->removeChild(widget);
+        widget->setParent(nullptr);    // 연결 해제
+        widget->hide();
+        widget->deleteLater();
+    }
+    else {
+        for (int i = 0; i < rootAreas.size(); ++i) {
+            RootBlockArea* area = rootAreas[i];
+            if (area->getRootBlock() == widget) {
+                area->hide();
+                area->setParent(nullptr);
+                area->deleteLater();
+                rootAreas.removeAt(i);
+                break;
+            }
+        }
+    }
+
+    // 2. 논리 블럭 구조에서 제거
+    if (auto parent = logicBlock->getParent().lock()) {
+        auto& siblings = parent->getChildrenMutable();
+        siblings.erase(std::remove(siblings.begin(), siblings.end(), logicBlock), siblings.end());
+    }
+    else {
+        rootLogicBlocks.erase(
+            std::remove(rootLogicBlocks.begin(), rootLogicBlocks.end(), logicBlock),
+            rootLogicBlocks.end());
+    }
+
+    recalculateAllLayout();
+    canvas->repaintAll();
+}
+
+
+void TestBlockPage::removeRootBlockArea(RootBlockArea* area) {
+    if (!area) return;
+    rootAreas.removeOne(area);
+    area->deleteLater();
+    recalculateAllLayout(); // 레이아웃 재정렬
+    canvas->repaintAll();   // 연결선 다시 그림
+}

@@ -21,6 +21,9 @@ public:
     std::vector<std::shared_ptr<Block>> getRootBlocks() const { return rootLogicBlocks;}
     std::shared_ptr<Block> getExceptionBlock() const { return exceptionBlock;}
 
+    void onDeleteBlock(BlockWidget* widget);
+    void removeRootBlockArea(RootBlockArea* area);
+
 private slots:
     void createRootBlock();
 

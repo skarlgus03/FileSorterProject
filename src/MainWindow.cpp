@@ -4,6 +4,7 @@
 #include "fileviewwidget.h"
 #include "Ui/TestBlockPage.h"
 #include "LogPage.h"
+#include "styles/stylesheet.h"
 
 #include <QSplitter>
 #include <QPushButton>
@@ -48,23 +49,10 @@ MainWindow::MainWindow(QWidget *parent)
     btnPage3->setFixedSize(buttonSize);
     btnPage4->setFixedSize(buttonSize);
 
-    QString btnStyle = (R"(
-        QPushButton{
-            background - color: #16162b;
-            color: #ffffff;
-            border: 2px solid #464964;
-            border - radius: 6px;
-        }
-        QPushButton:hover{
-            background - color: #3B82F6;
-            color: white;
-        }
-     )");
-
-    btnPage1->setStyleSheet(btnStyle);
-    btnPage2->setStyleSheet(btnStyle);
-    btnPage3->setStyleSheet(btnStyle);
-    btnPage4->setStyleSheet(btnStyle);
+    btnPage1->setStyleSheet(defaultButtonStyle());
+    btnPage2->setStyleSheet(defaultButtonStyle());
+    btnPage3->setStyleSheet(defaultButtonStyle());
+    btnPage4->setStyleSheet(defaultButtonStyle());
 
     menuLayout->addWidget(btnPage1);
     menuLayout->addWidget(btnPage2);

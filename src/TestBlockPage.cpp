@@ -1,4 +1,5 @@
 ﻿#include "Ui/testblockpage.h"
+#include "styles/StyleSheet.h"
 
 #include <QMessageBox>
 #include <QVBoxLayout>
@@ -6,6 +7,7 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QTimer>
+#include <QFileDialog>
 
 TestBlockPage::TestBlockPage(QWidget* parent)
     : QWidget(parent)
@@ -18,10 +20,27 @@ TestBlockPage::TestBlockPage(QWidget* parent)
     auto* topLayout = new QHBoxLayout(topBar);
     topLayout->setContentsMargins(10, 5, 10, 5);
     topLayout->setAlignment(Qt::AlignLeft);
+    topLayout->setSpacing(10);
 
-    btnCreateRoot = new QPushButton("부모생성", topBar);
-    btnCreateRoot->setFixedSize(100, 30);
-    topLayout->addWidget(btnCreateRoot);
+    createRootBtn = new QPushButton("부모생성", topBar);
+    createRootBtn->setFixedSize(100, 30);
+    createRootBtn->setStyleSheet(defaultButtonStyle());
+    topLayout->addWidget(createRootBtn);
+
+
+    auto* exceptionBtn = new QPushButton("예외 경로 선택");
+    exceptionBtn->setStyleSheet(defaultButtonStyle());
+    exceptionBtn->setFixedSize(100, 30);
+
+    exceptionPathLabel = new QLabel("경로 미설정");
+    exceptionPathLabel->setStyleSheet("color: gray;");
+    //중간 텍스트 생략처리
+    QString shortened = QFontMetrics(exceptionPathLabel->font())
+        .elidedText(exceptionPath, Qt::ElideMiddle, 300);
+    exceptionPathLabel->setText(shortened);
+
+    topLayout->addWidget(exceptionBtn);
+    topLayout->addWidget(exceptionPathLabel);
 
     mainLayout->addWidget(topBar);
 
@@ -35,7 +54,17 @@ TestBlockPage::TestBlockPage(QWidget* parent)
 
     mainLayout->addWidget(scrollArea);
 
-    connect(btnCreateRoot, &QPushButton::clicked, this, &TestBlockPage::createRootBlock);
+    // 버튼 연결
+    connect(createRootBtn, &QPushButton::clicked, this, &TestBlockPage::createRootBlock);
+    connect(exceptionBtn, &QPushButton::clicked, this, [=]() {
+        QString dir = QFileDialog::getExistingDirectory(this, "예외 경로 선택");
+        if (!dir.isEmpty()) {
+            exceptionPath = dir;
+            exceptionPathLabel->setText(dir);  //  표시 갱신
+            exceptionPathLabel->setStyleSheet("color: white;");
+        }
+    });
+
 }
 
 void TestBlockPage::createRootBlock() {

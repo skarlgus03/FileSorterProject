@@ -2,6 +2,7 @@
 #include "FileInfo.h"
 #include "Ui/TestBlockPage.h"
 #include "LogPage.h"
+#include "styles/StyleSheet.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -34,10 +35,12 @@ FileDropWidget::FileDropWidget(QWidget* parent)
 
         QPushButton* organizeBtn = new QPushButton("정리하기", this);
         organizeBtn->setFixedSize(100, 30);
+        organizeBtn->setStyleSheet(defaultButtonStyle());
         h->addWidget(organizeBtn);
 
         QPushButton* clearBtn = new QPushButton("비우기", this);
         clearBtn->setFixedSize(100, 30);
+        clearBtn->setStyleSheet(defaultButtonStyle());
         h->addWidget(clearBtn);
 
         layout->addLayout(h);
@@ -74,8 +77,9 @@ void FileDropWidget::dropEvent(QDropEvent* event)
         // icon
         QIcon fileIcon = iconProvider.icon(qfileInfo);
 
+        // 파일 분해 해서 저장하기
         FileInfo f;
-        f.fileName = qfileInfo.completeBaseName().toStdString();
+        f.fileName = qfileInfo.completeBaseName().toStdString(); //확장자 제외하고 저장
         f.filePath = filePath.toStdString();
         f.extension = qfileInfo.suffix().toStdString();
         f.size = std::to_string(qfileInfo.size());
@@ -101,7 +105,7 @@ void FileDropWidget::dropEvent(QDropEvent* event)
 // 정리 하는 함수
 void FileDropWidget::onOrganize()
 {
-
+    QString exceptionPath = testBlockPage->getExceptionPath();
     auto blocks = testBlockPage->getRootBlocks();
     if (blocks.empty()) {
         QMessageBox::warning(this, "정리 실패", "정리 기준 블럭이 없습니다.");
@@ -119,7 +123,7 @@ void FileDropWidget::onOrganize()
             continue;
         }
 
-        Classifier::classifyFile(file, blocks, nullptr);
+        Classifier::classifyFile(file, blocks, exceptionPath.toStdString());
 
         qDebug() << "  movePath  =" << QString::fromStdString(file.moveToPath);
 

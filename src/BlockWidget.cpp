@@ -1,5 +1,7 @@
 ﻿#include "Ui/blockwidget.h"
 #include "UIConstants.h"
+#include "styles/StyleSheet.h"
+
 #include <QFileDialog>
 #include "Ui/TestBlockPage.h"
 #include <QMessageBox>
@@ -28,21 +30,7 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
 
     filterTypeBox = new QComboBox(this);
     filterTypeBox->setFont(baseFont);
-    filterTypeBox->setStyleSheet(R"(
-        QComboBox {
-            background-color: #2b2f40;
-            color: #dcdfe4;
-            border: 1px solid #3b4c6e;
-            border-radius: 6px;
-            padding-left: 6px;
-        }
-        QComboBox:hover {
-            border-color: #3b78ff;
-        }
-        QComboBox::drop-down {
-            border: none;
-        }
-    )");
+    filterTypeBox->setStyleSheet(comboBoxStyle());
     filterTypeBox->setGeometry(10, 10, 120, 20);
     filterTypeBox->addItems({ "EXTENSION", "KEYWORD", "DATE", "EXCEPTION", "SIZE(BYTE)" });
     connect(filterTypeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &BlockWidget::onFilterTypeChanged);
@@ -60,7 +48,7 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     movePathBtn->setToolTip("말단 블럭에서만 경로를 설정할 수 있습니다.");
     connect(movePathBtn, &QPushButton::clicked, this, &BlockWidget::choosePath);
 
-    movePathLabel = new QLabel("(미지정)", this);
+    movePathLabel = new QLabel("", this);
     movePathLabel->setFont(baseFont);
     movePathLabel->setGeometry(65, 70, 95, 20);
     movePathLabel->setStyleSheet("color: lightgray;");
@@ -68,21 +56,7 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
 
     comparisonBox = new QComboBox(this);
     comparisonBox->setFont(baseFont);
-    comparisonBox->setStyleSheet(R"(
-        QComboBox {
-            background-color: #2b2f40;
-            color: #dcdfe4;
-            border: 1px solid #3b4c6e;
-            border-radius: 6px;
-            padding-left: 6px;
-        }
-        QComboBox:hover {
-            border-color: #3b78ff;
-        }
-        QComboBox::drop-down {
-            border: none;
-        }
-    )");
+    comparisonBox->setStyleSheet(comboBoxStyle());
     comparisonBox->setGeometry(131, 40, 40, 20);
     comparisonBox->addItems({ ">=", "<=", " >", " <", " =" });
     comparisonBox->hide();
@@ -93,46 +67,14 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
 
     addChildBtn = new QPushButton("＋", this);
     addChildBtn->setFont(baseFont);
-    addChildBtn->setStyleSheet(R"(
-        QPushButton {
-            background-color: #2e3440;
-            color: white;
-            border: 1px solid #4c566a;
-            border-radius: 4px;      
-            min-width: 16px;
-            min-height: 16px;
-            max-width: 20px;
-            max-height: 20px;
-            padding: 0;
-        }
-        QPushButton:hover {
-            background-color: #3b4252;
-            border-color: #88c0d0;
-        }
-    )");
+    addChildBtn->setStyleSheet(smallButtonStyle());
 
     addChildBtn->setGeometry(150, 70, 20, 20);
     connect(addChildBtn, &QPushButton::clicked, this, &BlockWidget::addChild);
 
     deleteBtn = new QPushButton("X",this);
     deleteBtn->setFont(baseFont);
-    deleteBtn->setStyleSheet(R"(
-        QPushButton {
-            background-color: #2e3440;
-            color: white;
-            border: 1px solid #4c566a;
-            border-radius: 4px;      
-            min-width: 16px;
-            min-height: 16px;
-            max-width: 20px;
-            max-height: 20px;
-            padding: 0;
-        }
-        QPushButton:hover {
-            background-color: #3b4252;
-            border-color: #88c0d0;
-        }
-    )");
+    deleteBtn->setStyleSheet(smallButtonStyle());
     deleteBtn->setGeometry(140, 10, 20, 20);
     connect(deleteBtn, &QPushButton::clicked, this, [=]() {
         qDebug() << "삭제 요청" << this;

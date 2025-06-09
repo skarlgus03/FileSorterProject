@@ -85,7 +85,7 @@ bool Block::matches(const FileInfo& file) const
     case FilterType::EXTENSION:
         return file.extension == condition;
     case FilterType::KEYWORD:
-        return file.fileName == condition;
+        return file.fileName.find(condition) != std::string::npos;
     case FilterType::DATE:
         return file.date == condition;
     case FilterType::EXCEPTION:

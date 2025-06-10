@@ -22,13 +22,14 @@ public:
     void updateLayoutFromChildGrowth();
     void removeChild(BlockWidget* child);
 
+
     QVector<BlockWidget*> getChildren() const { return children; }
     int getCurrentDepth() { return currentDepth; }
     std::shared_ptr<Block> getBlock() const { return logicBlock; }
     BlockWidget* getParentBlock() const { return parentBlock; }
 
-   
     void performSelfDelete();
+
 signals:
     void resized();
     void requestDelete(BlockWidget* self);

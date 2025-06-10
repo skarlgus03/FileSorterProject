@@ -204,6 +204,7 @@ void BlockWidget::onFilterTypeChanged(int index) {
     updateEnabledStates();
 }
 
+// 경로 설정 버튼 갱신
 void BlockWidget::updateEnabledStates() {
     bool isLeaf = logicBlock && logicBlock->isLeaf();
     movePathBtn->setEnabled(isLeaf);
@@ -232,6 +233,7 @@ void BlockWidget::updateEnabledStates() {
 
 void BlockWidget::removeChild(BlockWidget* child) {
     children.removeOne(child);
+    updateEnabledStates();
 }
 
 // 자신 삭제
@@ -257,7 +259,10 @@ void BlockWidget::performSelfDelete() {
     if (auto* area = qobject_cast<RootBlockArea*>(root->parentWidget())) {
         area->updateSize();
     }
-
+    // 블럭 삭제 후 부모 블럭의 상태 갱신
+    if (parentBlock) {
+        parentBlock->updateEnabledStates();
+    }
     this->hide();
     this->deleteLater();
 

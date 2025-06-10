@@ -33,7 +33,13 @@ private slots:
 private:
     QScrollArea* scrollArea;
     CanvasWidget* canvas;
+    
+    // buttons
     QPushButton* createRootBtn;
+    QPushButton* exceptionBtn;
+    QPushButton* settingSaveBtn;
+
+    // path Label
     QLabel* exceptionPathLabel = nullptr;
 
     std::vector<std::shared_ptr<Block>> rootLogicBlocks;

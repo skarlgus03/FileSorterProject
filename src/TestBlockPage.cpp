@@ -22,27 +22,37 @@ TestBlockPage::TestBlockPage(QWidget* parent)
     topLayout->setAlignment(Qt::AlignLeft);
     topLayout->setSpacing(10);
 
+
+    // 버튼 생성
     createRootBtn = new QPushButton("부모생성", topBar);
     createRootBtn->setFixedSize(100, 30);
     createRootBtn->setStyleSheet(defaultButtonStyle());
-    topLayout->addWidget(createRootBtn);
-
-
-    auto* exceptionBtn = new QPushButton("예외 경로 선택");
+    
+    exceptionBtn = new QPushButton("예외 경로 선택");
     exceptionBtn->setStyleSheet(defaultButtonStyle());
     exceptionBtn->setFixedSize(100, 30);
 
     exceptionPathLabel = new QLabel("경로 미설정");
     exceptionPathLabel->setStyleSheet("color: gray;");
+    exceptionPathLabel->setFixedWidth(250);
+    exceptionPathLabel->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
     //중간 텍스트 생략처리
     QString shortened = QFontMetrics(exceptionPathLabel->font())
-        .elidedText(exceptionPath, Qt::ElideMiddle, 300);
+        .elidedText(exceptionPath, Qt::ElideMiddle, 250);
     exceptionPathLabel->setText(shortened);
 
+    settingSaveBtn = new QPushButton("설정 저장");
+    settingSaveBtn->setStyleSheet(defaultButtonStyle());
+    settingSaveBtn->setFixedSize(100, 30);
+
+    topLayout->addWidget(createRootBtn);
     topLayout->addWidget(exceptionBtn);
     topLayout->addWidget(exceptionPathLabel);
+    topLayout->addWidget(settingSaveBtn);
 
     mainLayout->addWidget(topBar);
+
+
 
     // 캔버스 + 스크롤 영역
     scrollArea = new QScrollArea(this);

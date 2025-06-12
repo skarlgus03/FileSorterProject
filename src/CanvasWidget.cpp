@@ -38,13 +38,28 @@ void CanvasWidget::paintEvent(QPaintEvent* event) {
     painter.setPen(QPen(Qt::white, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush(Qt::NoBrush);
 
-    for (auto* area : rootAreas) {
-        if (!area || area->parent() == nullptr || !area->isVisible()) continue;
+    for (auto it = rootAreas.begin(); it != rootAreas.end();) {
+        RootBlockArea* area = *it;
+
+        // 🔐 예외 방어: null 이거나 삭제된 위젯일 경우 리스트에서 제거
+        if (!area || area->parent() == nullptr) {
+            it = rootAreas.erase(it);  // ❗ 여기서 죽은 포인터 제거
+            continue;
+        }
+
+        if (!area->isVisible()) {
+            ++it;
+            continue;
+        }
 
         BlockWidget* root = area->getRootBlock();
-        if (!root || root->parent() == nullptr || !root->isVisible()) continue;
+        if (!root || root->parent() == nullptr || !root->isVisible()) {
+            ++it;
+            continue;
+        }
 
         drawLinesRecursive(&painter, root, parentToMidX);
+        ++it;
     }
 }
 

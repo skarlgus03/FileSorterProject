@@ -238,30 +238,52 @@ void BlockWidget::removeChild(BlockWidget* child) {
 
 // 자식 블럭 재귀적으로 생성하기
 void BlockWidget::buildSubtreeFromLogic() {
-    if (!logicBlock) {
-        qDebug() << "❌ logicBlock is nullptr in buildSubtreeFromLogic";
-        return;
-    }
+    if (!logicBlock) return;
+
+    int yOffset = this->y() + BLOCK_HEIGHT + V_SPACING;
 
     for (const auto& childLogic : logicBlock->getChildren()) {
-        auto* child = new BlockWidget(canvasRef, this, currentDepth + 1, nextChildY);
+        auto* childWidget = new BlockWidget(canvasRef, this, currentDepth + 1, yOffset);
+        childWidget->setLogicBlock(childLogic);
+        childWidget->show();
 
-        
-        child->setLogicBlock(childLogic);
+        children.append(childWidget);
 
-        children.append(child);
+        connect(childWidget, &BlockWidget::requestDelete, childWidget, [=](BlockWidget* self) {
+            if (!self->getParentBlock()) {
+                if (auto* page = qobject_cast<TestBlockPage*>(canvasRef->parentWidget()->parentWidget())) {
+                    page->onDeleteBlock(self);
+                }
+            }
+            else {
+                self->performSelfDelete();
+            }
+            });
 
-        if (layout())
-            layout()->addWidget(child);
-        else
-            qDebug() << "❌ layout is null in BlockWidget";
+        yOffset += childWidget->getTotalHeight() + V_SPACING;
 
-        child->buildSubtreeFromLogic();  // 재귀
-
-        nextChildY += child->getTotalHeight() + V_SPACING;
+        childWidget->buildSubtreeFromLogic();  // 재귀
     }
 
+    relayoutChildren();
+    emit resized();
     updateEnabledStates();
+}
+
+void BlockWidget::applyLogicToUi() {
+    if (!logicBlock) return;
+
+    filterTypeBox->setCurrentIndex(static_cast<int>(logicBlock->getFilterType()));
+    conditionEdit->setText(QString::fromStdString(logicBlock->getCondition()));
+    movePathLabel->setText(QString::fromStdString(logicBlock->getMovePath()));
+
+    if (logicBlock->getFilterType() == FilterType::SIZE) {
+        comparisonBox->show();
+        comparisonBox->setCurrentIndex(static_cast<int>(logicBlock->getComparisonType()));
+    }
+    else {
+        comparisonBox->hide();
+    }
 }
 
 // 자신 삭제

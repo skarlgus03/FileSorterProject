@@ -92,8 +92,6 @@ TestBlockPage::TestBlockPage(QWidget* parent)
         QString path = QFileDialog::getOpenFileName(this, "설정 불러오기", "", "JSON (*.json)");
         if (path.isEmpty()) return;
 
-        auto loadedRoot = JsonManager::loadAllFromJson(path.toStdString());
-
         // 기존 블럭들 정리
         for (auto* area : rootAreas) {
             area->deleteLater();
@@ -193,6 +191,7 @@ void TestBlockPage::removeRootBlockArea(RootBlockArea* area) {
     area->deleteLater();
     recalculateAllLayout(); // 레이아웃 재정렬
     canvas->repaintAll();   // 연결선 다시 그림
+    QTimer::singleShot(0, canvas, SLOT(update()));
 }
 
 void TestBlockPage::addRootBlock(const std::shared_ptr<Block>& rootBlock) {
@@ -202,6 +201,11 @@ void TestBlockPage::addRootBlock(const std::shared_ptr<Block>& rootBlock) {
     auto* area = new RootBlockArea(canvas, nextRootY);
     area->show();
     rootAreas.append(area);
+    // 소멸되면 리스트에서 제거
+    connect(area, &QObject::destroyed, this, [=]() {
+        rootAreas.removeOne(area);
+    });
+
     static_cast<CanvasWidget*>(canvas)->addRootArea(area);
 
     BlockWidget* rootBlockWidget = area->getRootBlock();

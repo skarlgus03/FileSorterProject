@@ -48,9 +48,7 @@ bool Block::isLeaf() const {
 
 // 자식 블록을 추가하는 함수 (확장자 필터 중복 방지)
 void Block::addChild(const std::shared_ptr<Block>& child) {
-    if (this->filterType == FilterType::EXTENSION && child->filterType == FilterType::EXTENSION) {
-        throw std::invalid_argument("확장자는 다중 선택할 수 없습니다.");
-    }
+
     child->setParent(shared_from_this());
     children.push_back(child);
 }

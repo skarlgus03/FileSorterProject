@@ -1,5 +1,6 @@
 #include "Block.h"
 #include <stdexcept>
+#include "BlockUtils.h"
 
 // Block 클래스의 기본 생성자: 멤버 변수들을 기본값으로 초기화
 Block::Block()
@@ -85,7 +86,7 @@ bool Block::matches(const FileInfo& file) const
     case FilterType::KEYWORD:
         return file.fileName.find(condition) != std::string::npos;
     case FilterType::DATE:
-        return file.date == condition;
+        return isDateInRange(condition,file.date);
     case FilterType::EXCEPTION:
         return false;
     case FilterType::SIZE:
@@ -115,4 +116,22 @@ bool Block::matchSizeCondition(const FileInfo& file) const
     default:
         return false;
     }
+}
+
+// 날짜 비교 함수
+bool Block::isDateInRange(const std::string& range, const std::string& target) const {
+    
+    std::string trimedTarget = trim(target);
+    
+    auto tokens = split(range, '~');
+    if (tokens.size() != 2) return false; // 토큰이 둘다 비어있으면 오류임 
+
+    std::string start = tokens[0];
+    std::string end = tokens[1];
+
+    if (start.empty() && end.empty()) return false; // 시작, 끝이 "" 면 오류
+    if (!start.empty() && target < start) return false; // 시작값이 있을때 입력값이 시작 보다 작으면 false
+    if (!end.empty() && target > end) return false; // 끝값이 있을때  입력값이 끝 값보다 크면 false
+
+    return true;
 }

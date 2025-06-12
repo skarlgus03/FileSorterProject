@@ -40,38 +40,32 @@ MainWindow::MainWindow(QWidget *parent)
 
     //버튼 생성
     QPushButton *btnPage1 = new QPushButton("정리 창", leftMenu);
-    QPushButton *btnPage2 = new QPushButton("설정 창", leftMenu);
+    QPushButton *btnPage2 = new QPushButton("블록 설정", leftMenu);
     QPushButton *btnPage3 = new QPushButton("로그 창", leftMenu);
-    QPushButton* btnPage4 = new QPushButton("실험용", leftMenu);
     QSize buttonSize(120, 40);
     btnPage1->setFixedSize(buttonSize);
     btnPage2->setFixedSize(buttonSize);
     btnPage3->setFixedSize(buttonSize);
-    btnPage4->setFixedSize(buttonSize);
 
     btnPage1->setStyleSheet(defaultButtonStyle());
     btnPage2->setStyleSheet(defaultButtonStyle());
     btnPage3->setStyleSheet(defaultButtonStyle());
-    btnPage4->setStyleSheet(defaultButtonStyle());
 
     menuLayout->addWidget(btnPage1);
     menuLayout->addWidget(btnPage2);
     menuLayout->addWidget(btnPage3);
-    menuLayout->addWidget(btnPage4);
     menuLayout->addStretch();
 
     // 스택 위젯 버튼연결
     QStackedWidget *stack = new QStackedWidget;
 
     fileDropWidget = new FileDropWidget;
-    settingsWidget = new SettingsWidget;
     logPage = new LogPage;
     testBlockPage = new TestBlockPage;
 
     stack->addWidget(fileDropWidget);
-    stack->addWidget(settingsWidget);
-    stack->addWidget(logPage);
     stack->addWidget(testBlockPage);
+    stack->addWidget(logPage);
 
     fileDropWidget->setLogPage(logPage);
     fileDropWidget->setTestBlockPage(testBlockPage);
@@ -79,7 +73,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(btnPage1, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(0); });
     connect(btnPage2, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(1); });
     connect(btnPage3, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(2); });
-    connect(btnPage4, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(3); });
 
     splitter->addWidget(leftMenu);
     splitter->addWidget(stack);

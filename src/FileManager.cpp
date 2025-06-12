@@ -23,8 +23,8 @@ QString FileManager::moveFile(const FileInfo& fileInfo) {
             return QString::fromStdString(log.str());
         }
 
-        std::filesystem::path from(fileInfo.filePath);
-        std::filesystem::path to(fileInfo.moveToPath);
+        std::filesystem::path from = std::filesystem::u8path(fileInfo.filePath);
+        std::filesystem::path to = std::filesystem::u8path(fileInfo.moveToPath);
         to /= from.filename();
 
         if (from == to) {
@@ -37,7 +37,7 @@ QString FileManager::moveFile(const FileInfo& fileInfo) {
             return QString::fromStdString(log.str());
         }
 
-        std::filesystem::create_directories(fileInfo.moveToPath);
+        std::filesystem::create_directories(to.parent_path());
         std::filesystem::rename(from, to);
 
         log << "[이동 성공] " << from.string() << " → " << to.string();

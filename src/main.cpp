@@ -1,6 +1,5 @@
 #include <QApplication>
 #include "Ui/mainwindow.h"
-#include "Ui/TestBlockPage.h"
 
 int main(int argc, char *argv[])
 {

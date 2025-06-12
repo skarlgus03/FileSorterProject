@@ -14,11 +14,11 @@ public:
 private:
     BlockErrorDetector() = delete;
 
-    static void scanRecursive(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);
+    static void scanRecursive(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors, bool parentIsExtension);
 
-    static void checkEmptyCondition(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);
-        
+    static void checkEmptyCondition(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);    
     static void checkLeafWithoutMovePath(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);
-
-    static std::string filterTypeToString(FilterType type);  // 내부에서만 사용
+    static void checkExtensionDuplication(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);
+    static void checkDateFormat(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);
+    static void checkSizeFormat(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors);
 };

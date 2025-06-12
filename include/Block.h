@@ -45,6 +45,7 @@ public:
     bool matches(const FileInfo& file)const;
     bool matchSizeCondition(const FileInfo& file) const;
     bool isDateInRange(const std::string& range, const std::string& target)const;
+    bool isSizeInRange(const std::string& range, const std::string& targetSize)const;
 
     // 부모 설정 함수
     void setParent(const std::shared_ptr<Block>& parentBlock);

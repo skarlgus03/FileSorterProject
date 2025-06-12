@@ -12,7 +12,7 @@
 
 
 // Enum FilterType 을 문자열로 변환 
-inline std::string filterTypeToSting(FilterType type) {
+inline std::string filterTypeToString(FilterType type) {
 	switch (type)
 	{
 	case FilterType::EXTENSION: return "EXTENSION";

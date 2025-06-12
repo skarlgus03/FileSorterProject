@@ -1,4 +1,5 @@
 ﻿#include "BlockErrorDetector.h"
+#include "BlockUtils.h"
 
 std::vector<std::string> BlockErrorDetector::scan(const std::shared_ptr<Block>& root) {
     std::vector<std::string> errors;
@@ -8,24 +9,30 @@ std::vector<std::string> BlockErrorDetector::scan(const std::shared_ptr<Block>& 
         return errors;
     }
 
-    scanRecursive(root, "", errors);
+    scanRecursive(root, "", errors,false);
     return errors;
 }
 
 // 블록 트리를 재귀적으로 순회하며 검사 함수를 호출한다.
-void BlockErrorDetector::scanRecursive(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
+void BlockErrorDetector::scanRecursive(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors, bool parentIsExtension) {
     if (!block) return;
+
+    
+
 
     std::string currentPath = path + "/" + filterTypeToString(block->getFilterType()) + ":" + block->getCondition();
 
     checkEmptyCondition(block, currentPath, errors);
     checkLeafWithoutMovePath(block, currentPath, errors);
+    if (!parentIsExtension && block->getFilterType() == FilterType::EXTENSION) {
+        checkExtensionDuplication(block,currentPath,errors);
+    }
+
 
     for (const auto& child : block->getChildren()) {
-        scanRecursive(child, currentPath, errors);
+        scanRecursive(child, currentPath, errors, block->getFilterType() == FilterType::EXTENSION);
     }
 }
-
 
 // 조건이 비어 있는 경우
 void BlockErrorDetector::checkEmptyCondition(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
@@ -34,7 +41,6 @@ void BlockErrorDetector::checkEmptyCondition(const std::shared_ptr<Block>& block
     }
 }
 
-
 //말단 블록인데 이동 경로가 없는 경우
 void BlockErrorDetector::checkLeafWithoutMovePath(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
     if (block->isLeaf() && block->getMovePath().empty()) {
@@ -42,15 +48,19 @@ void BlockErrorDetector::checkLeafWithoutMovePath(const std::shared_ptr<Block>& 
     }
 }
 
-
-// FilterType enum을 문자열로 변환
-std::string BlockErrorDetector::filterTypeToString(FilterType type) {
-    switch (type) {
-    case FilterType::EXTENSION: return "EXTENSION";
-    case FilterType::KEYWORD:   return "KEYWORD";
-    case FilterType::DATE:      return "DATE";
-    case FilterType::EXCEPTION: return "EXCEPTION";
-    case FilterType::SIZE:      return "SIZE";
-    default: return "UNKNOWN";
+void BlockErrorDetector::checkExtensionDuplication(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
+    for (const auto& child : block->getChildren()) {
+        if (child->getFilterType() == FilterType::EXTENSION) {
+            errors.push_back("중복된 EXTENSION 필터타입이 존재합니다 → 경로: " + path);
+            return;
+        }
     }
 }
+
+
+
+
+
+
+
+

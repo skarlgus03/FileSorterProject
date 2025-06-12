@@ -5,7 +5,7 @@
 // 블럭을 JSON으로 저장
 json JsonManager::blockToJson(const std::shared_ptr<Block>& block) {
 	json j;
-	j["filterType"] = filterTypeToSting(block->getFilterType());
+	j["filterType"] = filterTypeToString(block->getFilterType());
 	j["condition"] = block->getCondition();
 	j["movePath"] = block->getMovePath();
 

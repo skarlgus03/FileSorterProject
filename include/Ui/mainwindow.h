@@ -7,6 +7,7 @@ class FileDropWidget;
 class SettingsWidget;
 class FileViewWidget;
 class LogPage;
+class HelpPage;
 
 
 
@@ -26,7 +27,7 @@ private:
     Ui::MainWindow *ui;  // Designer .ui를 쓰지 않으면 nullptr 유지
 
     FileDropWidget *fileDropWidget;
-    SettingsWidget *settingsWidget;
+    HelpPage* helpPage;
     FileViewWidget *fileViewWidget;
     TestBlockPage* testBlockPage;
     LogPage* logPage;

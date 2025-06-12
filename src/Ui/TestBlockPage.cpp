@@ -14,12 +14,12 @@ TestBlockPage::TestBlockPage(QWidget* parent)
     : QWidget(parent)
 {
     auto* mainLayout = new QVBoxLayout(this);
-    mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setContentsMargins(10, 5, 10, 5);
 
     // 상단 버튼 바
     auto* topBar = new QWidget(this);
     auto* topLayout = new QHBoxLayout(topBar);
-    topLayout->setContentsMargins(10, 5, 10, 5);
+    topLayout->setContentsMargins(0, 0, 0, 0);
     topLayout->setAlignment(Qt::AlignLeft);
     topLayout->setSpacing(10);
 

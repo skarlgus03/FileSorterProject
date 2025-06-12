@@ -1,5 +1,5 @@
 // LogPage.cpp
-#include "LogPage.h"
+#include "Ui/LogPage.h"
 #include <QVBoxLayout>
 #include <QDateTime>
 

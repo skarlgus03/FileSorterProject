@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "mainwindow.h"
+#include "Ui/mainwindow.h"
 #include "Ui/TestBlockPage.h"
 
 int main(int argc, char *argv[])

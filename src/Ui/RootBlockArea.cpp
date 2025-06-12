@@ -1,6 +1,6 @@
 ﻿#include "Ui/RootBlockArea.h"
 #include "Ui/BlockWidget.h"
-#include "UIConstants.h"
+#include "Ui/UIConstants.h"
 #include <algorithm>
 
 RootBlockArea::RootBlockArea(QWidget* parent, int y)

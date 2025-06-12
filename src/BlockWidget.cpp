@@ -236,6 +236,34 @@ void BlockWidget::removeChild(BlockWidget* child) {
     updateEnabledStates();
 }
 
+// 자식 블럭 재귀적으로 생성하기
+void BlockWidget::buildSubtreeFromLogic() {
+    if (!logicBlock) {
+        qDebug() << "❌ logicBlock is nullptr in buildSubtreeFromLogic";
+        return;
+    }
+
+    for (const auto& childLogic : logicBlock->getChildren()) {
+        auto* child = new BlockWidget(canvasRef, this, currentDepth + 1, nextChildY);
+
+        
+        child->setLogicBlock(childLogic);
+
+        children.append(child);
+
+        if (layout())
+            layout()->addWidget(child);
+        else
+            qDebug() << "❌ layout is null in BlockWidget";
+
+        child->buildSubtreeFromLogic();  // 재귀
+
+        nextChildY += child->getTotalHeight() + V_SPACING;
+    }
+
+    updateEnabledStates();
+}
+
 // 자신 삭제
 void BlockWidget::performSelfDelete() {
     if (!children.isEmpty()) {

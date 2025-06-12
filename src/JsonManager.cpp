@@ -1,5 +1,5 @@
 ﻿#include "JsonManager.h"
-
+#include "Ui/TestBlockPage.h"
 
 
 // 블럭을 JSON으로 저장
@@ -62,6 +62,35 @@ std::shared_ptr<Block> JsonManager::loadFromJson(const std::string& filePath) {
 }
 
 
+
+// 루트 블럭 순회하면서 json으로 저장 -> json파일 생성
+void JsonManager::saveAllToJson(const std::vector<std::shared_ptr<Block>> roots, const std::string& filePath){
+	json rootArray = json::array();
+	for (const auto& rootBlock : roots) {
+		rootArray.push_back(blockToJson(rootBlock));
+	}
+
+	std::ofstream out(filePath);
+	out << rootArray.dump(4);
+	out.close();
+}
+
+// json 순회하면서 블럭으로 만들기
+std::vector<std::shared_ptr<Block>> JsonManager::loadAllFromJson(const std::string& filepath) {
+	std::ifstream in(filepath);
+	json rootArray;
+	in >> rootArray;
+
+	std::vector<std::shared_ptr<Block>> roots;
+	for (const auto& item : rootArray) {
+		roots.push_back(jsonToBlock(item));
+	}
+	return roots;
+}
+
+
+
+
 // 올바른 JSON 파일 형식이 맞는지 검사
 bool JsonManager::isValidJson(const json& j) {
 	return j.contains("filterType") && j.contains("condition") && j.contains("movePath") && j.contains("children");
@@ -77,8 +106,4 @@ void JsonManager::prettyPrintJson(const std::shared_ptr<Block>& block) {
 	json j = blockToJson(block);
 	std::cout << j.dump(4) << std::endl;
 }
-
-
-
-
 

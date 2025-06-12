@@ -44,3 +44,4 @@ int RootBlockArea::calculateMaxDepth(BlockWidget* node) const {
 int RootBlockArea::getTotalWidth() const {
     return std::max(1100, rootBlock->getMaxRight() + 20);
 }
+

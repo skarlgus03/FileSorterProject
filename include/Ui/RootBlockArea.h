@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <QFrame>
+#include "Block.h"
 
 class BlockWidget;
 
@@ -8,7 +9,6 @@ class RootBlockArea : public QFrame {
 public:
     explicit RootBlockArea(QWidget* parent, int y);
     BlockWidget* getRootBlock() const;
-
 
     int getTotalHeight() const;
     void updateSize();

@@ -25,7 +25,7 @@ public:
     void onDeleteBlock(BlockWidget* widget);
     void removeRootBlockArea(RootBlockArea* area);
 
-
+    void addRootBlock(const std::shared_ptr<Block>& rootBlock);
 
 private slots:
     void createRootBlock();
@@ -38,6 +38,7 @@ private:
     QPushButton* createRootBtn;
     QPushButton* exceptionBtn;
     QPushButton* settingSaveBtn;
+    QPushButton* settingLoadBtn;
 
     // path Label
     QLabel* exceptionPathLabel = nullptr;

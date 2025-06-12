@@ -22,6 +22,7 @@ public:
     void updateLayoutFromChildGrowth();
     void removeChild(BlockWidget* child);
 
+    void buildSubtreeFromLogic();
 
     QVector<BlockWidget*> getChildren() const { return children; }
     int getCurrentDepth() { return currentDepth; }

@@ -15,6 +15,7 @@ inline std::string filterTypeToSting(FilterType type) {
 	case FilterType::KEYWORD: return "KEYWORD";
 	case FilterType::DATE: return "DATE";
 	case FilterType::EXCEPTION: return "EXCEPTION";
+	case FilterType::SIZE: return "SIZE";
 	default: return "UNKNOWN";
 	}
 }
@@ -25,6 +26,7 @@ inline FilterType stringToFilterType(const std::string& str) {
 	if (str == "KEYWORD") return FilterType::KEYWORD;
 	if (str == "DATE") return FilterType::DATE;
 	if (str == "EXCEPTION") return FilterType::EXCEPTION;
+	if (str == "SIZE") return FilterType::SIZE;
 
 	throw std::invalid_argument("Unknown FilterType: " + str);
 }

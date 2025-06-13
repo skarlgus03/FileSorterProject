@@ -31,6 +31,6 @@ include_directories(include)
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h" "src/Ui/*.cpp" "include/*.h" "include/Ui/*.h" )
 
 # 실행 파일 생성
-add_executable(FileSorterProject  ${SOURCES})
+add_executable(FileSorterProject WIN32 ${SOURCES})
 
 target_link_libraries(FileSorterProject PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)

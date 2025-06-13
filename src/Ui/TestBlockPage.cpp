@@ -17,18 +17,18 @@
 TestBlockPage::TestBlockPage(QWidget* parent)
     : QWidget(parent)
 {
+    canvas = new CanvasWidget(this);
+    scrollArea = new QScrollArea(this);
 
-    QSettings settings("MyCompany", "FileSorter");
+    QSettings settings("Maengo", "FileSorter");
     QString lastPath = settings.value("lastUsedSetting").toString();
+
     qDebug() << "[최근 설정 경로]" << lastPath;
     if (!lastPath.isEmpty() && JsonManager::isFileExist(lastPath)) {
         auto loadedRoots = JsonManager::loadAllFromJson(lastPath);
         for (const auto& block : loadedRoots) {
             addRootBlock(block);
         }
-    }
-    else {
-        qDebug() << "[자동불러오기 실패] 경로 비었거나 파일 없음";
     }
 
     auto* mainLayout = new QVBoxLayout(this);
@@ -79,10 +79,10 @@ TestBlockPage::TestBlockPage(QWidget* parent)
 
 
     // 캔버스 + 스크롤 영역
-    scrollArea = new QScrollArea(this);
+    
     scrollArea->setWidgetResizable(true);
 
-    canvas = new CanvasWidget(this);
+    
     canvas->setMinimumSize(2000, 2000);
     scrollArea->setWidget(canvas);
 
@@ -188,6 +188,10 @@ void TestBlockPage::removeRootBlockArea(RootBlockArea* area) {
 }
 
 void TestBlockPage::addRootBlock(const std::shared_ptr<Block>& rootBlock) {
+    if (!canvas) {
+        qWarning() << "[오류] canvas가 nullptr입니다!";
+        return;
+    }
     rootLogicBlocks.push_back(rootBlock);
 
     // 1. RootBlockArea 생성

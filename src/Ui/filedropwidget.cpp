@@ -85,13 +85,6 @@ void FileDropWidget::dropEvent(QDropEvent* event)
         f.size = std::to_string(qfileInfo.size());
         f.date = qfileInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss").toStdString();
 
-        // 디버그용
-        qDebug() << "파일 드롭됨:";
-        qDebug() << "  fileName   =" << QString::fromStdString(f.fileName);
-        qDebug() << "  filePath   =" << QString::fromStdString(f.filePath);
-        qDebug() << "  extension  =" << QString::fromStdString(f.extension);
-        qDebug() << "  size       =" << QString::fromStdString(f.size);
-        qDebug() << "  date       =" << QString::fromStdString(f.date);
 
         droppedFiles.push_back(f);
         // 아이콘 + 파일이름 표시하게하기
@@ -124,8 +117,6 @@ void FileDropWidget::onOrganize()
         }
 
         Classifier::classifyFile(file, blocks, exceptionPath.toStdString());
-
-        qDebug() << "  movePath  =" << QString::fromStdString(file.moveToPath);
 
         QString result = FileManager::moveFile(file);
         if (logPage) logPage->appendLog(result);

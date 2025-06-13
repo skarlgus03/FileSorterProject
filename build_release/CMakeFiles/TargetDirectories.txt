@@ -1,0 +1,3 @@
+D:/source/repos/FileSorterProject/build_release/CMakeFiles/FileSorterProject.dir
+D:/source/repos/FileSorterProject/build_release/CMakeFiles/ALL_BUILD.dir
+D:/source/repos/FileSorterProject/build_release/CMakeFiles/ZERO_CHECK.dir

@@ -7,7 +7,7 @@ RootBlockArea::RootBlockArea(QWidget* parent, int y)
     : QFrame(parent) {
     move(10, y);
     setFrameStyle(QFrame::Box); 
-    setStyleSheet("background-color: rgba(18, 20, 28, 150);");
+    setStyleSheet("background-color: rgba(18, 20, 28, 150); border: 1px solid #525f79;");
     setFixedWidth(1100);
 
     rootBlock = new BlockWidget(this, nullptr, 0, 10); // 루트 노드

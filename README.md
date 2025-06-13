@@ -11,7 +11,7 @@ This project uses the following third-party library:
 
 - [nlohmann/json](https://github.com/nlohmann/json) — A modern C++ JSON library (MIT License)
 
-- Qt6 
+- Qt6  (LGPL v3)
 
 
 

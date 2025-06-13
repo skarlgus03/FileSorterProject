@@ -58,11 +58,11 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     comparisonBox->setFont(baseFont);
     comparisonBox->setStyleSheet(comboBoxStyle());
     comparisonBox->setGeometry(131, 40, 40, 20);
-    comparisonBox->addItems({ ">=", "<=", " >", " <", " =" });
+    comparisonBox->addItems({ "B", "KB", "MB", "GB"});
     comparisonBox->hide();
     connect(comparisonBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
         if (logicBlock)
-            logicBlock->setComparisonType(static_cast<ComparisonType>(index));
+            logicBlock->setSizeUnit(static_cast<SizeUnit>(index));
         });
 
     addChildBtn = new QPushButton("＋", this);

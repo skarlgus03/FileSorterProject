@@ -17,6 +17,10 @@ HelpPage::HelpPage(QWidget* parent) : QWidget(parent) {
     descriptionText->setText(R"(
 이 프로그램은 블럭을 이용하여 파일을 분류하는 프로그램입니다.
 
+⚠️ 주의 사항 ⚠️
+
+- 블럭을 검사하는 순서는, 위->아래 입니다
+- 필터타입이 KEYWORD이고, 입력값이 비어져있으면, 그 블럭을 만나는 파일은 전부 그 블럭의 경로로 이동합니다.
 
 🧩 블럭 구성방법
 

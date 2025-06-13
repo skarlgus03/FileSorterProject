@@ -28,9 +28,13 @@ public:
 
     void addRootBlock(const std::shared_ptr<Block>& rootBlock);
     bool validate();
+   
+    
 
 private slots:
     void createRootBlock();
+    void onSaveJsonToSettings();
+    void onLoadJsonFromSettings();
 
 private:
     QScrollArea* scrollArea;

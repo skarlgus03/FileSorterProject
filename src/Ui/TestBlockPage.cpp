@@ -10,10 +10,27 @@
 #include <QScrollArea>
 #include <QTimer>
 #include <QFileDialog>
+#include <QInputDialog>
+#include <QCoreApplication>
+#include <QSettings>
 
 TestBlockPage::TestBlockPage(QWidget* parent)
     : QWidget(parent)
 {
+
+    QSettings settings("MyCompany", "FileSorter");
+    QString lastPath = settings.value("lastUsedSetting").toString();
+    qDebug() << "[최근 설정 경로]" << lastPath;
+    if (!lastPath.isEmpty() && JsonManager::isFileExist(lastPath)) {
+        auto loadedRoots = JsonManager::loadAllFromJson(lastPath);
+        for (const auto& block : loadedRoots) {
+            addRootBlock(block);
+        }
+    }
+    else {
+        qDebug() << "[자동불러오기 실패] 경로 비었거나 파일 없음";
+    }
+
     auto* mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(10, 5, 10, 5);
 
@@ -81,33 +98,8 @@ TestBlockPage::TestBlockPage(QWidget* parent)
             exceptionPathLabel->setStyleSheet("color: white;");
         }
     });
-    connect(settingSaveBtn, &QPushButton::clicked, this, [=]() {
-        QString path = QFileDialog::getSaveFileName(this, "설정 저장", "", "JSON (*.json)");
-        if (path.isEmpty()) return;
-
-        JsonManager::saveAllToJson(rootLogicBlocks, path.toStdString());
-    
-        
-    });
-    connect(settingLoadBtn, &QPushButton::clicked, this, [=]() {
-        QString path = QFileDialog::getOpenFileName(this, "설정 불러오기", "", "JSON (*.json)");
-        if (path.isEmpty()) return;
-
-        // 기존 블럭들 정리
-        for (auto* area : rootAreas) {
-            area->deleteLater();
-        }
-        rootAreas.clear();
-        rootLogicBlocks.clear();
-
-        // Json에서 Block 객체 vector 배열 받기
-        auto loadedRoots = JsonManager::loadAllFromJson(path.toStdString());
-
-        for (const auto& block : loadedRoots) {
-            addRootBlock(block);  // ✅ 이 함수가 BlockWidget까지 생성해주는 구조여야 함
-        }
-
-        });
+    connect(settingSaveBtn, &QPushButton::clicked, this, &TestBlockPage::onSaveJsonToSettings);
+    connect(settingLoadBtn, &QPushButton::clicked, this, &TestBlockPage::onLoadJsonFromSettings);
 
 }
 
@@ -228,20 +220,63 @@ void TestBlockPage::addRootBlock(const std::shared_ptr<Block>& rootBlock) {
 // 조건 검사  scan함수 호출
 bool TestBlockPage::validate() {
     auto roots = getRootBlocks();
-    std::vector<std::string> errors;
+    QStringList errors;
 
     for (const auto& root : roots) {
         if (!root) continue;
 
-        auto partial = BlockErrorDetector::scan(root);
-        errors.insert(errors.end(), partial.begin(), partial.end());
+        QStringList partial = BlockErrorDetector::scan(root);
+        errors += partial;  
     }
 
-    if (!errors.empty()) {
-        QString msg = QString::fromStdString(join(errors, "\n"));
+    if (!errors.isEmpty()) {
+        QString msg = errors.join("\n");  
         QMessageBox::warning(this, "블록 오류", msg);
         return false;
     }
 
     return true;
+}
+// Json 저장 버튼 누르면 나오는 창
+void TestBlockPage::onSaveJsonToSettings() {
+    QString fileName = QInputDialog::getText(this, "설정 저장", "파일 이름 입력 (확장자 생략):");
+    if (fileName.isEmpty()) return;
+
+    QString path = QDir(QCoreApplication::applicationDirPath() + "/settings").filePath(fileName + ".json");
+    QDir().mkpath(QFileInfo(path).absolutePath());
+
+    JsonManager::saveAllToJson(rootLogicBlocks, path);
+    QMessageBox::information(this, "저장 완료", "설정이 저장되었습니다:\n" + path);
+
+    QSettings settings("Maengo", "FileSorter");
+    settings.setValue("lastUsedSetting", path);
+}
+// Json 불러오기 버튼 누르면 나오는 창
+void TestBlockPage::onLoadJsonFromSettings() {
+    QDir settingsDir(QCoreApplication::applicationDirPath() + "/settings");
+    QStringList fileList = settingsDir.entryList(QStringList() << "*.json", QDir::Files);
+
+    if (fileList.isEmpty()) {
+        QMessageBox::information(this, "파일 없음", "settings 폴더에 저장된 설정 파일이 없습니다.");
+        return;
+    }
+
+    bool ok = false;
+    QString selectedFile = QInputDialog::getItem(this, "설정 선택", "불러올 설정 파일을 선택하세요:", fileList, 0, false, &ok);
+    if (!ok || selectedFile.isEmpty()) return;
+
+    QString path = settingsDir.filePath(selectedFile);
+
+    // 기존 블럭 정리
+    for (auto* area : rootAreas) area->deleteLater();
+    rootAreas.clear();
+    rootLogicBlocks.clear();
+
+    // 불러오기
+    auto loadedRoots = JsonManager::loadAllFromJson(path);
+    for (const auto& block : loadedRoots) {
+        addRootBlock(block);
+    }
+    QSettings settings("Maengo", "FileSorter");
+    settings.setValue("lastUsedSetting", path);
 }

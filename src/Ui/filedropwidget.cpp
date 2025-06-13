@@ -79,16 +79,16 @@ void FileDropWidget::dropEvent(QDropEvent* event)
 
         // 파일 분해 해서 저장하기
         FileInfo f;
-        f.fileName = qfileInfo.completeBaseName().toStdString(); //확장자 제외하고 저장
-        f.filePath = filePath.toStdString();
-        f.extension = qfileInfo.suffix().toStdString();
-        f.size = std::to_string(qfileInfo.size());
-        f.date = qfileInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss").toStdString();
+        f.fileName = qfileInfo.completeBaseName(); // 확장자 제외
+        f.filePath = filePath;
+        f.extension = qfileInfo.suffix();
+        f.size = QString::number(qfileInfo.size());
+        f.date = qfileInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
 
 
         droppedFiles.push_back(f);
         // 아이콘 + 파일이름 표시하게하기
-        auto* item = new QListWidgetItem(fileIcon, QString::fromStdString(f.fileName));
+        auto* item = new QListWidgetItem(fileIcon,f.fileName);
         fileList->addItem(item);
         
         
@@ -111,11 +111,11 @@ void FileDropWidget::onOrganize()
     }
 
     for (auto& file : droppedFiles) {
-        if (file.filePath.empty()) {
+        if (file.filePath.isEmpty()) {
             continue;
         }
 
-        Classifier::classifyFile(file, blocks, exceptionPath.toStdString());
+        Classifier::classifyFile(file, blocks, exceptionPath);
 
         QString result = FileManager::moveFile(file);
         if (logPage) logPage->appendLog(result);

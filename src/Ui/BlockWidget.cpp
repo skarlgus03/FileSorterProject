@@ -39,7 +39,7 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     conditionEdit->setFont(baseFont);
     conditionEdit->setGeometry(10, 40, 120, 20);
     connect(conditionEdit, &QLineEdit::textChanged, this, [=](const QString& text) {
-        if (logicBlock) logicBlock->setCondition(text.toStdString());
+        if (logicBlock) logicBlock->setCondition(text);
         });
 
     movePathBtn = new QPushButton("경로선택", this);
@@ -179,8 +179,8 @@ void BlockWidget::updateLayoutFromChildGrowth() {
 void BlockWidget::setLogicBlock(const std::shared_ptr<Block>& block) {
     logicBlock = block;
     filterTypeBox->setCurrentIndex(static_cast<int>(block->getFilterType()));
-    conditionEdit->setText(QString::fromStdString(block->getCondition()));
-    movePathLabel->setText(QString::fromStdString(block->getMovePath()));
+    conditionEdit->setText(block->getCondition());
+    movePathLabel->setText(block->getMovePath());
     comparisonBox->setCurrentIndex(static_cast<int>(block->getSizeUnit()));
     comparisonBox->setVisible(block->getFilterType() == FilterType::SIZE);
     updateEnabledStates();
@@ -191,7 +191,7 @@ void BlockWidget::choosePath() {
     if (!path.isEmpty()) {
         movePathLabel->setText(path);
         if (logicBlock)
-            logicBlock->setMovePath(path.toStdString());
+            logicBlock->setMovePath(path);
     }
 }
 
@@ -273,8 +273,8 @@ void BlockWidget::applyLogicToUi() {
     if (!logicBlock) return;
 
     filterTypeBox->setCurrentIndex(static_cast<int>(logicBlock->getFilterType()));
-    conditionEdit->setText(QString::fromStdString(logicBlock->getCondition()));
-    movePathLabel->setText(QString::fromStdString(logicBlock->getMovePath()));
+    conditionEdit->setText(logicBlock->getCondition());
+    movePathLabel->setText(logicBlock->getMovePath());
 
     if (logicBlock->getFilterType() == FilterType::SIZE) {
         comparisonBox->show();

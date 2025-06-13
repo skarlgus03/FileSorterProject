@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <FileInfo.h>
+#include <Qstring>
 
 enum class FilterType {
     EXTENSION,
@@ -23,13 +24,13 @@ class Block : public std::enable_shared_from_this<Block> {
 public:
     Block();
 
-    Block(FilterType filterType, const std::string& condition, const std::string& movePath = "");
+    Block(FilterType filterType, const QString& condition, const QString& movePath = "");
 
 
     // getter 
     FilterType getFilterType() const;
-    const std::string& getCondition() const;
-    const std::string& getMovePath() const;
+    const QString& getCondition() const;
+    const QString& getMovePath() const;
     SizeUnit getSizeUnit() const;
     const std::vector<std::shared_ptr<Block>>& getChildren() const;
     std::weak_ptr<Block> getParent() const;
@@ -41,8 +42,8 @@ public:
     std::shared_ptr<Block> addEmptyChild();
 
     bool matches(const FileInfo& file)const;
-    bool isDateInRange(const std::string& range, const std::string& target)const;
-    bool isSizeInRange(const std::string& range, const std::string& targetSize)const;
+    bool isDateInRange(const QString& range, const QString& target)const;
+    bool isSizeInRange(const QString& range, const QString& targetSize)const;
 
     // 부모 설정 함수
     void setParent(const std::shared_ptr<Block>& parentBlock);
@@ -52,13 +53,13 @@ public:
 
     // 빈노드 필터를 설정하게 하는 setter 함수
     void setFilterType(FilterType type);
-    void setCondition(const std::string& cond);
-    void setMovePath(const std::string& path);
+    void setCondition(const QString& cond);
+    void setMovePath(const QString& path);
     void setSizeUnit(SizeUnit unit);
 private:
     FilterType filterType;
-    std::string condition;
-    std::string movePath;
+    QString condition;
+    QString movePath;
     std::vector<std::shared_ptr<Block>> children;
     SizeUnit sizeUnit = SizeUnit::B;
 

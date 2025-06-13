@@ -1,157 +1,106 @@
 ﻿#pragma once
 
-#include <string>
+#include <QString>
+#include <QStringList>
+#include <QRegularExpression>
 #include "Block.h"
-#include <sstream>
-#include <vector>
-#include <cctype>
-#include <algorithm>
-#include <regex>
 
-
-// 블럭 유틸리티 클래스 입니다.
-
-
-
-// Enum FilterType 을 문자열로 변환 
-inline std::string filterTypeToString(FilterType type) {
-	switch (type)
-	{
-	case FilterType::EXTENSION: return "EXTENSION";
-	case FilterType::KEYWORD: return "KEYWORD";
-	case FilterType::DATE: return "DATE";
-	case FilterType::SIZE: return "SIZE";
-	default: return "UNKNOWN";
-	}
+// FilterType enum → 문자열
+inline QString filterTypeToString(FilterType type) {
+    switch (type) {
+    case FilterType::EXTENSION: return "EXTENSION";
+    case FilterType::KEYWORD: return "KEYWORD";
+    case FilterType::DATE: return "DATE";
+    case FilterType::SIZE: return "SIZE";
+    default: return "UNKNOWN";
+    }
 }
 
-// 문자열을 Enum FilterType 으로 변환
-inline FilterType stringToFilterType(const std::string& str) {
-	if (str == "EXTENSION") return FilterType::EXTENSION;
-	if (str == "KEYWORD") return FilterType::KEYWORD;
-	if (str == "DATE") return FilterType::DATE;
-	if (str == "SIZE") return FilterType::SIZE;
-
-	throw std::invalid_argument("Unknown FilterType: " + str);
+inline FilterType stringToFilterType(const QString& str) {
+    if (str == "EXTENSION") return FilterType::EXTENSION;
+    if (str == "KEYWORD") return FilterType::KEYWORD;
+    if (str == "DATE") return FilterType::DATE;
+    if (str == "SIZE") return FilterType::SIZE;
+    throw std::invalid_argument("Unknown FilterType: " + str.toStdString());
 }
 
-// 문자열 <-> SizeUnit
-inline std::string sizeUnitToString(SizeUnit unit) {
-	switch (unit)
-	{
-	case SizeUnit::B: return "Byte";
-	case SizeUnit::KB: return "KB";
-	case SizeUnit::MB: return "MB";
-	case SizeUnit::GB: return "GB";
-	default: return "UNKNOWN";
-	}
-}
-inline SizeUnit stringToSizeUnit(const std::string& str) {
-	if (str == "B") return SizeUnit::B;
-	if (str == "KB") return SizeUnit::KB;
-	if (str == "MB") return SizeUnit::MB;
-	if (str == "GB") return SizeUnit::GB;
-
-	throw std::invalid_argument("Unknown FilterType: " + str);
+inline QString sizeUnitToString(SizeUnit unit) {
+    switch (unit) {
+    case SizeUnit::B: return "Byte";
+    case SizeUnit::KB: return "KB";
+    case SizeUnit::MB: return "MB";
+    case SizeUnit::GB: return "GB";
+    default: return "UNKNOWN";
+    }
 }
 
-
-// 문자 하나를 기준으로 앞, 뒤 분해하는것
-inline std::vector<std::string> split(const std::string& str, char delim) {
-	std::vector<std::string> result;
-	std::stringstream ss(str);
-	std::string token;
-
-	while (std::getline(ss, token, delim)) {
-		result.push_back(token);
-	}
-
-	if (str.back() == delim) result.push_back("");
-
-	return result;
+inline SizeUnit stringToSizeUnit(const QString& str) {
+    if (str == "B") return SizeUnit::B;
+    if (str == "KB") return SizeUnit::KB;
+    if (str == "MB") return SizeUnit::MB;
+    if (str == "GB") return SizeUnit::GB;
+    throw std::invalid_argument("Unknown SizeUnit: " + str.toStdString());
 }
 
-// 문자열 공백 제거
-inline std::string trim(const std::string& s) {
-	auto start = std::find_if_not(s.begin(), s.end(), ::isspace);
-	auto end = std::find_if_not(s.rbegin(), s.rend(), ::isspace).base();
-
-	if (start >= end) return "";
-
-	return std::string(start, end);
+// 문자열 분할
+inline QStringList split(const QString& str, QChar delim) {
+    return str.split(delim);
 }
 
-
-// 올바르게 Date 값 입력했는가? ex) 2025-06-13 만 검사하는 함수
-inline bool isValidDateFormat(const std::string& date) {
-	std::regex pattern(R"(^\d{4}-\d{2}-\d{2}$)");
-	return std::regex_match(date, pattern);
-}
-// Date 범위 입력값 전부 스캔하기
-inline bool isValidDateRangeFormat(const std::string& range) {
-	auto tokens = split(range, '~');
-
-	if (tokens.size() == 2) {
-		std::string start = trim(tokens[0]);
-		std::string end = trim(tokens[1]);
-
-		if (start.empty() && end.empty()) return false;
-
-		return (start.empty() || isValidDateFormat(start)) &&
-			(end.empty() || isValidDateFormat(end));
-	}
-	// 단일 날짜
-	return isValidDateFormat(trim(range));
+// 문자열 trim
+inline QString trim(const QString& s) {
+    return s.trimmed();
 }
 
-// 다른단위를 Byte단위로 변경해주기
+// 날짜 형식 검사 (ex. 2025-06-13)
+inline bool isValidDateFormat(const QString& date) {
+    QRegularExpression re("^\\d{4}-\\d{2}-\\d{2}$");
+    return re.match(date).hasMatch();
+}
+
+// 날짜 범위 형식 검사 (ex. 2025-01-01~2025-12-31)
+inline bool isValidDateRangeFormat(const QString& range) {
+    auto tokens = split(range, '~');
+    if (tokens.size() == 2) {
+        QString start = trim(tokens[0]);
+        QString end = trim(tokens[1]);
+        if (start.isEmpty() && end.isEmpty()) return false;
+        return (start.isEmpty() || isValidDateFormat(start)) &&
+            (end.isEmpty() || isValidDateFormat(end));
+    }
+    return isValidDateFormat(trim(range));
+}
+
+// 크기 단위 변환
 inline uint64_t applySizeUnit(uint64_t value, SizeUnit unit) {
-	switch (unit) {
-	case SizeUnit::KB: return value * 1024ULL;
-	case SizeUnit::MB: return value * 1024ULL * 1024ULL;
-	case SizeUnit::GB: return value * 1024ULL * 1024ULL * 1024ULL;
-	default: return value;
-	}
+    switch (unit) {
+    case SizeUnit::KB: return value * 1024ULL;
+    case SizeUnit::MB: return value * 1024ULL * 1024ULL;
+    case SizeUnit::GB: return value * 1024ULL * 1024ULL * 1024ULL;
+    default: return value;
+    }
 }
 
-// 올바르게 Size 포맷 입력했나 (숫자 아니거나 아예 비어있는 경우)
-inline bool isValidSizeRangeFormat(const std::string& range) {
-	auto tokens = split(range, '~');
+// 크기 범위 형식 검사
+inline bool isValidSizeRangeFormat(const QString& range) {
+    auto tokens = split(range, '~');
+    auto isNumeric = [](const QString& s) {
+        return !s.isEmpty() && std::all_of(s.begin(), s.end(), [](QChar c) { return c.isDigit(); });
+        };
 
-	if (tokens.size() == 2) {
-		std::string start = trim(tokens[0]);
-		std::string end = trim(tokens[1]);
+    if (tokens.size() == 2) {
+        QString start = trim(tokens[0]);
+        QString end = trim(tokens[1]);
+        if (start.isEmpty() && end.isEmpty()) return false;
+        return (start.isEmpty() || isNumeric(start)) &&
+            (end.isEmpty() || isNumeric(end));
+    }
 
-		// 둘 다 empty면 false
-		if (start.empty() && end.empty()) return false;
-
-		// 비어있지 않은 값은 반드시 숫자여야 함
-		return (start.empty() || std::all_of(start.begin(), start.end(), ::isdigit)) &&
-			(end.empty() || std::all_of(end.begin(), end.end(), ::isdigit));
-	}
-
-	// 단일 숫자
-	std::string trimmed = trim(range);
-	return !trimmed.empty() && std::all_of(trimmed.begin(), trimmed.end(), ::isdigit);
+    QString single = trim(range);
+    return isNumeric(single);
 }
 
-// vector<string>을 어떤 문자열 로 구분하여 연결하는 함수 기본값 = \n
-inline std::string join(const std::vector<std::string>& parts, const std::string delimiter = "\n") {
-	std::ostringstream oss;
-
-	for (size_t i = 0; i < parts.size(); ++i) {
-		oss << parts[i];
-		if (i != parts.size() - 1) {
-			oss << delimiter;
-		}
-	}
-
-	return oss.str();
+// 문자열 배열 합치기
+inline QString join(const QStringList& parts, const QString& delimiter = "\n") {
+    return parts.join(delimiter);
 }
-
-
-
-
-
-
-

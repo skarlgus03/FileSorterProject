@@ -8,7 +8,7 @@ Block::Block()
 }
 
 // Block 클래스의 매개변수 생성자: 전달받은 값으로 멤버 변수 초기화
-Block::Block(FilterType filterType, const std::string& condition, const std::string& movePath)
+Block::Block(FilterType filterType, const QString& condition, const QString& movePath)
     : filterType(filterType), condition(condition), movePath(movePath) {
 }
 
@@ -16,10 +16,10 @@ Block::Block(FilterType filterType, const std::string& condition, const std::str
 FilterType Block::getFilterType() const { return filterType; }
 
 // condition 멤버 변수 값을 반환하는 getter 함수
-const std::string& Block::getCondition() const { return condition; }
+const QString& Block::getCondition() const { return condition; }
 
 // movePath 멤버 변수 값을 반환하는 getter 함수
-const std::string& Block::getMovePath() const { return movePath; }
+const QString& Block::getMovePath() const { return movePath; }
 
 
 SizeUnit Block::getSizeUnit() const { return sizeUnit; }
@@ -37,10 +37,10 @@ std::weak_ptr<Block> Block::getParent() const { return parent; }
 void Block::setFilterType(FilterType type) { filterType = type; }
 
 // condition 멤버 변수 값을 설정하는 setter 함수
-void Block::setCondition(const std::string& cond) { condition = cond; }
+void Block::setCondition(const QString& cond) { condition = cond; }
 
 // movePath 멤버 변수 값을 설정하는 setter 함수
-void Block::setMovePath(const std::string& path) { movePath = path; }
+void Block::setMovePath(const QString& path) { movePath = path; }
 
 void Block::setSizeUnit(SizeUnit unit) { sizeUnit = unit; }
 
@@ -85,12 +85,16 @@ bool Block::matches(const FileInfo& file) const
     {
     case FilterType::EXTENSION:
         return file.extension == condition;
+
     case FilterType::KEYWORD:
-        return file.fileName.find(condition) != std::string::npos;
+        return file.fileName.contains(condition, Qt::CaseInsensitive);
+
     case FilterType::DATE:
-        return isDateInRange(condition,file.date);
+        return isDateInRange(condition, file.date);
+
     case FilterType::SIZE:
-        return isSizeInRange(condition,file.size);
+        return isSizeInRange(condition, file.size);
+
     default:
         return false;
     }
@@ -98,58 +102,56 @@ bool Block::matches(const FileInfo& file) const
 
 
 // 날짜 비교 함수
-bool Block::isDateInRange(const std::string& range, const std::string& targetDate) const {
+bool Block::isDateInRange(const QString& range, const QString& targetDate) const {
+    QString target = targetDate.trimmed();
+    QString start, end;
+    QStringList tokens = range.split('~');
 
-    std::string target = trim(targetDate);
-    std::string start, end;
-    auto tokens = split(range, '~');
-    
     if (tokens.size() == 2) {
-        start = trim(tokens[0]);
-        end = trim(tokens[1]);
+        start = tokens[0].trimmed();
+        end = tokens[1].trimmed();
     }
     else {
-        start = end = trim(range);
+        start = end = range.trimmed();
     }
-    
 
-    if (start.empty() && end.empty()) return false; // 시작, 끝이 "" 면 오류
-    if (!start.empty() && target < start) return false; // 시작값이 있을때 입력값이 시작 보다 작으면 false
-    if (!end.empty() && target > end) return false; // 끝값이 있을때  입력값이 끝 값보다 크면 false
+    if (start.isEmpty() && end.isEmpty()) return false;
+    if (!start.isEmpty() && target < start) return false;
+    if (!end.isEmpty() && target > end) return false;
 
     return true;
 }
 
-bool Block::isSizeInRange(const std::string& range, const std::string& targetSizeStr) const {
-    
-    size_t targetSize;
-    try {
-        targetSize = std::stoull(trim(targetSizeStr));
-    }
-    catch (...) {
-        return false;
-    }
+bool Block::isSizeInRange(const QString& range, const QString& targetSizeStr) const {
+    bool ok = false;
+    quint64 targetSize = targetSizeStr.trimmed().toULongLong(&ok);
+    if (!ok) return false;
 
-    std::string startSizeStr, endSizeStr;
-    auto tokens = split(range, '~');
+    QString startSizeStr, endSizeStr;
+    QStringList tokens = range.split('~');
 
     if (tokens.size() == 2) {
-        startSizeStr = trim(tokens[0]);
-        endSizeStr = trim(tokens[1]);
+        startSizeStr = tokens[0].trimmed();
+        endSizeStr = tokens[1].trimmed();
     }
     else {
-        startSizeStr = endSizeStr = trim(range);
+        startSizeStr = endSizeStr = range.trimmed();
     }
-    
 
-    size_t start = 0;
-    size_t end = SIZE_MAX;
-    try {
-        if (!startSizeStr.empty()) start = applySizeUnit(std::stoull(startSizeStr),getSizeUnit());
-        if (!endSizeStr.empty())   end = applySizeUnit(std::stoull(endSizeStr), getSizeUnit());
+    quint64 start = 0;
+    quint64 end = std::numeric_limits<quint64>::max();
+
+    if (!startSizeStr.isEmpty()) {
+        bool okStart = false;
+        start = applySizeUnit(startSizeStr.toULongLong(&okStart), getSizeUnit());
+        if (!okStart) return false;
     }
-    catch (...) {
-        return false;
+
+    if (!endSizeStr.isEmpty()) {
+        bool okEnd = false;
+        end = applySizeUnit(endSizeStr.toULongLong(&okEnd), getSizeUnit());
+        if (!okEnd) return false;
     }
+
     return (start <= targetSize && targetSize <= end);
 }

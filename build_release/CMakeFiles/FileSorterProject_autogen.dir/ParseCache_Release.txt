@@ -3,7 +3,9 @@ D:/source/repos/FileSorterProject/include/Block.h
 D:/source/repos/FileSorterProject/include/Ui/TestBlockPage.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QPointer
+ mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QVector
+ mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q17memory.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20functional.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20iterator.h
@@ -210,14 +212,17 @@ D:/source/repos/FileSorterProject/include/Ui/TestBlockPage.h
  mdp:D:/source/repos/FileSorterProject/include/Ui/BlockWidget.h
  mdp:D:/source/repos/FileSorterProject/include/Ui/RootBlockArea.h
 D:/source/repos/FileSorterProject/include/BlockErrorDetector.h
-D:/source/repos/FileSorterProject/src/main.cpp
-D:/source/repos/FileSorterProject/include/FileInfo.h
 D:/source/repos/FileSorterProject/src/Classifier.cpp
 D:/source/repos/FileSorterProject/include/Ui/UIConstants.h
 D:/source/repos/FileSorterProject/include/BlockUtils.h
+D:/source/repos/FileSorterProject/src/main.cpp
+D:/source/repos/FileSorterProject/include/FileInfo.h
 D:/source/repos/FileSorterProject/include/JsonManager.h
+D:/source/repos/FileSorterProject/include/FileManager.h
 D:/source/repos/FileSorterProject/include/Ui/RootBlockArea.h
  mmc:Q_OBJECT
+ mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
+ mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q17memory.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20functional.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20iterator.h
@@ -379,11 +384,12 @@ D:/source/repos/FileSorterProject/include/Ui/RootBlockArea.h
  mdp:D:/source/repos/FileSorterProject/include/Block.h
  mdp:D:/source/repos/FileSorterProject/include/FileInfo.h
  mdp:D:/source/repos/FileSorterProject/include/Ui/RootBlockArea.h
-D:/source/repos/FileSorterProject/include/FileManager.h
 D:/source/repos/FileSorterProject/include/Classifier.h
 D:/source/repos/FileSorterProject/include/Ui/BlockWidget.h
  mmc:Q_OBJECT
+ mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QVector
+ mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q17memory.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20functional.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20iterator.h
@@ -586,7 +592,9 @@ D:/source/repos/FileSorterProject/include/Ui/BlockWidget.h
 D:/source/repos/FileSorterProject/include/Ui/CanvasWidget.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QPointer
+ mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QVector
+ mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q17memory.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20functional.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20iterator.h
@@ -950,7 +958,6 @@ D:/source/repos/FileSorterProject/include/Ui/HelpPage.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/qtwidgetsglobal.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/qwidget.h
  mdp:D:/source/repos/FileSorterProject/include/Ui/HelpPage.h
-D:/source/repos/FileSorterProject/src/BlockErrorDetector.cpp
 D:/source/repos/FileSorterProject/include/Ui/LogPage.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QList
@@ -1155,8 +1162,10 @@ D:/source/repos/FileSorterProject/include/Ui/LogPage.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/qtwidgetsglobal.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtWidgets/qwidget.h
  mdp:D:/source/repos/FileSorterProject/include/Ui/LogPage.h
+D:/source/repos/FileSorterProject/src/BlockErrorDetector.cpp
 D:/source/repos/FileSorterProject/include/Ui/filedropwidget.h
  mmc:Q_OBJECT
+ mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q17memory.h
  mdp:C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20functional.h

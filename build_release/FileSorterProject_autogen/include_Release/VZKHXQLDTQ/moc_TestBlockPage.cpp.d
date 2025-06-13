@@ -1,6 +1,8 @@
 D:/source/repos/FileSorterProject/build_release/FileSorterProject_autogen/include_Release/VZKHXQLDTQ/moc_TestBlockPage.cpp: D:/source/repos/FileSorterProject/include/Ui/TestBlockPage.h \
   C:/Qt/6.9.0/msvc2022_64/include/QtCore/QPointer \
+  C:/Qt/6.9.0/msvc2022_64/include/QtCore/QString \
   C:/Qt/6.9.0/msvc2022_64/include/QtCore/QVector \
+  C:/Qt/6.9.0/msvc2022_64/include/QtCore/Qstring \
   C:/Qt/6.9.0/msvc2022_64/include/QtCore/q17memory.h \
   C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20functional.h \
   C:/Qt/6.9.0/msvc2022_64/include/QtCore/q20iterator.h \

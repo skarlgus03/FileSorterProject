@@ -35,6 +35,27 @@ inline FilterType stringToFilterType(const std::string& str) {
 	throw std::invalid_argument("Unknown FilterType: " + str);
 }
 
+// 문자열 <-> SizeUnit
+inline std::string sizeUnitToString(SizeUnit unit) {
+	switch (unit)
+	{
+	case SizeUnit::B: return "Byte";
+	case SizeUnit::KB: return "KB";
+	case SizeUnit::MB: return "MB";
+	case SizeUnit::GB: return "GB";
+	default: return "UNKNOWN";
+	}
+}
+inline SizeUnit stringToSizeUnit(const std::string& str) {
+	if (str == "B") return SizeUnit::B;
+	if (str == "KB") return SizeUnit::KB;
+	if (str == "MB") return SizeUnit::MB;
+	if (str == "GB") return SizeUnit::GB;
+
+	throw std::invalid_argument("Unknown FilterType: " + str);
+}
+
+
 // 문자 하나를 기준으로 앞, 뒤 분해하는것
 inline std::vector<std::string> split(const std::string& str, char delim) {
 	std::vector<std::string> result;

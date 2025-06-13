@@ -182,7 +182,7 @@ void BlockWidget::setLogicBlock(const std::shared_ptr<Block>& block) {
     filterTypeBox->setCurrentIndex(static_cast<int>(block->getFilterType()));
     conditionEdit->setText(QString::fromStdString(block->getCondition()));
     movePathLabel->setText(QString::fromStdString(block->getMovePath()));
-    comparisonBox->setCurrentIndex(static_cast<int>(block->getComparisonType()));
+    comparisonBox->setCurrentIndex(static_cast<int>(block->getSizeUnit()));
     comparisonBox->setVisible(block->getFilterType() == FilterType::SIZE);
     updateEnabledStates();
 }
@@ -279,7 +279,7 @@ void BlockWidget::applyLogicToUi() {
 
     if (logicBlock->getFilterType() == FilterType::SIZE) {
         comparisonBox->show();
-        comparisonBox->setCurrentIndex(static_cast<int>(logicBlock->getComparisonType()));
+        comparisonBox->setCurrentIndex(static_cast<int>(logicBlock->getSizeUnit()));
     }
     else {
         comparisonBox->hide();

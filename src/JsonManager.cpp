@@ -2,13 +2,15 @@
 #include "Ui/TestBlockPage.h"
 
 
-// 블럭을 JSON으로 저장
+// 블럭 객체를 JSON으로 저장
 json JsonManager::blockToJson(const std::shared_ptr<Block>& block) {
 	json j;
 	j["filterType"] = filterTypeToString(block->getFilterType());
 	j["condition"] = block->getCondition();
-	j["movePath"] = block->getMovePath();
-
+	j["movePath"] = block->getMovePath(); 
+	if (block->getFilterType() == FilterType::SIZE) {
+		j["sizeUnit"] = sizeUnitToString(block->getSizeUnit()); // 예: "KB", "MB"
+	}
 	j["children"] = json::array();
 	for (const auto& child : block->getChildren()) {
 		j["children"].push_back(blockToJson(child)); // 재귀 함수
@@ -25,8 +27,9 @@ std::shared_ptr<Block> JsonManager::jsonToBlock(const json& j) {
 	std::string movePath = j.at("movePath").get<std::string>();
 
 	auto block = std::make_shared<Block>(type, condition, movePath);
-
-
+	if (type == FilterType::SIZE && j.contains("sizeUnit")) {
+		block->setSizeUnit(stringToSizeUnit(j.at("sizeUnit").get<std::string>()));
+	}
 	//  child가 있다면, 재귀적으로 블럭 생성
 	if (j.contains("children")) {
 		for (const auto& childJson : j.at("children")) {

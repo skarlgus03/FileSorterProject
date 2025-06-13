@@ -21,7 +21,6 @@ const std::string& Block::getCondition() const { return condition; }
 // movePath 멤버 변수 값을 반환하는 getter 함수
 const std::string& Block::getMovePath() const { return movePath; }
 
-ComparisonType Block::getComparisonType() const { return comparisonType; }
 
 SizeUnit Block::getSizeUnit() const { return sizeUnit; }
 
@@ -42,8 +41,6 @@ void Block::setCondition(const std::string& cond) { condition = cond; }
 
 // movePath 멤버 변수 값을 설정하는 setter 함수
 void Block::setMovePath(const std::string& path) { movePath = path; }
-
-void Block::setComparisonType(ComparisonType type) { comparisonType = type; }
 
 void Block::setSizeUnit(SizeUnit unit) { sizeUnit = unit; }
 

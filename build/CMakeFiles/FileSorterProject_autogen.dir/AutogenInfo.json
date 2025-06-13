@@ -335,12 +335,6 @@
 			null
 		],
 		[
-			"D:/source/repos/FileSorterProject/include/ExceptionBlock.h",
-			"MU",
-			"6YEA5652QU/moc_ExceptionBlock.cpp",
-			null
-		],
-		[
 			"D:/source/repos/FileSorterProject/include/FileInfo.h",
 			"MU",
 			"6YEA5652QU/moc_FileInfo.cpp",
@@ -371,6 +365,18 @@
 			null
 		],
 		[
+			"D:/source/repos/FileSorterProject/include/Ui/HelpPage.h",
+			"MU",
+			"VZKHXQLDTQ/moc_HelpPage.cpp",
+			null
+		],
+		[
+			"D:/source/repos/FileSorterProject/include/Ui/LogPage.h",
+			"MU",
+			"VZKHXQLDTQ/moc_LogPage.cpp",
+			null
+		],
+		[
 			"D:/source/repos/FileSorterProject/include/Ui/RootBlockArea.h",
 			"MU",
 			"VZKHXQLDTQ/moc_RootBlockArea.cpp",
@@ -383,27 +389,27 @@
 			null
 		],
 		[
-			"D:/source/repos/FileSorterProject/include/filedropwidget.h",
+			"D:/source/repos/FileSorterProject/include/Ui/UIConstants.h",
 			"MU",
-			"6YEA5652QU/moc_filedropwidget.cpp",
+			"VZKHXQLDTQ/moc_UIConstants.cpp",
 			null
 		],
 		[
-			"D:/source/repos/FileSorterProject/include/fileviewwidget.h",
+			"D:/source/repos/FileSorterProject/include/Ui/filedropwidget.h",
 			"MU",
-			"6YEA5652QU/moc_fileviewwidget.cpp",
+			"VZKHXQLDTQ/moc_filedropwidget.cpp",
 			null
 		],
 		[
-			"D:/source/repos/FileSorterProject/include/mainwindow.h",
+			"D:/source/repos/FileSorterProject/include/Ui/mainwindow.h",
 			"MU",
-			"6YEA5652QU/moc_mainwindow.cpp",
+			"VZKHXQLDTQ/moc_mainwindow.cpp",
 			null
 		],
 		[
-			"D:/source/repos/FileSorterProject/include/settingswidget.h",
+			"D:/source/repos/FileSorterProject/include/styles/StyleSheet.h",
 			"MU",
-			"6YEA5652QU/moc_settingswidget.cpp",
+			"ZFN6XY7J5R/moc_StyleSheet.cpp",
 			null
 		]
 	],
@@ -561,30 +567,38 @@
 			"MU",
 			null
 		],
-		[ "D:/source/repos/FileSorterProject/src/BlockWidget.cpp", "MU", null ],
-		[ "D:/source/repos/FileSorterProject/src/CanvasWidget.cpp", "MU", null ],
 		[ "D:/source/repos/FileSorterProject/src/Classifier.cpp", "MU", null ],
 		[ "D:/source/repos/FileSorterProject/src/FileManager.cpp", "MU", null ],
 		[ "D:/source/repos/FileSorterProject/src/JsonManager.cpp", "MU", null ],
-		[ "D:/source/repos/FileSorterProject/src/RootBlockArea.cpp", "MU", null ],
-		[ "D:/source/repos/FileSorterProject/src/TestBlockPage.cpp", "MU", null ],
 		[
-			"D:/source/repos/FileSorterProject/src/filedropwidget.cpp",
+			"D:/source/repos/FileSorterProject/src/Ui/BlockWidget.cpp",
 			"MU",
 			null
 		],
 		[
-			"D:/source/repos/FileSorterProject/src/fileviewwidget.cpp",
+			"D:/source/repos/FileSorterProject/src/Ui/CanvasWidget.cpp",
 			"MU",
 			null
 		],
-		[ "D:/source/repos/FileSorterProject/src/main.cpp", "MU", null ],
-		[ "D:/source/repos/FileSorterProject/src/mainwindow.cpp", "MU", null ],
+		[ "D:/source/repos/FileSorterProject/src/Ui/HelpPage.cpp", "MU", null ],
+		[ "D:/source/repos/FileSorterProject/src/Ui/LogPage.cpp", "MU", null ],
 		[
-			"D:/source/repos/FileSorterProject/src/settingswidget.cpp",
+			"D:/source/repos/FileSorterProject/src/Ui/RootBlockArea.cpp",
 			"MU",
 			null
-		]
+		],
+		[
+			"D:/source/repos/FileSorterProject/src/Ui/TestBlockPage.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/source/repos/FileSorterProject/src/Ui/filedropwidget.cpp",
+			"MU",
+			null
+		],
+		[ "D:/source/repos/FileSorterProject/src/Ui/mainwindow.cpp", "MU", null ],
+		[ "D:/source/repos/FileSorterProject/src/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

@@ -32,7 +32,7 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     filterTypeBox->setFont(baseFont);
     filterTypeBox->setStyleSheet(comboBoxStyle());
     filterTypeBox->setGeometry(10, 10, 120, 20);
-    filterTypeBox->addItems({ "EXTENSION", "KEYWORD", "DATE", "EXCEPTION", "SIZE(BYTE)" });
+    filterTypeBox->addItems({ "EXTENSION", "KEYWORD", "DATE", "SIZE" });
     connect(filterTypeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &BlockWidget::onFilterTypeChanged);
 
     conditionEdit = new QLineEdit(this);

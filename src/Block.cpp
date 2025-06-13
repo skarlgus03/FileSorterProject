@@ -23,6 +23,9 @@ const std::string& Block::getMovePath() const { return movePath; }
 
 ComparisonType Block::getComparisonType() const { return comparisonType; }
 
+SizeUnit Block::getSizeUnit() const { return sizeUnit; }
+
+
 // 자식 블록 목록을 반환하는 getter 함수
 const std::vector<std::shared_ptr<Block>>& Block::getChildren() const { return children; }
 
@@ -42,6 +45,8 @@ void Block::setMovePath(const std::string& path) { movePath = path; }
 
 void Block::setComparisonType(ComparisonType type) { comparisonType = type; }
 
+void Block::setSizeUnit(SizeUnit unit) { sizeUnit = unit; }
+
 // 자식 블록이 없는지 확인하는 함수
 bool Block::isLeaf() const {
     return children.empty();
@@ -56,7 +61,7 @@ void Block::addChild(const std::shared_ptr<Block>& child) {
 
 // 비어있는(예외 타입) 자식 블록을 추가하고 반환하는 함수
 std::shared_ptr<Block> Block::addEmptyChild() {
-    auto child = std::make_shared<Block>(FilterType::EXCEPTION, "", "");
+    auto child = std::make_shared<Block>(FilterType::EXTENSION, "", "");
     child->setParent(shared_from_this());     //  부모 등록
     children.push_back(child);                
     return child;
@@ -87,46 +92,29 @@ bool Block::matches(const FileInfo& file) const
         return file.fileName.find(condition) != std::string::npos;
     case FilterType::DATE:
         return isDateInRange(condition,file.date);
-    case FilterType::EXCEPTION:
-        return false;
     case FilterType::SIZE:
-        return matchSizeCondition(file);
+        return isSizeInRange(condition,file.size);
     default:
         return false;
     }
 }
 
-// 크기비교 함수
-bool Block::matchSizeCondition(const FileInfo& file) const
-{
-    std::uintmax_t fileSize = std::stoull(file.size);
-    std::uintmax_t conditionSize = std::stoull(condition);
-    switch (comparisonType)
-    {
-    case ComparisonType::GREATER_EQUAL:
-        return fileSize >= conditionSize;
-    case ComparisonType::LESS_EQUAL:
-        return fileSize <= conditionSize;
-    case ComparisonType::GREATER:
-        return fileSize > conditionSize;
-    case ComparisonType::LESS:
-        return fileSize < conditionSize;
-    case ComparisonType::EQUAL:
-        return fileSize == conditionSize;
-    default:
-        return false;
-    }
-}
 
 // 날짜 비교 함수
 bool Block::isDateInRange(const std::string& range, const std::string& targetDate) const {
-    
-    auto tokens = split(range, '~');
-    if (tokens.size() != 2) return false; // 토큰이 둘다 비어있으면 오류임 
 
     std::string target = trim(targetDate);
-    std::string start = trim(tokens[0]);
-    std::string end = trim(tokens[1]);
+    std::string start, end;
+    auto tokens = split(range, '~');
+    
+    if (tokens.size() == 2) {
+        start = trim(tokens[0]);
+        end = trim(tokens[1]);
+    }
+    else {
+        start = end = trim(range);
+    }
+    
 
     if (start.empty() && end.empty()) return false; // 시작, 끝이 "" 면 오류
     if (!start.empty() && target < start) return false; // 시작값이 있을때 입력값이 시작 보다 작으면 false
@@ -135,19 +123,36 @@ bool Block::isDateInRange(const std::string& range, const std::string& targetDat
     return true;
 }
 
-bool Block::isSizeInRange(const std::string& range, const std::string& targetSize) const {
+bool Block::isSizeInRange(const std::string& range, const std::string& targetSizeStr) const {
     
+    size_t targetSize;
+    try {
+        targetSize = std::stoull(trim(targetSizeStr));
+    }
+    catch (...) {
+        return false;
+    }
+
+    std::string startSizeStr, endSizeStr;
     auto tokens = split(range, '~');
-    if (tokens.size() != 2) return false;
 
-    std::string startStr = trim(tokens[0]);
-    std::string endStr = trim(tokens[1]);
+    if (tokens.size() == 2) {
+        startSizeStr = trim(tokens[0]);
+        endSizeStr = trim(tokens[1]);
+    }
+    else {
+        startSizeStr = endSizeStr = trim(range);
+    }
+    
 
-    if (startStr.empty() && endStr.empty()) return false;
-
-    size_t start = startStr.empty() ? 0 : std::stoull(startStr);
-    size_t end = endStr.empty() ? SIZE_MAX : std::stoull(endStr);
-    size_t target = std::stoull(targetSize);
-
-    return (start <= target && target <= end);
+    size_t start = 0;
+    size_t end = SIZE_MAX;
+    try {
+        if (!startSizeStr.empty()) start = applySizeUnit(std::stoull(startSizeStr),getSizeUnit());
+        if (!endSizeStr.empty())   end = applySizeUnit(std::stoull(endSizeStr), getSizeUnit());
+    }
+    catch (...) {
+        return false;
+    }
+    return (start <= targetSize && targetSize <= end);
 }

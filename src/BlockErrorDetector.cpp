@@ -21,11 +21,18 @@ void BlockErrorDetector::scanRecursive(const std::shared_ptr<Block>& block, cons
 
 
     std::string currentPath = path + "/" + filterTypeToString(block->getFilterType()) + ":" + block->getCondition();
-
-    checkEmptyCondition(block, currentPath, errors);
+    if (block->getFilterType() != FilterType::KEYWORD) {
+        checkEmptyCondition(block, currentPath, errors);
+    }
     checkLeafWithoutMovePath(block, currentPath, errors);
     if (!parentIsExtension && block->getFilterType() == FilterType::EXTENSION) {
         checkExtensionDuplication(block,currentPath,errors);
+    }
+    if (block->getFilterType() == FilterType::DATE) {
+        checkDateFormat(block,currentPath,errors);
+    }
+    if (block->getFilterType() == FilterType::SIZE) {
+        checkSizeFormat(block, currentPath, errors);
     }
 
 
@@ -38,6 +45,7 @@ void BlockErrorDetector::scanRecursive(const std::shared_ptr<Block>& block, cons
 void BlockErrorDetector::checkEmptyCondition(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
     if (block->getCondition().empty()) {
         errors.push_back("조건이 비어 있음 → 경로: " + path);
+        return;
     }
 }
 
@@ -45,6 +53,7 @@ void BlockErrorDetector::checkEmptyCondition(const std::shared_ptr<Block>& block
 void BlockErrorDetector::checkLeafWithoutMovePath(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
     if (block->isLeaf() && block->getMovePath().empty()) {
         errors.push_back("이동 경로가 없는 말단 블록 → 경로: " + path);
+        return;
     }
 }
 
@@ -54,6 +63,20 @@ void BlockErrorDetector::checkExtensionDuplication(const std::shared_ptr<Block>&
             errors.push_back("중복된 EXTENSION 필터타입이 존재합니다 → 경로: " + path);
             return;
         }
+    }
+}
+
+void BlockErrorDetector::checkDateFormat(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
+    if (!isValidDateRangeFormat(block->getCondition())) {
+        errors.push_back("Date 필터타입의 입력값이 잘못되었습니다. → 경로:" + path);
+        return;
+    }
+}
+
+void BlockErrorDetector::checkSizeFormat(const std::shared_ptr<Block>& block, const std::string& path, std::vector<std::string>& errors) {
+    if (!isValidSizeRangeFormat(block->getCondition())) {
+        errors.push_back("Size 필터타입의 입력값이 잘못되었습니다. → 경로: " + path);
+        return;
     }
 }
 

@@ -42,14 +42,30 @@ template <> constexpr inline auto BlockWidget::qt_create_metaobjectdata<qt_meta_
         "BlockWidget",
         "resized",
         "",
-        "addChild"
+        "requestDelete",
+        "BlockWidget*",
+        "self",
+        "addChild",
+        "choosePath",
+        "onFilterTypeChanged",
+        "index"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Signal 'resized'
         QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'requestDelete'
+        QtMocHelpers::SignalData<void(BlockWidget *)>(3, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 4, 5 },
+        }}),
         // Slot 'addChild'
-        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'choosePath'
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onFilterTypeChanged'
+        QtMocHelpers::SlotData<void(int)>(8, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 9 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -74,12 +90,29 @@ void BlockWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->resized(); break;
-        case 1: _t->addChild(); break;
+        case 1: _t->requestDelete((*reinterpret_cast< std::add_pointer_t<BlockWidget*>>(_a[1]))); break;
+        case 2: _t->addChild(); break;
+        case 3: _t->choosePath(); break;
+        case 4: _t->onFilterTypeChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
+        }
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 1:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< BlockWidget* >(); break;
+            }
+            break;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
         if (QtMocHelpers::indexOfMethod<void (BlockWidget::*)()>(_a, &BlockWidget::resized, 0))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (BlockWidget::*)(BlockWidget * )>(_a, &BlockWidget::requestDelete, 1))
             return;
     }
 }
@@ -103,14 +136,14 @@ int BlockWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        if (_id < 5)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 5;
     }
     return _id;
 }
@@ -119,5 +152,11 @@ int BlockWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 void BlockWidget::resized()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+
+// SIGNAL 1
+void BlockWidget::requestDelete(BlockWidget * _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
 }
 QT_WARNING_POP

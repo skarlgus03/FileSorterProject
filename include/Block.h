@@ -9,7 +9,6 @@ enum class FilterType {
     EXTENSION,
     KEYWORD,
     DATE,
-    EXCEPTION,
     SIZE
 };
 
@@ -21,6 +20,13 @@ enum class ComparisonType {
     EQUAL          // 동일 =
 };
 
+enum class SizeUnit {
+    B,
+    KB,
+    MB,
+    GB
+};
+
 class Block : public std::enable_shared_from_this<Block> {
 public:
     Block();
@@ -28,11 +34,12 @@ public:
     Block(FilterType filterType, const std::string& condition, const std::string& movePath = "");
 
 
-
+    // getter 
     FilterType getFilterType() const;
     const std::string& getCondition() const;
     const std::string& getMovePath() const;
     ComparisonType getComparisonType() const;
+    SizeUnit getSizeUnit() const;
     const std::vector<std::shared_ptr<Block>>& getChildren() const;
     std::weak_ptr<Block> getParent() const;
     std::vector<std::shared_ptr<Block>>& getChildrenMutable() { return children; }
@@ -58,12 +65,14 @@ public:
     void setCondition(const std::string& cond);
     void setMovePath(const std::string& path);
     void setComparisonType(ComparisonType type);
+    void setSizeUnit(SizeUnit unit);
 private:
     FilterType filterType;
     std::string condition;
     std::string movePath;
     std::vector<std::shared_ptr<Block>> children;
     ComparisonType comparisonType = ComparisonType::GREATER_EQUAL; // 기본값
+    SizeUnit sizeUnit = SizeUnit::B;
 
     // 부모 노드를 가리키는 weak_ptr 멤버 추가
     std::weak_ptr<Block> parent;

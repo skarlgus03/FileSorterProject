@@ -1,6 +1,7 @@
 ﻿#include "Ui/testblockpage.h"
 #include "styles/StyleSheet.h"
 #include "JsonManager.h"
+#include "BlockErrorDetector.h"
 
 #include <QMessageBox>
 #include <QVBoxLayout>
@@ -184,7 +185,7 @@ void TestBlockPage::onDeleteBlock(BlockWidget* widget) {
 }
 
 
-
+// 블럭에어리아 제거
 void TestBlockPage::removeRootBlockArea(RootBlockArea* area) {
     if (!area) return;
     rootAreas.removeOne(area);
@@ -222,4 +223,25 @@ void TestBlockPage::addRootBlock(const std::shared_ptr<Block>& rootBlock) {
         });
 
     recalculateAllLayout();
+}
+
+// 조건 검사  scan함수 호출
+bool TestBlockPage::validate() {
+    auto roots = getRootBlocks();
+    std::vector<std::string> errors;
+
+    for (const auto& root : roots) {
+        if (!root) continue;
+
+        auto partial = BlockErrorDetector::scan(root);
+        errors.insert(errors.end(), partial.begin(), partial.end());
+    }
+
+    if (!errors.empty()) {
+        QString msg = QString::fromStdString(join(errors, "\n"));
+        QMessageBox::warning(this, "블록 오류", msg);
+        return false;
+    }
+
+    return true;
 }

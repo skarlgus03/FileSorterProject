@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QStackedWidget>
 
 class TestBlockPage;
 class FileDropWidget;
@@ -21,6 +22,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    void tryChangePage(int targetIndex);
     ~MainWindow();
 
 private:
@@ -31,4 +33,6 @@ private:
     FileViewWidget *fileViewWidget;
     TestBlockPage* testBlockPage;
     LogPage* logPage;
+
+    QStackedWidget* stack;
 };

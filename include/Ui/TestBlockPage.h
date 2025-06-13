@@ -18,6 +18,7 @@ public:
     explicit TestBlockPage(QWidget* parent = nullptr);
     void recalculateAllLayout();
 
+    // getter
     std::vector<std::shared_ptr<Block>> getRootBlocks() const { return rootLogicBlocks;}
     std::shared_ptr<Block> getExceptionBlock() const { return exceptionBlock;}
     QString getExceptionPath() const { return exceptionPath; }
@@ -26,6 +27,7 @@ public:
     void removeRootBlockArea(RootBlockArea* area);
 
     void addRootBlock(const std::shared_ptr<Block>& rootBlock);
+    bool validate();
 
 private slots:
     void createRootBlock();

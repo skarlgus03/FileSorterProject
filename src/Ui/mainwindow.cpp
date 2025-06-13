@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent)
     menuLayout->addStretch();
 
     // 스택 위젯 버튼연결
-    QStackedWidget *stack = new QStackedWidget;
+    stack = new QStackedWidget;
 
     fileDropWidget = new FileDropWidget;
     logPage = new LogPage;
@@ -76,10 +76,10 @@ MainWindow::MainWindow(QWidget *parent)
     fileDropWidget->setLogPage(logPage);
     fileDropWidget->setTestBlockPage(testBlockPage);
 
-    connect(btnPage1, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(0); });
-    connect(btnPage2, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(1); });
-    connect(btnPage3, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(2); });
-    connect(btnPage4, &QPushButton::clicked, this, [=](){ stack->setCurrentIndex(3); });
+    connect(btnPage1, &QPushButton::clicked, this, [=](){ tryChangePage(0); });
+    connect(btnPage2, &QPushButton::clicked, this, [=](){ tryChangePage(1); });
+    connect(btnPage3, &QPushButton::clicked, this, [=](){ tryChangePage(2); });
+    connect(btnPage4, &QPushButton::clicked, this, [=](){ tryChangePage(3); });
 
     splitter->addWidget(leftMenu);
     splitter->addWidget(stack);
@@ -90,6 +90,18 @@ MainWindow::MainWindow(QWidget *parent)
     resize(1024, 700);
     setMinimumSize(800, 600);
 }
+
+void MainWindow::tryChangePage(int targetIndex) {
+    QWidget* current = stack->currentWidget();
+
+    if (current == testBlockPage) {
+        if (!testBlockPage->validate()) {
+            return;
+        }
+    }
+    stack->setCurrentIndex(targetIndex);
+}
+
 
 MainWindow::~MainWindow()
 {

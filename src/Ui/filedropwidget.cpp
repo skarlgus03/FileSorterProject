@@ -112,7 +112,6 @@ void FileDropWidget::onOrganize()
 
     for (auto& file : droppedFiles) {
         if (file.filePath.empty()) {
-            qDebug() << "❌ filePath 비어 있음: " << QString::fromStdString(file.fileName);
             continue;
         }
 

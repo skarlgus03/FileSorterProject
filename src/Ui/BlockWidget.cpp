@@ -77,7 +77,6 @@ BlockWidget::BlockWidget(QWidget* canvas, BlockWidget* parent, int depth, int y)
     deleteBtn->setStyleSheet(smallButtonStyle());
     deleteBtn->setGeometry(140, 10, 20, 20);
     connect(deleteBtn, &QPushButton::clicked, this, [=]() {
-        qDebug() << "삭제 요청" << this;
         emit requestDelete(this);
         });
     updateEnabledStates();

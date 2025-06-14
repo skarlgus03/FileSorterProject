@@ -6,8 +6,10 @@ void Classifier::classifyFile(FileInfo& file, const std::vector<std::shared_ptr<
     for (const auto& root : rootBlocks) {
         if (root->matches(file)) {
             auto target = followBlock(file, root);
-            file.moveToPath = target->getMovePath();
-            return;
+            if (target && !target->getMovePath().isEmpty()) {
+                file.moveToPath = target->getMovePath();
+                return;
+            }
         }
     }
 

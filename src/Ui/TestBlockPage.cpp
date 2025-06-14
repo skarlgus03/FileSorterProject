@@ -25,7 +25,7 @@ TestBlockPage::TestBlockPage(QWidget* parent)
 
     qDebug() << "[최근 설정 경로]" << lastPath;
     if (!lastPath.isEmpty() && JsonManager::isFileExist(lastPath)) {
-        auto loadedRoots = JsonManager::loadAllFromJson(lastPath);
+        auto loadedRoots = JsonManager::loadAllFromJson(lastPath,exceptionPath);
         for (const auto& block : loadedRoots) {
             addRootBlock(block);
         }
@@ -249,7 +249,7 @@ void TestBlockPage::onSaveJsonToSettings() {
     QString path = QDir(QCoreApplication::applicationDirPath() + "/settings").filePath(fileName + ".json");
     QDir().mkpath(QFileInfo(path).absolutePath());
 
-    JsonManager::saveAllToJson(rootLogicBlocks, path);
+    JsonManager::saveAllToJson(rootLogicBlocks, path,exceptionPath);
     QMessageBox::information(this, "저장 완료", "설정이 저장되었습니다:\n" + path);
 
     QSettings settings("Maengo", "FileSorter");
@@ -277,7 +277,7 @@ void TestBlockPage::onLoadJsonFromSettings() {
     rootLogicBlocks.clear();
 
     // 불러오기
-    auto loadedRoots = JsonManager::loadAllFromJson(path);
+    auto loadedRoots = JsonManager::loadAllFromJson(path,exceptionPath);
     for (const auto& block : loadedRoots) {
         addRootBlock(block);
     }

@@ -1,6 +1,8 @@
 ﻿#include "JsonManager.h"
 #include "Ui/TestBlockPage.h"
 
+
+
 // 블럭 객체를 JSON으로 저장
 json JsonManager::blockToJson(const std::shared_ptr<Block>& block) {
     json j;
@@ -42,56 +44,46 @@ std::shared_ptr<Block> JsonManager::jsonToBlock(const json& j) {
     return block;
 }
 
-// JSON 저장 (단일 루트)
-void JsonManager::saveToJson(const std::shared_ptr<Block>& root, const QString& filePath) {
-    json j = blockToJson(root);
-    std::ofstream out(filePath.toStdString());
-    if (!out) {
-        throw std::runtime_error("파일 저장 실패: " + filePath.toStdString());
-    }
-    out << j.dump(4);
-}
 
-// JSON 불러오기 (단일 루트)
-std::shared_ptr<Block> JsonManager::loadFromJson(const QString& filePath) {
-    std::ifstream in(filePath.toStdString());
-    if (!in) {
-        throw std::runtime_error("파일 열기 실패: " + filePath.toStdString());
-    }
-
+void JsonManager::saveAllToJson(const std::vector<std::shared_ptr<Block>>& roots, const QString& filePath, const QString& exceptionPath) {
     json j;
-    in >> j;
-    return jsonToBlock(j);
-}
-
-// 여러 루트 저장
-void JsonManager::saveAllToJson(const std::vector<std::shared_ptr<Block>>& roots, const QString& filePath) {
-    json rootArray = json::array();
+    j["exceptionPath"] = exceptionPath.toUtf8().constData();
+    j["blocks"] = json::array();
     for (const auto& rootBlock : roots) {
-        rootArray.push_back(blockToJson(rootBlock));
+        j["blocks"].push_back(blockToJson(rootBlock));
     }
+
     std::ofstream out(std::filesystem::path(filePath.toStdWString()));
     if (!out) {
         qWarning() << "[오류] 파일 열기 실패:" << filePath;
         return;
     }
-    out << rootArray.dump(4);
+    out << j.dump(4);
     out.close();
 }
 
-// 여러 루트 불러오기
-std::vector<std::shared_ptr<Block>> JsonManager::loadAllFromJson(const QString& filePath) {
+std::vector<std::shared_ptr<Block>> JsonManager::loadAllFromJson(const QString& filePath, QString& exceptionPathOut) {
     std::ifstream in(std::filesystem::path(filePath.toStdWString()));
     if (!in) {
         qWarning() << "[오류] JSON 파일 열기 실패:" << filePath;
         return {};
     }
-    json rootArray;
-    in >> rootArray;
+
+    json j;
+    in >> j;
+
+    if (j.contains("exceptionPath")) {
+        exceptionPathOut = QString::fromUtf8(j.at("exceptionPath").get<std::string>());
+    }
+    else {
+        exceptionPathOut = "";
+    }
 
     std::vector<std::shared_ptr<Block>> roots;
-    for (const auto& item : rootArray) {
-        roots.push_back(jsonToBlock(item));
+    if (j.contains("blocks")) {
+        for (const auto& item : j.at("blocks")) {
+            roots.push_back(jsonToBlock(item));
+        }
     }
     return roots;
 }
